@@ -9,7 +9,9 @@ import javax.persistence.Table;
 
 
 @Entity
-
+//error for customer because there needs to be connection made to the database
+//this connection can be done by using database below Maven on the right side
+//of the page.
 @Table(name = "customer")
 public class Customer {
 

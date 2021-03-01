@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="css/payment_style.css" type="text/css" rel="stylesheet">
+<title>payment</title>
+</head>
+
+<body>
+	<img id="logo" src="images/logo.png" >
+	<br>
+	<h2 id="tit">Payment</h2>
+	 <table id="table">
+		<tr>
+			<td class="tip">Card type:</td>
+			<td><select class="border"><option>VISA</option><option>MASTER</option></select></td>
+		 </tr>
+		 <tr>
+		 	<td class="tip">Name on the card:</td>
+			<td ><input type="text" id="input_border" class="input_border" name="border"/></td>
+		 </tr>
+		 <tr>
+		 	<td class="tip">Card number:</td>
+			<td ><input type="text" id="input_border" class="input_border" name="border"/></td>
+		 </tr>
+		 <tr>
+		 	<td class="tip">Expiry date:</td>
+			<td></td>
+		 </tr>
+	</table>
+</body>
+	
+<script type="text/javascript">
+	//获取总额
+	var infor = window.location.search.substring(1).split("&");
+	alert(infor);
+	
+	//获取时间
+	
+	
+</script>
+</html>
+
+
+
+
