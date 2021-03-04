@@ -14,7 +14,7 @@
 <div id="nav">
 	<div class="left">
 		<h2>login</h2>
-		<form action="shopping.html" method="post" name="form" >
+		<form action="../../../../../../Desktop/team8-master-Frontend/Frontend/shopping.html" method="post" name="form" >
 		<table>
 			<tr>
 				<td class="tit">Email address:</td>
@@ -30,7 +30,7 @@ Please log in by email" onblur="validate_username(this.value)"/></td>
 				<td class="tit">Password:</td>
 			</tr>
 			<tr>
-				<td><input type="password" id="password" name="password" placeholder="The 6-digit password consists of numbers and letters" onblur="validate_password(this.value)"/></td>
+				<td><input type="password" id="password" name="password" placeholder="The 8-16 bit password consists of numbers and uppercase and lowercase letters！" onblur="validate_password(this.value)"/></td>
 			</tr>
 			<tr>
 				<td id="test_pw"></td>
@@ -50,7 +50,7 @@ Please log in by email" onblur="validate_username(this.value)"/></td>
 		<br>
 		<p>Please register by email</p>
 		<p>The password has 6 digits, composed of numbers and letters!</p>
-		<div id="goto_register"><a href="register.html">Register</a></div>
+		<div id="goto_register"><a href="../../../../../../Desktop/team8-master-Frontend/Frontend/register.html">Register</a></div>
 	</div>
 	
 </div>
@@ -75,13 +75,13 @@ Please log in by email" onblur="validate_username(this.value)"/></td>
   	function validate_password(password){
   		//^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6-10}$
 		//测试密码：12345y
-  		var passwordReg=/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6}$/;
+  		var passwordReg=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
   		if(password != "" && password.search(passwordReg) != -1)
   		{
   			document.getElementById("test_pw").innerHTML = "<font color='green' size='3px'>√ the password format is correct</font>";
   		}else{
   			document.getElementById("test_pw").innerHTML = "<font color='red' size='3px'>password format error</font>";
-  			alert("The password has 6 digits, composed of numbers and letters!");
+  			alert("The password consists of 8-16 digits. The password consists of numbers and upper and lower case letters");
   		}
   	}
 //函数4：验证表单是否已经填好
@@ -93,7 +93,7 @@ Please log in by email" onblur="validate_username(this.value)"/></td>
   		//这三个，如果任何一个有问题，都返回false
   		//18128@qq.com		12345y
   		var emailReg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-  		var passwordReg=/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6}$/;
+  		var passwordReg=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
   		
   		if(username != "" && emailReg.test(username)){
   			if(password !="" && passwordReg.test(password)){

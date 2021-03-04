@@ -11,6 +11,7 @@
 <br>
 	
 	<h4 id="numMoney">total:£</h4>
+	<a id="address" href="map.html">选择收货地址</a>
 	<table>
   		<tbody id="tbody1">
 			<tr class="tit"><td>Type</td><td>Size</td><td>SizeMoney</td><td>Number</td></tr>
@@ -52,15 +53,18 @@
 	numMoney.innerHTML+=sumMoney;
 	
 	//选择配送或自提
+	var address = document.getElementById("address");
 	var peisong  = document.getElementById("peisong");
 	var self = document.getElementById("self");
 	peisong.onclick = function(){
 		peisong.style.background="#FF0004";
 		self.style.background="000000";
+		address.style.display="block";
 	}
 	self.onclick = function(){
 		self.style.background="#FF0004";
 		peisong.style.background="000000";
+		address.style.display="none";
 	}
 	
 	//点击提交订单
@@ -68,6 +72,7 @@
 	confirm.onclick = function(){
 		window.open("payment.html?"+sumMoney);
 	}
+	
 	
 	
 </script>

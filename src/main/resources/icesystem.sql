@@ -43,7 +43,8 @@ Date: 2021-02-25 22:21:55
 --   `customerName` varchar(255) NOT NULL,
 --   `phoneNum` varchar(11) NOT NULL,
 --   `address` varchar(255) NOT NULL,
---   `orderID` int(11) NOT NULL,
+--   `orderID` int(11) NOT NULL, //may need to me removed because customer can login but does not have
+--   'password' varchar(30) NOT NULL, //added because every use needs a password in order to login
 --   PRIMARY KEY (`customerID`)
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

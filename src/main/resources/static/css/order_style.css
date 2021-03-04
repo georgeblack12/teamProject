@@ -62,3 +62,17 @@
 	cursor: pointer;
 	border: 1px solid #999999;
 }
+#address{
+	text-decoration: none;
+	color: #000000;
+	margin-left: 0px;
+	width: 200px;
+	display: block;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+	background: #999999;
+	font-size: 20px;
+	cursor: pointer;
+	margin-bottom: 20px;
+}

@@ -23,7 +23,8 @@
 }
 
 #table{
-	width: 800px;
+	
+	width: 980px;
 	margin: 0 auto;
 	padding-left: 85px;
 }
@@ -49,4 +50,21 @@
 	height: 25px;
 	border: 1px solid #999999;
 	text-align: left;
+}
+#date{
+	width: 255px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 18px;
+	margin-left: 0px;
+}
+#pay{
+	margin-top: 30px;
+	width: 180px;
+	height: 50px;
+	background:#FEE696;
+	line-height: 50px;
+	text-align: center;
+	cursor: pointer;
+	border: 1px solid #999999;
 }
