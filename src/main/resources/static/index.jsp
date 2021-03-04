@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+
+
+
+
+
 <!doctype html>
 <html>
 <head>
@@ -14,7 +20,17 @@
 <div id="nav">
 	<div class="left">
 		<h2>login</h2>
-		<form action="Frontend/shopping.html" method="post" name="form" >
+
+
+<%--		<% if (request.getAttribute("error")!=null){--%>
+<%--		%>--%>
+<%--		<%=request.getAttribute("error")%><br >--%>
+<%--		<%--%>
+<%--		}--%>
+<%--		%>--%>
+
+	}
+		<form action="login" method="post" name="form" >
 		<table>
 			<tr>
 				<td class="tit">Email address:</td>
@@ -50,7 +66,7 @@ Please log in by email" onblur="validate_username(this.value)"/></td>
 		<br>
 		<p>Please register by email</p>
 		<p>The password has 6 digits, composed of numbers and letters!</p>
-		<div id="goto_register"><a href="Frontend/register.html">Register</a></div>
+		<div id="goto_register"><a href="register.html">Register</a></div>
 	</div>
 	
 </div>

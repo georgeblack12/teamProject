@@ -8,11 +8,75 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-@Entity
+//@Entity
 //error for customer because there needs to be connection made to the database
 //this connection can be done by using database below Maven on the right side
 //of the page.
-@Table(name = "customer")
+//@Table(name = "customer")
+//public class Customer {
+//
+//    @Id
+//    private Integer customerID;
+//    private String customerName;
+//    private String phoneNum;
+//    private String address;
+//    private Integer orderId;
+//    private String password;
+//
+//    public Integer getCustomerID() {
+//        return customerID;
+//    }
+//
+//    public void setCustomerID(Integer customerID) {
+//        this.customerID = customerID;
+//    }
+//
+//    public String getCustomerName() {
+//        return customerName;
+//    }
+//
+//    public void setCustomerName(String customerName) {
+//        this.customerName = customerName;
+//    }
+//
+//    public String getPhoneNum() {
+//        return phoneNum;
+//    }
+//
+//    public void setPhoneNum(String phoneNum) {
+//        this.phoneNum = phoneNum;
+//    }
+//
+//    public String getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(String address) {
+//        this.address = address;
+//    }
+//
+//    public Integer getOrderId() {
+//        return orderId;
+//    }
+//
+//    public void setOrderId(Integer orderId) {
+//        this.orderId = orderId;
+//    }
+//
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//}
+
+
+//error for customer because there needs to be connection made to the database
+//this connection can be done by using database below Maven on the right side
+//of the page.
+@Entity
 public class Customer {
 
     @Id
@@ -20,7 +84,7 @@ public class Customer {
     private String customerName;
     private String phoneNum;
     private String address;
-    private Integer orderId;
+    //private Integer orderId;
     private String password;
 
     public Integer getCustomerID() {
@@ -55,13 +119,13 @@ public class Customer {
         this.address = address;
     }
 
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
+//    public Integer getOrderId() {
+//        return orderId;
+//    }
+//
+//    public void setOrderId(Integer orderId) {
+//        this.orderId = orderId;
+//    }
 
     public String getPassword() {
         return password;
