@@ -2,12 +2,14 @@ package com.project.cavallo.dao;
 
 import com.project.cavallo.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class CustomerRepository {
@@ -24,16 +26,22 @@ public class CustomerRepository {
 
 
 
-    public Customer login(String username, String password) throws Exception {
+    public Optional<Customer> login(String username, String password) throws Exception {
 
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        Customer customer = null;
 
-        String sql = "select * from customer where customerName=? and password=?";
+        try {
+            String sql = "select * from customer where customerName=? and password=?";
 
-        Customer customer = jdbcTemplate.queryForObject(sql, rowMapper, username, password);
+            customer = jdbcTemplate.queryForObject(sql, rowMapper, username, password);
 
 
-        return customer;
+
+        } catch (DataAccessException ex){
+            System.out.println("User does not exist");
+        }
+        return Optional.ofNullable(customer);
     }
 
 
@@ -41,7 +49,7 @@ public class CustomerRepository {
 
     //get the customerId of the person that logs in.
     public int getLoginId(String username,String password) throws Exception {
-        Customer customer= this.login(username,password);
+        Customer customer= this.login(username,password).orElse(new Customer());
         return customer.getCustomerID();
     }
 

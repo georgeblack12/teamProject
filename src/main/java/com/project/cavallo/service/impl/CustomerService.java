@@ -52,7 +52,7 @@ public class CustomerService implements ICustomerService {
 
 
         try {
-            Customer customer = customerRepository.login(username, password);
+            Customer customer = customerRepository.login(username, password).orElse(new Customer());
 
             boolean u = username.equals(customer.getCustomerName());
             boolean p = password.equals(customer.getPassword());

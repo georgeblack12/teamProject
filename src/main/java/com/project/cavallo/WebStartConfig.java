@@ -1,15 +1,22 @@
 package com.project.cavallo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration
-public class WebStartConfig implements WebMvcConfigurer {
+@Controller
+public class WebStartConfig {
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("/home.jsp");
+    //going ahead and creating this class
+
+
+    //The moment I call slash go to /pages/datahome.jsp
+    @RequestMapping("/")
+    public String home(){
+        return "/pages/home.jsp";
     }
 
 }
