@@ -70,16 +70,18 @@
 
 
 	
-	// //点击提交订单
-	// var confirm = document.getElementById("confirm");
-	// confirm.onclick = function(){
-	// 	window.open("/payment.html?"+sumMoney);
-	// }
-
+	//点击提交订单
 	var confirm = document.getElementById("confirm");
 	confirm.onclick = function(){
+		window.open("/pages/payment.jsp?"+sumMoney);
+	}
+
+	var confirm = document.getElementById("confirm");
+		confirm.onclick = function(){
 		window.open("/pages/payment.jsp?totalCost="+sumMoney);
 	}
+
+
 	
 	
 	

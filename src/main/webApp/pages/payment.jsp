@@ -129,44 +129,45 @@ setInterval(function() {
 	}
 }, 1000)
 
+
+
+
+
+	var horseObject={
+		"storeId": "Team08",
+		 "custId": String(<%session.getAttribute("custId");%>),
+		"date": getFormattedDate(),
+		"time": getFormattedTime(),
+		"timeZone": "GMT",
+		"transactionAmount":<%request.getParameter("totalCost");%>,
+		"currencyCode:": "GBP"
+	}
+
+	var formData=JSON.stringify(horseObject);
+
 	function sendJson(){
 		let xhr = new XMLHttpRequest();
-		let url = "checkHorseValue";
-
+		let url ='/horsePay';
 		// open a connection
 		xhr.open("POST", url, true);
 
 		// Set the request header i.e. which type of content you are sending
-		xhr.setRequestHeader("Content-Type", "application/json");
+		//xhr.setRequestHeader("Content-Type", "application/json");
 		xhr.send(formData);
-		<%System.out.println("sending data");%>
 	}
 
-
-
-	var formData=JSON.stringify(horseObject);
-
-	var horseObject={
-		"storeId": "Team08",
-		<%--"custId":<%session.getAttribute("custId");%>,--%>
-		<%--"date": getFormattedDate(),--%>
-		<%--"time": getFormattedTime(),--%>
-		<%--"timeZone": shiQu,--%>
-		<%--"transactionAmount":<%request.getParameter("totalCost");%>,--%>
-		<%--"currencyCode:": "GBP"--%>
-	}
 
 	function getFormattedDate(){
 		var MM=date.getMonth()+1; //plus one because
 		var yyyy=date.getFullYear();
 		var DD=date.getDate();
-		return DD+"/"+MM+"/"+yyyy;
+		return String(DD+"/"+MM+"/"+yyyy);
 	}
 
 	function getFormattedTime(){
 		var hh=date.getHours();
 		var mm=date.getMinutes();
-		return hh+":"+mm;
+		return String(hh+":"+mm);
 
 	}
 

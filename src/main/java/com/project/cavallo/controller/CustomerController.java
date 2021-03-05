@@ -51,18 +51,18 @@ public class CustomerController {
 
 
     @PostMapping(value = {"login", "pages/login"})
-    public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password,Model model,HttpSession session) throws Exception {
+    public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password,HttpSession session) throws Exception {
         boolean ableToLogin = customerService.login(username, password);
         ModelAndView mv = new ModelAndView();
 
         if(ableToLogin){
-           int custId=customerRepository.getLoginId(username,password);
+            int custId=customerRepository.getLoginId(username,password);
             session.setAttribute("custId",custId);
             mv.setViewName("/pages/shopping.jsp");
 
         }
         else {
-            model.addAttribute("ERROR", "Error! Invalid Entries, please try again");
+            mv.addObject("ERROR", "Error! Invalid Entries, please try again");
              mv.setViewName("/pages/home.jsp");
         }
         return mv;

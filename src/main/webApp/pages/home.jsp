@@ -53,6 +53,7 @@ Please log in by email" onblur="validate_username(this.value)"/></td>
                 </tr>
                 <tr>
                     <td>
+<%--                        <input type="submit" id="submit_form" value="Login" onclick="return validate_form()"/>--%>
                         <input type="submit" id="submit_form" value="Login" onclick="return validate_form()"/>
                     </td>
                 </tr>
