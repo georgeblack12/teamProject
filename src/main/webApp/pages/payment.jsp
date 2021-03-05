@@ -54,15 +54,26 @@
 			<td ><p id="date"></p></td>
 		 </tr>
 	</table>
-	<div id="pay">Pay now  £<span id="money">money</span></div>
+
+
+
+<%--	<div id="pay">Pay now  £<span id="money"></span></div>--%>
+
+	<div id="pay" onclick="sendJson()">Pay now  £ <%=request.getParameter("totalCost")%></div>
+
+
+
+
+
+
 </body>
 	
 <script type="text/javascript">
 	//获取总额
-	var infor = window.location.search.substring(1).split("&");
-	var money = document.getElementById("money");
+	//var infor = window.location.search.substring(1).split("&");
+	//var money = document.getElementById("money");
 
-	money.innerHTML = infor;
+	//money.innerHTML = infor;
 	//alert(infor);
 	
 	//选择时区获取时间
@@ -118,21 +129,32 @@ setInterval(function() {
 	}
 }, 1000)
 
+	function sendJson(){
+		let xhr = new XMLHttpRequest();
+		let url = "checkHorseValue";
 
+		// open a connection
+		xhr.open("POST", url, true);
 
-	//get the horsepayment values
-	var input={
-		"storeId": "Team08",
-		"custId":<%session.getAttribute("custId");%>,
-		"date": getFormattedDate(),
-		"time": getFormattedTime(),
-		"timeZone": shiQu,
-		"transactionAmount": money,
-		"currencyCode:": "GBP"
+		// Set the request header i.e. which type of content you are sending
+		xhr.setRequestHeader("Content-Type", "application/json");
+		xhr.send(formData);
+		<%System.out.println("sending data");%>
 	}
 
 
 
+	var formData=JSON.stringify(horseObject);
+
+	var horseObject={
+		"storeId": "Team08",
+		<%--"custId":<%session.getAttribute("custId");%>,--%>
+		<%--"date": getFormattedDate(),--%>
+		<%--"time": getFormattedTime(),--%>
+		<%--"timeZone": shiQu,--%>
+		<%--"transactionAmount":<%request.getParameter("totalCost");%>,--%>
+		<%--"currencyCode:": "GBP"--%>
+	}
 
 	function getFormattedDate(){
 		var MM=date.getMonth()+1; //plus one because
