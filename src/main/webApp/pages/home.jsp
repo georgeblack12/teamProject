@@ -23,7 +23,10 @@
     <div class="left">
         <h2>login</h2>
 
-        <c:out  value="${ERROR}">No error</c:out>
+        <% if (request.getAttribute("ERROR") != null) { %>
+        <%=request.getAttribute("ERROR")%>
+        <%
+            }%>
 
         <form action="login" method="post" name="form">
             <table>

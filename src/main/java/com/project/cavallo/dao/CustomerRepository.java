@@ -50,6 +50,7 @@ public class CustomerRepository {
     //get the customerId of the person that logs in.
     public int getLoginId(String username,String password) throws Exception {
         Customer customer= this.login(username,password).orElse(new Customer());
+        System.out.println(customer);
         return customer.getCustomerID();
     }
 

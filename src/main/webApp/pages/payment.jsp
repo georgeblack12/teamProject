@@ -1,24 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<link href="css/payment_style.css" type="text/css" rel="stylesheet">
+<link href="../css/payment_style.css" type="text/css" rel="stylesheet">
 <title>payment</title>
 <!--you head hit my-->
 </head>
 <!-- youve got a nice.... -->
 
 <body>
-	<img id="logo" src="images/logo.png" >
+	<img id="logo" src="../images/logo.png" >
 	<br>
 	<h2 id="tit">Payment</h2>
+
+
+
+
 	 <table id="table">
 		<tr>
 			<td class="tip">Card type:</td>
 			<td>
 				<select class="border">
-				<option>VISA</option>
-				<option>MASTER</option>
+					<option>HorsePay Motherfucker</option>
+<%--				<option>VISA</option>--%>
+<%--				<option>MASTER</option>--%>
 				</select>
 			</td>
 		 </tr>
@@ -46,13 +54,14 @@
 			<td ><p id="date"></p></td>
 		 </tr>
 	</table>
-	<div id="pay">Pay now  £<span id="money"></span></div>
+	<div id="pay">Pay now  £<span id="money">money</span></div>
 </body>
 	
 <script type="text/javascript">
 	//获取总额
 	var infor = window.location.search.substring(1).split("&");
 	var money = document.getElementById("money");
+
 	money.innerHTML = infor;
 	//alert(infor);
 	
@@ -108,7 +117,42 @@ setInterval(function() {
 			break;
 	}
 }, 1000)
+
+
+
+	//get the horsepayment values
+	var input={
+		"storeId": "Team08",
+		"custId":<%session.getAttribute("custId");%>,
+		"date": getFormattedDate(),
+		"time": getFormattedTime(),
+		"timeZone": shiQu,
+		"transactionAmount": money,
+		"currencyCode:": "GBP"
+	}
+
+
+
+
+	function getFormattedDate(){
+		var MM=date.getMonth()+1; //plus one because
+		var yyyy=date.getFullYear();
+		var DD=date.getDate();
+		return DD+"/"+MM+"/"+yyyy;
+	}
+
+	function getFormattedTime(){
+		var hh=date.getHours();
+		var mm=date.getMinutes();
+		return hh+":"+mm;
+
+	}
+
+
+
 </script>
+
+
 </html>
 
 

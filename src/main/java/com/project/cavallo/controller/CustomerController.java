@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
 
 
 
-//@RequestMapping("/customer")
+
 @RestController
 public class CustomerController {
 
@@ -36,31 +36,35 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private CustomerRepository customerRepository;
+
+//    //added to avoid having messy message displayed to
+//    @RequestMapping("/invalidEntry")
+//    public ModelAndView getError(Model model){
+//        model.addAttribute("ERROR", "Error! Invalid Entries, please try again");
+//        return new ModelAndView("/pages/home.jsp");
+//    }
+
+
+
+
 
     @PostMapping(value = {"login", "pages/login"})
-    public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password, Model model) throws Exception {
+    public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password,Model model,HttpSession session) throws Exception {
         boolean ableToLogin = customerService.login(username, password);
         ModelAndView mv = new ModelAndView();
-        System.out.println(username);
 
         if(ableToLogin){
-            //set the session for attribute of CustomerId will be done later?
-            System.out.println("Login successful");
+           int custId=customerRepository.getLoginId(username,password);
+            session.setAttribute("custId",custId);
+            mv.setViewName("/pages/shopping.jsp");
 
-
-            mv.setViewName("redirect:/pages/shopping.jsp");
         }
         else {
-            System.out.println("error here");
-            model.addAttribute("ERROR", "Invalid Entries");
-
-            mv.setViewName("redirect:/pages/home.jsp");
-
+            model.addAttribute("ERROR", "Error! Invalid Entries, please try again");
+             mv.setViewName("/pages/home.jsp");
         }
         return mv;
     }
-
-
-
-
 }

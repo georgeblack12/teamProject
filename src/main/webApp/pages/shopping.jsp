@@ -23,8 +23,8 @@
 
 <div id="tit"><h2>--menu--</h2></div>
 
-		<c:out value="${userId}"/>
-	
+
+
 <div id="menu">
 <!--	one-->
 	<div class="menu_information">
