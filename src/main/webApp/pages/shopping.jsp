@@ -243,6 +243,8 @@
 
 <script type="text/javascript">
 
+
+
 	//数量加减
 	var num_jia = document.getElementsByClassName("num-jia");
 	var num_jian = document.getElementsByClassName("num-jian");
@@ -327,6 +329,7 @@
 			return false;
 		}else{
 			//alert(sumMoney);
+
 			window.open("order.html?"+sumMoney+"&"+type_arr+"&"+size_arr+"&"+sizeMoney_arr+"&"+number_arr);
 		}
 	}
