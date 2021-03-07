@@ -1,12 +1,14 @@
 @charset "utf-8";
 /* CSS Document */
 
-*{
+*:not([class*="swal2"]){
 	width: 980px;
 	margin: 0px auto;
 	padding: 0px;
 	border: 0px;
 }
+
+
 #logo{
 	width: 210px;
 	height: 90px;
@@ -23,11 +25,20 @@
 }
 
 #table{
-	
+
 	width: 980px;
 	margin: 0 auto;
 	padding-left: 85px;
+
 }
+
+/*#table{*/
+
+/*	!* 	width: 980px; *!*/
+/*	margin: 0 auto;*/
+/*	!* 	padding-left: 85px; *!*/
+/*	padding-right:320px;*/
+/*}*/
 #table tr{
 	height: 40px;
 }

@@ -7,8 +7,10 @@
 <head>
     <meta charset="utf-8">
     <link href="../css/payment_style.css" type="text/css" rel="stylesheet">
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.css">
 
-    <script src="sweetalert2.all.min.js"></script>
+
 
     <title>payment</title>
     <!--you head hit my-->
@@ -21,7 +23,7 @@
 <h2 id="tit">Payment</h2>
 
 
-<table id="table">
+<table id="table" >
     <tr>
         <td class="tip">Card type:</td>
         <td>
@@ -198,7 +200,13 @@
 
     function getAlertMessage(result) {
         if (result["paymentResult"]["status"]) {
-           swal('Hello World');
+            Swal.fire({
+                icon:'success',
+                title:"Payment Successful",
+                showDenyButton: true,
+                confirmButtonText: `back to login page`,
+                denyButtonText: `make another order`
+            });
         } else {
             //donothing
         }

@@ -67,7 +67,7 @@ Please log in by email" onblur="validate_username(this.value)"/></td>
         <br>
         <p>Please register by email</p>
         <p>The password has 6 digits, composed of numbers and letters!</p>
-        <div id="goto_register"><a href="IdeaProjects/team8Final/src/main/resources/static/register.html">Register</a>
+        <div id="goto_register"><a href="../register.html">Register</a>
         </div>
     </div>
 

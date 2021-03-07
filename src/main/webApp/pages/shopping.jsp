@@ -183,7 +183,7 @@
 	</div>
 <!--	seven-->
 	<div class="menu_information">
-		<img src="IdeaProjects/team8Final/src/main/resources/static/images/ice07.jpg">
+		<img src="../images/ice07.jpg">
 		<h3 class="type">SaltedCaramel</h3>
 		<p>Salted caramel ice cream is a mixture of two flavors: salted caramel. Some salty caramel ice cream is a simple vanilla ice cream mixed with salty caramel.</p>
 		<div class="select_box">
@@ -208,7 +208,7 @@
 	</div>
 <!--	eight-->
 	<div class="menu_information">
-		<img src="IdeaProjects/team8Final/src/main/resources/static/images/ice08.jpg">
+		<img src="../images/ice08.jpg">
 		<h3 class="type">Strawberry</h3>
 		<p>Strawberry ice cream, the world's most popular ice princess. It is famous for its noble and attractive appearance, indescribable delicacy and irresistible charm.</p>
 		<div class="select_box">
@@ -333,8 +333,6 @@
 			window.open("order.html?"+sumMoney+"&"+type_arr+"&"+size_arr+"&"+sizeMoney_arr+"&"+number_arr);
 		}
 	}
-
-
 
 </script>
 </html>
