@@ -1,12 +1,15 @@
-<%@ page import="com.project.cavallo.domain.HorsePayReceive" %>
-<%@ page import="com.project.cavallo.domain.HorsePayResponse" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
     <link href="../css/payment_style.css" type="text/css" rel="stylesheet">
+
+    <script src="sweetalert2.all.min.js"></script>
+
     <title>payment</title>
     <!--you head hit my-->
 </head>
@@ -16,19 +19,6 @@
 <img id="logo" src="../images/logo.png">
 <br>
 <h2 id="tit">Payment</h2>
-
-<%--<% if (request.getAttribute("ERROR") != null) { %>--%>
-<%--<%=request.getAttribute("ERROR")%>--%>
-<%--<%--%>
-<%--    }%>--%>
-
-
-<% if (request.getAttribute("horsePayResponse") != null) { %>
-<%=((HorsePayResponse) request.getAttribute("horsePayResponse")).getPaymentSuccessMessage()%>
-
-<%
-    }
-%>
 
 
 <table id="table">
@@ -74,7 +64,15 @@
 </div>
 
 
+
+
 </body>
+
+
+
+
+
+
 
 <script type="text/javascript">
     //获取总额
@@ -178,6 +176,9 @@
     //adapted example from https://www.geeksforgeeks.org/how-to-send-a-jsn-object-to-a-server-using-javascript/
     var stringHorseObject = JSON.stringify(horseObject);
 
+    var horseResult;
+
+
     function sendJson() {
         let xhr = new XMLHttpRequest();
         let url = '/horsePay';
@@ -186,13 +187,34 @@
 
         // Set the request header i.e. which type of content you are sending
         xhr.setRequestHeader("Content-Type", "application/json");
-
-
         xhr.send(stringHorseObject);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == XMLHttpRequest.DONE)
+
+                getAlertMessage(JSON.parse(xhr.response));
+        }
+    }
+
+    function getAlertMessage(result) {
+        if (result["paymentResult"]["status"]) {
+           swal('Hello World');
+        } else {
+            //donothing
+        }
     }
 
 
+
+
+
+
+
+
+
 </script>
+
+
 
 
 </html>
