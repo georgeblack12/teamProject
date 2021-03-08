@@ -21,6 +21,8 @@ public class HorsePay {
 
     private String AggreySmells;
 
+    //another comment
+
 
     public HorsePay(String storeID, String customerID, String date, String time, String timeZone, float transactionAmount, String currencyCode) {
         this.storeID = storeID;
