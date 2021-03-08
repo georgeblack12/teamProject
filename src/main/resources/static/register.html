@@ -41,6 +41,8 @@
 <script type="text/javascript">
 	//onblur失去焦点事件，用户离开输入框时执行 JavaScript 代码：
 	//函数1：验证邮箱格式
+	// Onblur loses focus events and executes JavaScript code when the user leaves the input box:
+	// Function 1: Verify mailbox format
 	function validate_username(username){
 		//定义正则表达式的变量:邮箱正则
 		var emailReg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
@@ -54,9 +56,11 @@
 	}
 
 	//函数2：验证密码是否符合要求：匹配6位密码，由数字和字母组成：
+	// Function 2: Verify that the password matches the requirement: Matches the 6-digit password, consisting of numbers and letters:
 	function validate_password(password){
 		//^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6-10}$
 		//测试密码：12345y
+		// Test password: 12345y
 		var passwordReg=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
 		if(password != "" && password.search(passwordReg) != -1)
 		{
@@ -68,6 +72,7 @@
 	}
 
 	//函数3：验证两次输入的密码是否一样
+	// Function 3: Verify that the password is the same when entered twice
 	function validate_password2(password2){
 		var password = document.getElementById("password").value;
 		//测试：console.log(password);
@@ -83,6 +88,7 @@
 	}
 
 	//函数4：验证表单是否已经填好
+	// Function 4: Verifies that the form is already filled in
 	function validate_form(){
 		var username = document.getElementById("username").value;
 		var password = document.getElementById("password").value;
@@ -90,6 +96,8 @@
 		//console.log("表单填写正确，可以正常提交！");
 
 		//这三个，如果任何一个有问题，都返回false
+		//console.log(" Form filled correctly, ready to submit!");
+        // All three return false if there is a problem with any of them
 		//18128@qq.com		12345y
 		var emailReg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 		var passwordReg=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
@@ -97,22 +105,22 @@
 		if(username != "" && emailReg.test(username)){
 			if(password !="" && passwordReg.test(password)){
 				if(password2==password){
-					alert("信息填写正确，可以正常提交！");
-					console.log("信息填写正确，可以正常提交！");
+					alert("Information filled in correctly, can be submitted normally!");
+					console.log("Information filled in correctly, can be submitted normally!");
 					return true;
 				}else{
-					alert("密码不一致，提交失败，请重新填写！");
-					console.log("密码不一致，提交失败，请重新填写！");
+					alert("The password is not consistent, the submission failed, please fill in again!");
+					console.log("The password is not consistent, the submission failed, please fill in again!");
 					return false;
 				}
 			}else{
-				alert("密码格式错误，提交失败，请重新填写！");
-				console.log("密码格式错误，提交失败，请重新填写！");
+				alert("Incorrect password format, failed to submit, please fill in again!");
+				console.log("Incorrect password format, failed to submit, please fill in again!");
 				return false;
 			}
 		}else{
-			alert("注册的账号不符合要求，提交失败，请重新填写！");
-			console.log("注册的账号不符合要求，提交失败，请重新填写！");
+			alert("The registered account does not meet the requirements, the submission failed, please fill in again!");
+			console.log("The registered account does not meet the requirements, the submission failed, please fill in again!");
 			return false;
 		}
 	}
