@@ -1,4 +1,5 @@
-
+<!--Note: I moved this html to pages in order to have the website continuously. For example, if the user-->
+<!--wishes to make another order after they place order. Thanks,George Black-->
 <!doctype html>
 <html>
 <head>
@@ -78,7 +79,7 @@
 	// 	window.open("/pages/payment.html?"+sumMoney);
 	// }
 
-	//Had to edit this to get the total cost to be moved properly as a request Parameter. Thanks, George Black
+	//Had to edit this to get the totalCost to be moved properly as a request Parameter. Thanks, George Black
 	var confirm = document.getElementById("confirm");
 		confirm.onclick = function(){
 		window.open("/pages/payment.jsp?totalCost="+sumMoney);

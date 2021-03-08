@@ -20,12 +20,7 @@
 </div>
 
 <div id="tit"><h2>--menu--</h2></div>
-<%if (session.getAttribute("custId") != null) {%>
-<%=session.getAttribute("custId")%>
 
-<%
-    }
-%>
 
 
 <div id="menu">
