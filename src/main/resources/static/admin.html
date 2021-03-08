@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>admin</title>
+    <link href="css/admin_style.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<div id="logo">
+    <img  src="images/logo.png" >
+</div>
+<div id="date">
+    <table >
+        <tr >
+            <label id="tit">Order Date:</label>
+            <input id="inputDate" type="date" value="2020-01-01"/>
+            <input type="button" id="dateBtn" value="检索">
+        </tr>
+    </table>
+</div>
+<table id="iceSales">
+    <tbody >
+    <tr class="tit">
+        <td>Ice Cream</td>
+        <td>Sales</td>
+    </tr>
+    <tr>
+        <td>Plainvanilla</td>
+        <td class="number"></td>
+    </tr>
+    <tr>
+        <td>Honeycomb</td>
+        <td class="number"></td>
+    </tr>
+    <tr>
+        <td>RumandRaisi</td>
+        <td class="number"></td>
+    </tr>
+    <tr>
+        <td>Mint</td>
+        <td class="number"></td>
+    </tr>
+    <tr>
+        <td>Cherry</td>
+        <td class="number"></td>
+    </tr>
+    <tr>
+        <td>Chocolate</td>
+        <td class="number"></td>
+    </tr>
+    <tr>
+        <td>SaltedCaramel</td>
+        <td class="number"></td>
+    </tr>
+    <tr>
+        <td>Strawberry</td>
+        <td class="number"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+
+<script type="text/javascript">
+    //获取年、月、日
+    var date = document.getElementById("inputDate").value;
+    date = date.toString();
+    var year = date.split("-")[0];
+    var month = date.split("-")[1];
+    var day = date.split("-")[2];
+    if(month<10){
+        month = date.split("-")[1];
+        month = month[[month.length-1]]
+        //alert(month)
+    }
+    if(day<10){
+        day = date.split("-")[1];
+        day = day[[day.length-1]]
+        //alert(day)
+    }
+    //alert(year+""+month+""+day);
+    //冰淇淋销量
+    var iceNumbebr = document.getElementsByClassName("number");
+    for(var i=0;i<8;i++){
+        //alert(iceNumbebr[i].innerHTML);
+    }
+
+</script>
+</html>
