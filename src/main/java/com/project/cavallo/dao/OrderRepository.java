@@ -14,6 +14,9 @@ import static java.lang.Integer.parseInt;
 @Repository
 public class OrderRepository {
 
+    //Here is my change
+    private String blah;
+
     //autowired so we do not have to worry about creating the jdbcTemplate to use
     @Autowired
     private JdbcTemplate jdbcTemplate;
