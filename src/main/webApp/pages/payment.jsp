@@ -349,6 +349,8 @@ to make-a payment. Thanks, George Black--%>
             (error) {
             //unnecessary syntax error with paymentResult catch block here from keeping it from running a Syntax
             //error
+
+            //here is a slight change
         }
     }
 
