@@ -6,7 +6,7 @@
 </head>
 <body style="background:#CBE1FF">
 <div style="width:730px;margin:auto;">
-  要查询的地址：<input id="text_" type="text" value="Northumberland" style="margin-right:100px;" />
+  The address to query：<input id="text_" type="text" value="Northumberland" style="margin-right:100px;" />
   <!--		查询结果(经纬度)： <input id="result_" type="text" />-->
   <input type="button" value="确定" onclick="searchByStationName();" />
   <div id="container" style="position: absolute;margin-top:30px;width: 730px;height: 590px;top: 50;border: 1px solid gray;overflow:hidden;">
@@ -60,10 +60,10 @@
       s = s *6378.137 ;// EARTH_RADIUS;
       s = Math.round(s * 10000) / 10000;
       if(s > 5000){
-        alert("超出配送范围，请重新选择地址");
+        alert("Out of delivery range, please choose a new address");
 
       }else{
-        alert("可配送");
+        alert("Can be delivery");
       }
       window.history.go(-1);
     });
