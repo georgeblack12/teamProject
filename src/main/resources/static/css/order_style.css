@@ -39,9 +39,10 @@
 	line-height: 80px;
 	text-align: right;
 	font-size: 30px;
-	
+
 }
 #self{
+
 	cursor: pointer;
 	list-style: none;
 }
@@ -53,7 +54,7 @@
 }
 
 #confirm{
-	margin-top: 30px;
+	margin-top: 90px;
 	width: 150px;
 	height: 50px;
 	background:#FEE696;
@@ -76,3 +77,37 @@
 	cursor: pointer;
 	margin-bottom: 20px;
 }
+#inputPhone{
+	width: 360px;
+	height: 40px;
+	float: right;
+	font-size: 20px;
+}
+#phone{
+	width: 275px;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid #999999;
+}
+#choice a{
+	text-align: center;
+	line-height: 50px;
+	width: 200px;
+	height: 50px;
+	display: block;
+	float: right;
+	margin-left: 20px;
+	margin: 10px 0px;
+
+}
+
+#inputAddress{
+	border: 1px solid #999999;
+	width: 250px;
+	height: 40px;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+
+
