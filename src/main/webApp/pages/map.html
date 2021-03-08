@@ -6,8 +6,8 @@
 </head>
 <body style="background:#CBE1FF">
 <div style="width:730px;margin:auto;">
-  The address to query：<input id="text_" type="text" value="Northumberland" style="margin-right:100px;" />
-  <!--		查询结果(经纬度)Query results (latitude and longitude)： <input id="result_" type="text" />-->
+  要查询的地址：<input id="text_" type="text" value="Northumberland" style="margin-right:100px;" />
+  <!--		查询结果(经纬度)： <input id="result_" type="text" />-->
   <input type="button" value="确定" onclick="searchByStationName();" />
   <div id="container" style="position: absolute;margin-top:30px;width: 730px;height: 590px;top: 50;border: 1px solid gray;overflow:hidden;">
   </div>
@@ -21,19 +21,19 @@
   inputAddress.value=address;
   var map = new BMap.Map("container");
   map.centerAndZoom("Northumberland", 10);
-  map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用 Enable scroll zooming in and out, disabled by default
-  map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用 Enable map inertia drag and drop, disabled by default
-  map.addControl(new BMap.NavigationControl()); //添加默认缩放平移控件 Add the default zoom pan control
-  map.addControl(new BMap.OverviewMapControl()); //添加默认缩略地图控件 Add a default thumbnail map control
+  map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
+  map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
+  map.addControl(new BMap.NavigationControl()); //添加默认缩放平移控件
+  map.addControl(new BMap.OverviewMapControl()); //添加默认缩略地图控件
   map.addControl(new BMap.OverviewMapControl({
     isOpen: true,
     anchor: BMAP_ANCHOR_BOTTOM_RIGHT
-  })); //右下角，打开 Bottom right, open
+  })); //右下角，打开
   var localSearch = new BMap.LocalSearch(map);
-  localSearch.enableAutoViewport(); //允许自动调节窗体大小 Allows automatic resizing of forms
+  localSearch.enableAutoViewport(); //允许自动调节窗体大小
   function searchByStationName() {
 
-    map.clearOverlays(); //清空原来的标注 Clear the original label。
+    map.clearOverlays(); //清空原来的标注
     var keyword = document.getElementById("text_").value;
     localSearch.setSearchCompleteCallback(function(searchResult) {
       var poi = searchResult.getPoi(0);
@@ -41,18 +41,17 @@
       map.centerAndZoom(poi.point, 13);
       var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat)); // 创建标注，为要查询的地方对应的经纬度
       map.addOverlay(marker);
-      var content = document.getElementById("text_").value + "<br/><br/>longitude：" + poi.point.lng + "<br/>latitude：" + poi.point.lat;
+      var content = document.getElementById("text_").value + "<br/><br/>经度：" + poi.point.lng + "<br/>纬度：" + poi.point.lat;
       var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;'>" + content + "</p>");
       marker.addEventListener("click", function() {
         this.openInfoWindow(infoWindow);
       });
-      // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画 Jumping animation
+      // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
       //获取选择地址的经纬度
-      // Gets the latitude and longitude of the selected address
-      var lat1 = 43.929181;	//冰激凌店铺纬度 Ice cream shop latitude
-      var lng1 = -78.110828;	//冰激凌店铺经度 Longitude of the ice cream shop
-      var lat2 = poi.point.lat;	//用户纬度 Users of latitude
-      var lng2 = poi.point.lng;	//用户经度 Users of longitude
+      var lat1 = 43.929181;	//冰激凌店铺纬度
+      var lng1 = -78.110828;	//冰激凌店铺经度
+      var lat2 = poi.point.lat;	//用户纬度
+      var lng2 = poi.point.lng;	//用户经度
       var radLat1 = lat1*Math.PI / 180.0;
       var radLat2 = lat2*Math.PI / 180.0;
       var a = radLat1 - radLat2;
@@ -61,10 +60,10 @@
       s = s *6378.137 ;// EARTH_RADIUS;
       s = Math.round(s * 10000) / 10000;
       if(s > 5000){
-        alert("Out of delivery range, please choose a new address");
+        alert("超出配送范围，请重新选择地址");
 
       }else{
-        alert("Can be delivery");
+        alert("可配送");
       }
       window.history.go(-1);
     });

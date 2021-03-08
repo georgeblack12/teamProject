@@ -11,8 +11,15 @@
 </head>
 
 <body>
-<img id="logo" src="../images/logo.png">
-<br>
+<div id="top">
+    <img id="logo" src="../images/logo.png">
+    <li class="menu">
+        <a href="/">login</a>
+<%--        <a href="register.html">register</a> does not make sense to register since they are alread logged in, thanks
+george black --%>
+        <a href="/pages/admin.html">admin</a>
+    </li>
+</div>
 
 
 <div id="head">
@@ -20,7 +27,6 @@
 </div>
 
 <div id="tit"><h2>--menu--</h2></div>
-
 
 
 <div id="menu">
@@ -280,6 +286,8 @@
     var number_arr = [];
     var sizeMoney_arr = [];
     var sumMoney = 0;
+    var date = [];
+    var ice_json;
     for (var i = 0; i < add.length; i++) {
         add[i].id = i;
         add[i].onclick = function () {
@@ -290,22 +298,42 @@
                 var size = select[this.id].value;
                 var ice_name = type[this.id].innerHTML;
                 var sizeMoney;
-                switch (size) {
-                    case "Small":
-                        sizeMoney = 1.75;
-                        break;
-                    case "Medium":
-                        sizeMoney = 2.25;
-                        break;
-                    case "Large":
-                        sizeMoney = 2.75;
-                        break;
-                    case "ExtraLarge":
-                        sizeMoney = 3.50;
-                        break;
-                    case "ExtraExtraLarge":
-                        sizeMoney = 5.75;
-                        break;
+                if (ice_name == "SaltedCaramel") {
+                    switch (size) {
+                        case "Small":
+                            sizeMoney = 1.75 + 0.75;
+                            break;
+                        case "Medium":
+                            sizeMoney = 2.25 + 0.75;
+                            break;
+                        case "Large":
+                            sizeMoney = 2.75 + 0.75;
+                            break;
+                        case "ExtraLarge":
+                            sizeMoney = 3.50 + 0.75;
+                            break;
+                        case "ExtraExtraLarge":
+                            sizeMoney = 5.75 + 0.75;
+                            break;
+                    }
+                } else {
+                    switch (size) {
+                        case "Small":
+                            sizeMoney = 1.75;
+                            break;
+                        case "Medium":
+                            sizeMoney = 2.25;
+                            break;
+                        case "Large":
+                            sizeMoney = 2.75;
+                            break;
+                        case "ExtraLarge":
+                            sizeMoney = 3.50;
+                            break;
+                        case "ExtraExtraLarge":
+                            sizeMoney = 5.75;
+                            break;
+                    }
                 }
                 sumMoney += sizeMoney;
                 count.value = parseInt(count.value) + 1;
@@ -316,6 +344,15 @@
                 sizeMoney_arr.push(sizeMoney);
                 number_arr.push(num);
                 //alert(type_arr);
+                //封装为json
+                var ice = new Object();
+                ice.type = ice_name;
+                ice.size = size;
+                ice.number = num;
+                ice.price = sizeMoney;
+                date.push(ice)
+                ice_json = JSON.stringify(date)
+                //alert(ice_json);
             }
         }
     }
@@ -339,17 +376,34 @@
     //生成订单
     var productionOrder = document.getElementById("productionOrder");
     productionOrder.onclick = function () {
-        if (count.value <= 0) {
-            alert("Currently, there is no order, no need to generate!");
-            return false;
-        } else {
-            //alert(sumMoney);
-
-
-            window.location.assign("order.html?" + sumMoney + "&" + type_arr + "&" + size_arr + "&" + sizeMoney_arr + "&" + number_arr);
-
+        //冰淇淋数量
+        var s = 0;
+        for (var i = 0; i < number_arr.length; i++) {
+            s += parseInt(number_arr[i]);
         }
+        if (s > 5) {
+            alert("每单冰淇淋数量最多5个");
+            location.reload();
+        } else {
+            if (count.value <= 0) {
+                alert("Currently, there is no order, no need to generate!");
+                return false;
+            } else {
+                //alert(sumMoney);
+                //json对象
+                ice_json = JSON.parse(ice_json)
+                var li = new Object();
+                li.iceCreamList = ice_json;
+                var li_json = JSON.stringify(li);
+                alert(li_json);
+                window.open("order.html?" + sumMoney + "&" + type_arr + "&" + size_arr + "&" + sizeMoney_arr + "&" + number_arr);
+            }
+        }
+
+
     }
+    //管理员界面
+    var admin = document.getElementById("")
 
 </script>
 </html>
