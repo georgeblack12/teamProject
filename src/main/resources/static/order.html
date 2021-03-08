@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>order</title>
+    <link href="css/order_style.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<img id="logo" src="images/logo.png" >
+<br>
+
+<h4 id="numMoney">total:£</h4>
+<input type="text" id="inputAddress" name="inputAddress" placeholder="Northumberland" />
+<a id="address">Determine address</a>
+<table>
+    <tbody id="tbody1">
+    <tr class="tit"><td>Type</td><td>Size</td><td>SizeMoney</td><td>Number</td></tr>
+    </tbody>
+</table>
+
+<div id="choice">
+    <a id="peisong">Distribution</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a id="self">SelfExtraction</a>
+</div>
+<div id="inputPhone">
+    <span>phone number：</span><input type="text" id="phone" name="phone" placeholder="Please input mobile phone number"/>
+</div>
+<div id="confirm"><a>Confirm order</a></div>
+</body>
+
+<script type="text/javascript">
+    //颜色转换  Color conversion
+    String.prototype.colorHex = function () {
+        // RGB颜色值的正则 Regularity of RGB color values
+        var reg = /^(rgb|RGB)/;
+        var color = this;
+        if (reg.test(color)) {
+            var strHex = "#";
+            // 把RGB的3个数值变成数组 Change the three values of RGB into an array
+            var colorArr = color.replace(/(?:\(|\)|rgb|RGB)*/g, "").split(",");
+            // 转成16进制 Switch to hexadecimal
+            for (var i = 0; i < colorArr.length; i++) {
+                var hex = Number(colorArr[i]).toString(16);
+                if (hex === "0") {
+                    hex += hex;
+                }
+                strHex += hex;
+            }
+            return strHex;
+        } else {
+            return String(color);
+        }
+    }
+
+
+    var infor = window.location.search.substring(1).split("&");
+    var sumMoney = infor[0];	//总额 The total amount of
+    var type_arr = infor[1].split(",");	//冰激凌类型数组 Ice cream type array
+    var size_arr = infor[2].split(",");	//尺寸数组 Size of the array
+    var sizeMoney_arr = infor[3].split(",");	//尺寸价格数组 Size price array
+    var number_arr = infor[4].split(",");	//数量数组 The number of array
+    //alert(sumMoney);
+    //alert(type_arr);
+    //alert(type_arr[0]);
+    //alert(type_arr[1]);
+
+    var tbody = document.getElementById("tbody1");
+    var tableData="";
+    //动态增加5个td,并且把data数组的五个值赋给每个td
+    //Add five TDs dynamically and assign five values from the data array to each TD
+    for(var i=0;i<type_arr.length;i++){
+
+        tableData+="<tr><td>"+type_arr[i]+"</td>"+"<td>"+size_arr[i]+"</td>"+"<td>"+sizeMoney_arr[i]+"</td>"+"<td>"+number_arr[i]+"</td></tr>"
+    }
+    tbody.innerHTML+=tableData;
+    //alert(tbody.innerHTML);
+
+    //设置总额 The total set
+    var numMoney = document.getElementById("numMoney");
+    numMoney.innerHTML+=sumMoney;
+
+    //选择配送或自提
+    //Choose delivery or self-pickup
+    var address = document.getElementById("address");
+    var peisong  = document.getElementById("peisong");
+    var self = document.getElementById("self");
+    peisong.onclick = function(){
+        peisong.style.background="#FF0004";
+        self.style.background="000000";
+        address.style.display="block";
+    }
+    self.onclick = function(){
+        self.style.background="#FF0004";
+        peisong.style.background="000000";
+        address.style.display="none";
+    }
+    //当前英国时间
+    function getTimeString(date, timezone) {
+        //获取时差（返回当地时间与伦敦时间的分钟的差值）
+        //Get the time difference (return the difference of minutes between local time and London time)
+        var sc = date.getTimezoneOffset();
+        //获取日期对象
+        // Get the date object
+        var newDate = new Date();
+        //重置日期对象
+        // Reset the date object
+        newDate.setTime(date.getTime() + sc * 60000 + timezone * 3600000);
+        //年 year
+        var Y = format(newDate.getFullYear());
+        //月 month
+        var M = format(newDate.getMonth() + 1);
+        //日  day
+        var D = format(newDate.getDate());
+        //小时  hour
+        var H = format(newDate.getHours());
+        //分钟 min
+        var m = format(newDate.getMinutes());
+        //秒   seconds
+        var S = format(newDate.getSeconds());
+        //格式化时间
+        // Format the time
+        function format(n) {
+            if(n < 10) {
+                return '0' + n;
+            } else {
+                return '' + n;
+            }
+        }
+        //返回时间字符串
+        // Returns the time string
+        return H + ':' + m ;
+    };
+    //点击提交订单
+    // Click to submit the order
+    var confirm = document.getElementById("confirm");
+    //英国时间（小时和分钟）
+    var date = getTimeString(new Date(), 0).split(":");
+    var hour = date[0];
+    var minu = date[1];
+    //手机号  phone number
+    confirm.onclick = function(){
+        var phone = document.getElementById("phone").value;
+        if(inputAddress.value==""){
+            alert("Please enter the shipping address");
+        }
+        if(phone == ""){
+            alert("Please enter your cell phone number");
+        }else{
+            if(!(/^1[345678]\d{9}$/.test(phone))){
+                alert("Cellphone number verification failed");
+                return false;
+            }else{
+                //alert(peisong.style.background);
+                //判断选择配送还是自提
+                if(peisong.style.background=="" ||peisong.style.background.toString().colorHex()=="#ff004"){
+                    if("11"<=hour<="18"){
+                        alert("During the delivery time");
+                        window.open("payment.html?"+sumMoney+"&"+type_arr+"&"+size_arr+"&"+size_arr);
+                    }else{
+                        alert("Not during the delivery time, the delivery time is 11:00-18:00");
+                    }
+                }else{
+                    if("11"<=hour<="17" || ((hour=="17")&&(minu<"45"))){
+                        alert("In self - lift time");
+                        window.open("payment.html?"+sumMoney+"&"+type_arr+"&"+size_arr+"&"+number_arr);
+                    }else{
+                        alert("It is not during self - lift time, self - lift time is 11:00-17:45");
+                    }
+                }
+
+            }
+        }
+
+    }
+    //判断地址是否可用
+    // Determine if the address is available
+    var inputAddress =document.getElementById("inputAddress");
+    address.onclick=function(){
+        if(inputAddress==""){
+            alert("Please enter the shipping address");
+        }
+        window.open("map.html?"+inputAddress.value);
+    }
+    //返回的参数
+    //alert("冰淇淋名称"+type_arr+";尺寸"+size_arr+";数量"+size_arr+";总价"+sumMoney+";地址"+inputAddress.value";电话号码"+phone);
+    // return the parameter
+    //alert(" +type_arr+";Size "+ size_arr +";The number "+ size_arr +";The total price sumMoney "+ +";Address "+ inputAddress value";Phone number "+phone);
+
+
+</script>
+</html>
