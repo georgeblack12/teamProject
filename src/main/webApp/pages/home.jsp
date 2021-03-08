@@ -15,6 +15,14 @@
 </head>
 
 <body>
+
+<%--If the user already has the custId in the session remove it. This is to be used if the user decides to go back into--%>
+<%--the login page after making/trying to make  an order. Thanks, George Black--%>
+<%if (session.getAttribute("custId") != null) {%>
+<%session.removeAttribute("custId");%>
+<%
+    }
+%>
 <img id="logo" src="../images/logo.png">
 
 <br>
@@ -23,10 +31,13 @@
     <div class="left">
         <h2>login</h2>
 
+<%--        If the user tries to login and and they enter incorrect credentials an error message is displayed.
+            This will need to be styled. Thanks, George Black. --%>
         <% if (request.getAttribute("ERROR") != null) { %>
         <%=request.getAttribute("ERROR")%>
         <%
-            }%>
+        }%>
+
 
         <form action="login" method="post" name="form">
             <table>
@@ -53,7 +64,7 @@ Please log in by email" onblur="validate_username(this.value)"/></td>
                 </tr>
                 <tr>
                     <td>
-<%--                        <input type="submit" id="submit_form" value="Login" onclick="return validate_form()"/>--%>
+
                         <input type="submit" id="submit_form" value="Login" onclick="return validate_form()"/>
                     </td>
                 </tr>
@@ -101,6 +112,10 @@ Please log in by email" onblur="validate_username(this.value)"/></td>
             alert("The password consists of 8-16 digits. The password consists of numbers and upper and lower case letters");
         }
     }
+
+    //Edited this out since it seemed to be a test case and no longer needed now we are connected to database. At least
+    //locally, feel free to change it if need be Thanks, George Black.
+
 
     //函数4：验证表单是否已经填好
     // function validate_form() {

@@ -1,33 +1,26 @@
-package com.project.cavallo.controller;
+package com.project.cavallo.HorsePayClass;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.PostMapping;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
-class HorsePay {
+/**
+ * A class for the JSON that is to be sent from the client to the server when they click to make payment. Only has
+ * constructor, getters, and setters.
+ * @author George Black.
+ */
+public class HorsePay {
 
-    private  String storeID;
+    private String storeID;
+    private String customerID;
+    private String date;
+    private String time;
+    private String timeZone;
+    private float transactionAmount;
+    private String currencyCode;
 
-    private  String customerID;
 
-    private  String date;
-
-    private  String time;
-
-    private  String timeZone;
-
-    private  float transactionAmount;
-
-    private  String currencyCode;
-
-    private  boolean forcePaymentSatusReturnType;
-
-    public HorsePay(String storeID, String customerID, String date, String time, String timeZone, float transactionAmount, String currencyCode, boolean forcePaymentSatusReturnType) {
+    public HorsePay(String storeID, String customerID, String date, String time, String timeZone, float transactionAmount, String currencyCode) {
         this.storeID = storeID;
         this.customerID = customerID;
         this.date = date;
@@ -35,7 +28,6 @@ class HorsePay {
         this.timeZone = timeZone;
         this.transactionAmount = transactionAmount;
         this.currencyCode = currencyCode;
-        this.forcePaymentSatusReturnType = forcePaymentSatusReturnType;
     }
 
     public void setStoreID(String storeID) {
@@ -66,10 +58,6 @@ class HorsePay {
         this.currencyCode = currencyCode;
     }
 
-    public void setForcePaymentSatusReturnType(boolean forcePaymentSatusReturnType) {
-        this.forcePaymentSatusReturnType = forcePaymentSatusReturnType;
-    }
-
     public String getStoreID() {
         return storeID;
     }
@@ -96,10 +84,6 @@ class HorsePay {
 
     public String getCurrencyCode() {
         return currencyCode;
-    }
-
-    public boolean isForcePaymentSatusReturnType() {
-        return forcePaymentSatusReturnType;
     }
 
 

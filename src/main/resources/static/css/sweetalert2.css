@@ -1,3 +1,7 @@
+/*CSS for the library sweet alert 2 This will be used for the popup used on the payment page.*/
+/*Thanks, George Black*/
+
+
 .swal2-popup.swal2-toast {
   flex-direction: row;
   align-items: center;
@@ -1367,3 +1371,6 @@ body.swal2-toast-column .swal2-toast .swal2-input {
 body.swal2-toast-column .swal2-toast .swal2-validation-message {
   font-size: 1em;
 }
+
+
+

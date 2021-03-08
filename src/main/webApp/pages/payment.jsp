@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.ui.Model" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -7,15 +8,16 @@
 <head>
     <meta charset="utf-8">
     <link href="../css/payment_style.css" type="text/css" rel="stylesheet">
-    <script src="sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="sweetalert2.css">
+    <script src="../SweetAlertJavaScript/sweetalert2.min.js"></script>
+    <script>
 
+    </script>
+    <link rel="stylesheet" href="../css/sweetalert2.css">
 
 
     <title>payment</title>
-    <!--you head hit my-->
 </head>
-<!-- youve got a nice.... -->
+
 
 <body>
 <img id="logo" src="../images/logo.png">
@@ -23,12 +25,15 @@
 <h2 id="tit">Payment</h2>
 
 
-<table id="table" >
+<%--Table probably needs to be edited to meet the requirements of horsePay, we do not need a name on Car,--%>
+<%--Card Number, or timeZone (we can assume that it is GMT). Thank, George Black--%>
+<table id="table">
     <tr>
         <td class="tip">Card type:</td>
         <td>
             <select class="border">
-                <option>HorsePay Motherfucker</option>
+<%--                Only need the option of payment to be HorsePay--%>
+                <option>HorsePay (not HorsePlay, ya ding)</option>
                 <%--				<option>VISA</option>--%>
                 <%--				<option>MASTER</option>--%>
             </select>
@@ -61,22 +66,18 @@
 
 
 <%--	<div id="pay">Pay now  £<span id="money"></span></div>--%>
-
-<div id="pay" onclick="sendJson()">Pay now £ <%=request.getParameter("totalCost")%>
+<%--Edited to display total cost. Thanks, George Black--%>
+<div id="pay" onclick="askToCompleteOrder()">Pay now £ <%=request.getParameter("totalCost")%>
 </div>
-
-
 
 
 </body>
 
 
-
-
-
-
-
 <script type="text/javascript">
+    //I to not believe this code is no longer needed based on how I am getting the totalCost now. Feel free to change if
+    //need be. Could you please translate/change your chinese? Thanks, George Black.
+
     //获取总额
     //var infor = window.location.search.substring(1).split("&");
     //var money = document.getElementById("money");
@@ -163,7 +164,22 @@
     var timeToSend = getFormattedTime();
 
 
-    var horseObject = {
+    function askToCompleteOrder() {
+        Swal.fire({
+            title: "Complete Order",
+            imageUrl: "../images/logo.png",
+            text: "Complete order for  £<%=request.getParameter("totalCost")%>" + " ?",
+            showCancelButton: true,
+            confirmButtonText: 'Confirm order',
+        }).then((result) => {
+                if (result.isConfirmed) {
+                    this.sendJson()
+                }
+            }
+        )
+    }
+
+    var originalHorseObject = {
         "storeID": "Team08",
         "customerID": String(<%=session.getAttribute("custId")%>),
         "date": dateToSend,
@@ -171,58 +187,100 @@
         "timeZone": "GMT",
         "transactionAmount": String(<%=request.getParameter("totalCost")%>),
         "currencyCode": "GBP",
-        "forcePaymentSatusReturnType": "true"
     }
 
-
     //adapted example from https://www.geeksforgeeks.org/how-to-send-a-jsn-object-to-a-server-using-javascript/
-    var stringHorseObject = JSON.stringify(horseObject);
-
-    var horseResult;
-
+    var stringHorseObject = JSON.stringify(originalHorseObject);
 
     function sendJson() {
         let xhr = new XMLHttpRequest();
         let url = '/horsePay';
         // open a connection
-        xhr.open("POST", url, true);
+        xhr.open("POST", url + "?totalCost=" +<%=request.getParameter("totalCost")%>, true);
 
-        // Set the request header i.e. which type of content you are sending
+
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(stringHorseObject);
 
+
         xhr.onreadystatechange = function () {
-            if (xhr.readyState == XMLHttpRequest.DONE)
+            if (xhr.readyState == XMLHttpRequest.DONE) {
 
                 getAlertMessage(JSON.parse(xhr.response));
+            } else {
+                let paymentResult = {
+                    "Status": false,
+                    "reason": "internal error with horsePay server"
+                }
+
+                originalHorseObject["paymentResult"] = paymentResult;
+                getAlertMessage(originalHorseObject);
+                console.log(originalHorseObject)
+
+            }
         }
     }
+
 
     function getAlertMessage(result) {
-        if (result["paymentResult"]["status"]) {
-            Swal.fire({
-                icon:'success',
-                title:"Payment Successful",
-                showDenyButton: true,
-                confirmButtonText: `back to login page`,
-                denyButtonText: `make another order`
-            });
-        } else {
-            //donothing
+        try {
+            if (result.paymentResult["Status"]) {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: result.paymentResult["reason"],
+                    text: "Thank you for shopping with Cavallo",
+                    showCancelButton: true,
+                    showDenyButton:true,
+                    confirmButtonText: 'Back to login page',
+                    cancelButtonText: 'make another order',
+                    denyButtonText: 'button for maddie (testing)'
+                }).then((result) =>{
+                    if(result.isConfirmed){
+
+                        //remove the customerId from the session
+
+                        window.location.replace("/");
+
+                    } else if(result.isDismissed){
+                        window.location.replace("/pages/shopping.jsp");
+                    }else{
+                        //stay here for testing
+                    }
+                })
+            } else {
+
+                Swal.fire({
+                    icon: 'error',
+                    title: "HorsePay Error",
+                    text: result.paymentResult["reason"],
+                    showCancelButton: true,
+                    showDenyButton: true,
+                    confirmButtonText: 'stay on page and try again',
+                    cancelButtonText: 'go back to login page',
+                    denyButtonText: 'button for maddie (testing)'
+                }).then((result) =>{
+                    if(result.isConfirmed){
+                        //stay here do nothing
+
+                    } else if(result.isDismissed){
+                        window.location.replace("/");
+                    }else{
+                        //do nothing stay here
+                    }
+                })
+            }
+
+        } catch
+            (error) {
+            //unneccessary syntax error with paymentResult catch block here from keeping it from running a Syntax
+            //error
         }
+
     }
-
-
-
-
-
-
-
 
 
 </script>
-
-
 
 
 </html>
