@@ -19,9 +19,7 @@ public class HorsePay {
     private float transactionAmount;
     private String currencyCode;
 
-    private String AggreySmells;
 
-    //another comment
 
 
     public HorsePay(String storeID, String customerID, String date, String time, String timeZone, float transactionAmount, String currencyCode) {
