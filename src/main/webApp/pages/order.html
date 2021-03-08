@@ -154,30 +154,30 @@
 	confirm.onclick = function () {
 		var phone = document.getElementById("phone").value;
 		if (inputAddress.value == "") {
-			alert("请输入收货地址");
+			alert("Please enter the shipping address");
 		}
 		if (phone == "") {
-			alert("请输入手机号");
+			alert("Please enter your cell phone number");
 		} else {
-			if (!(/^1[345678]\d{9}$/.test(phone))) {
-				alert("手机号码验证失败");
+			if (!(/^0044-7\d{9}$/.test(phone))) {
+				alert("Cellphone number verification failed");
 				return false;
 			} else {
 				//alert(peisong.style.background);
 				//判断选择配送还是自提
 				if (peisong.style.background == "" || peisong.style.background.toString().colorHex() == "#ff004") {
 					if ("11" <= hour <= "18") {
-						alert("在配送时间内");
+						alert("During the delivery time");
 						window.open("/pages/payment.jsp?totalCost=" + sumMoney);
 					} else {
-						alert("不在配送时间内,配送时间在11：00-18：00");
+						alert("Not during the delivery time, the delivery time is 11:00-18:00");
 					}
 				} else {
 					if ("11" <= hour <= "17" || ((hour == "17") && (minu < "45"))) {
-						alert("在自提时间内");
+						alert("In self - lift time");
 						window.open("/pages/payment.jsp?totalCost=" + sumMoney);
 					} else {
-						alert("不在自提时间内,自提时间在11：00-17：45");
+						alert("It is not during self - lift time, self - lift time is 11:00-17:45");
 					}
 				}
 
@@ -189,7 +189,7 @@
 	var inputAddress = document.getElementById("inputAddress");
 	address.onclick = function () {
 		if (inputAddress == "") {
-			alert("请输入收货地址");
+			alert("Please enter the shipping address");
 		}
 		window.open("map.html?" + inputAddress.value);
 	}
