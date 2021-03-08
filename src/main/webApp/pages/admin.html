@@ -15,7 +15,7 @@
         <tr >
             <label id="tit">Order Date:</label>
             <input id="inputDate" type="date" value="2020-01-01"/>
-            <input type="button" id="dateBtn" value="检索">
+            <input type="button" id="dateBtn" value="retrieve">
         </tr>
     </table>
 </div>
@@ -63,7 +63,7 @@
 </body>
 
 <script type="text/javascript">
-    //获取年、月、日
+    //获取年、月、日  get year,month day
     var date = document.getElementById("inputDate").value;
     date = date.toString();
     var year = date.split("-")[0];
@@ -80,7 +80,7 @@
         //alert(day)
     }
     //alert(year+""+month+""+day);
-    //冰淇淋销量
+    //冰淇淋销量  count of ice cream
     var iceNumbebr = document.getElementsByClassName("number");
     for(var i=0;i<8;i++){
         //alert(iceNumbebr[i].innerHTML);
