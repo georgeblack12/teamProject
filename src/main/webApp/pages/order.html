@@ -7,15 +7,20 @@
 	<title>order</title>
 
 	<!--	Had to change links for css and images to be in the right spot for our project. Thanks, George Black-->
-	<link href="../../resources/static/css/order_style.css" type="text/css" rel="stylesheet">
+	<link href="../css/order_style.css" type="text/css" rel="stylesheet">
+
+	<!--    Files needed to be added in order to get Sweet alert 2. These are used in the pop ups when the person wishes
+	to make-a payment. Thanks, George Black-->
+	<script src="../SweetAlertJavaScript/sweetalert2.min.js"></script>
+	<link rel="stylesheet" href="../css/sweetalert2.css">
 </head>
 
 <body>
-<img id="logo" src="../../resources/static/images/logo.png">
+<img id="logo" src="../images/logo.png">
 <br>
 
 <h4 id="numMoney">total:£</h4>
-<input type="text" id="inputAddress" name="inputAddress" placeholder="Northumberland" />
+<input type="text" id="inputAddress" name="inputAddress" placeholder="Please enter address here" />
 <a id="address">Determine address</a>
 <table>
 	<tbody id="tbody1">
@@ -34,9 +39,7 @@
 </div>
 
 <div id="confirm"><a>Confirm order</a></div>
-<div id="inputPhone">
-	<span>phone number：</span><input type="text" id="phone" name="phone" placeholder="Please input mobile phone number"/>
-</div>
+
 </body>
 
 <script type="text/javascript">
@@ -152,17 +155,9 @@
 	//手机号
 
 	confirm.onclick = function () {
-		var phone = document.getElementById("phone").value;
 		if (inputAddress.value == "") {
 			alert("Please enter the shipping address");
-		}
-		if (phone == "") {
-			alert("Please enter your cell phone number");
 		} else {
-			if (!(/^0044-7\d{9}$/.test(phone))) {
-				alert("Cellphone number verification failed");
-				return false;
-			} else {
 				//alert(peisong.style.background);
 				//判断选择配送还是自提
 				if (peisong.style.background == "" || peisong.style.background.toString().colorHex() == "#ff004") {
@@ -183,7 +178,7 @@
 
 			}
 		}
-	}
+
 
 	//判断地址是否可用
 	var inputAddress = document.getElementById("inputAddress");

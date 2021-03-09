@@ -32,7 +32,7 @@ to make-a payment. Thanks, George Black--%>
 <%--Card Number, or timeZone (we can assume that it is GMT). Thank, George Black--%>
 <table id="table">
     <tr>
-        <td class="tip">Card type:</td>
+        <td class="tip">Payment type:</td>
         <td>
             <select class="border">
 <%--                Only need the option of payment to be HorsePay--%>
@@ -42,6 +42,9 @@ to make-a payment. Thanks, George Black--%>
             </select>
         </td>
     </tr>
+
+<%--    Horsepay does not require that we get name on card, card number or time zone. This needs to be changed
+Thanks, George Black--%>
     <tr>
         <td class="tip">Name on the card:</td>
         <td><input type="text" id="input_border" class="input_border" name="border"/></td>
@@ -218,7 +221,6 @@ to make-a payment. Thanks, George Black--%>
 
             //displays the companies logo
             imageUrl: "../images/logo.png",
-
             text: "Confirm order for  £<%=request.getParameter("totalCost")%>" + " ?",
             showCancelButton: true,
             confirmButtonText: 'Confirm order',
@@ -293,12 +295,8 @@ to make-a payment. Thanks, George Black--%>
      * @author George Black
      *
      * @param result The horsePay JSON with the paymentResult
-     * @throws Throws a syntax error thrown because it does not recognize paymentResult. This is just caught and nothing
-     * is done because everything is working properly and we know the JSON contains the JSON of payment result.
      */
     function getAlertMessage(result) {
-        try {
-            //
             if (result.paymentResult["Status"]) {
 
                 Swal.fire({
@@ -345,14 +343,6 @@ to make-a payment. Thanks, George Black--%>
                 })
             }
 
-        } catch
-            (error) {
-            //unnecessary syntax error with paymentResult catch block here from keeping it from running a Syntax
-            //error
-
-            //here is a slight change
-            //here is anohter
-        }
     }
 
 

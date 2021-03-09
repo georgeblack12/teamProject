@@ -1,8 +1,8 @@
 @charset "utf-8";
 /* CSS Document */
 
-/*Had to add the not() so it would not affect sweetalert, thanks George Black*/
-*:not([class*=swal2]){
+/*edit of the * call to get it to work with sweet alert. Thanks, George Black*/
+*:not([class*="con"],.swal2-header,[class*="styled"]){
 	width: 980px;
 	margin: 0px auto;
 	padding: 0px;

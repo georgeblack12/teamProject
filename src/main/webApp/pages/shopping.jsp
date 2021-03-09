@@ -8,15 +8,17 @@
     <meta charset="utf-8">
     <title>shopping</title>
     <link href="../css/shopping_style.css" type="text/css" rel="stylesheet">
+    <script src="../SweetAlertJavaScript/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="../css/sweetalert2.css">
 </head>
 
 <body>
 <div id="top">
     <img id="logo" src="../images/logo.png">
     <li class="menu">
-        <a href="/">login</a>
-<%--        <a href="register.html">register</a> does not make sense to register since they are alread logged in, thanks
-george black --%>
+        <a href="/">logout</a>
+        <%--        <a href="register.html">register</a> does not make sense to register since they are alread logged in, thanks
+        george black --%>
         <a href="/pages/admin.html">admin</a>
     </li>
 </div>
@@ -292,7 +294,13 @@ george black --%>
         add[i].id = i;
         add[i].onclick = function () {
             if (input_num[this.id].value <= 0) {
-                alert("Additional purchase quantity cannot be zero!");
+
+                //sweet alert added to make the look nicer, Thanks George Black.
+                swal.fire({
+                    icon: 'info',
+                    text: "Unable to add zero items",
+                });
+
             } else {
                 var num = input_num[this.id].value;
                 var size = select[this.id].value;
@@ -335,9 +343,26 @@ george black --%>
                             break;
                     }
                 }
-                sumMoney += sizeMoney;
+                sumMoney += sizeMoney * num;
                 count.value = parseInt(count.value) + 1;
-                alert("Type:" + ice_name + "; " + "Size:" + size + ";" + "Number:" + num + "Money:" + sizeMoney);
+                // alert("Type:" + ice_name + "; " + "Size:" + size + ";" + "Number:" + num + "Money:" + sizeMoney);
+
+                var orderString;
+                var hasHave;
+                if (num > 1) {
+                    orderString = " orders of ";
+                    hasHave="have";
+                } else {
+                    orderString = " order of ";
+                    hasHave="has";
+                }
+
+                //changed wording and used swal. Thanks, George Black
+                swal.fire({
+                    text:num + " " + size + orderString + ice_name + " ice cream "
+                    +hasHave+" been added to your total order"});
+
+
                 information.innerHTML += "Type:" + ice_name + "; &nbsp;&nbsp;&nbsp;&nbsp;" + "Size:" + size + "; &nbsp;&nbsp;&nbsp;&nbsp;" + "Number:" + num + ";&nbsp;&nbsp;&nbsp;&nbsp;Money:" + sizeMoney + "<br>";
                 type_arr.push(ice_name);
                 size_arr.push(size);
@@ -353,6 +378,7 @@ george black --%>
                 date.push(ice)
                 ice_json = JSON.stringify(date)
                 //alert(ice_json);
+
             }
         }
     }
@@ -382,11 +408,22 @@ george black --%>
             s += parseInt(number_arr[i]);
         }
         if (s > 5) {
-            alert("每单冰淇淋数量最多5个");
+
+            //changed wording and used swal. Thanks, George Black
+            swal.fire({
+                icon: "error",
+                text: "Maximum number of ice creams per order is 5"
+            });
             location.reload();
         } else {
             if (count.value <= 0) {
-                alert("Currently, there is no order, no need to generate!");
+
+                //changed wording and used swal. Thanks, George Black
+                swal.fire({
+                    icon: "error",
+                    text:"Unable to make an order with 0 items"
+                });
+
                 return false;
             } else {
                 //alert(sumMoney);
@@ -395,7 +432,7 @@ george black --%>
                 var li = new Object();
                 li.iceCreamList = ice_json;
                 var li_json = JSON.stringify(li);
-                alert(li_json);
+                //alert(li_json); do not thing this is needed. Thanks, George Black
                 window.open("order.html?" + sumMoney + "&" + type_arr + "&" + size_arr + "&" + sizeMoney_arr + "&" + number_arr);
             }
         }
