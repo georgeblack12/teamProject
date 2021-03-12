@@ -44,7 +44,7 @@ Date: 2021-02-25 22:21:55
 --   `phoneNum` varchar(11) NOT NULL,
 --   `address` varchar(255) NOT NULL,
 --   `orderID` int(11) NOT NULL, //may need to me removed because customer can login but does not have
---   'cPassword' varchar(30) NOT NULL, //added because every use needs a password in order to login
+--   'password' varchar(30) NOT NULL, //added because every use needs a password in order to login
 --   PRIMARY KEY (`customerID`)
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -88,14 +88,15 @@ Date: 2021-02-25 22:21:55
 -- ----------------------------
 -- Table structure for order
 -- ----------------------------
--- DROP TABLE IF EXISTS `order`;
--- CREATE TABLE `order` (
+-- DROP TABLE IF EXISTS iceCreamOrder;
+-- CREATE TABLE `iceCreamOrder` (
 --   `orderID` int(255) NOT NULL AUTO_INCREMENT,
---   `orderType` varchar(255) NOT NULL,
+--    `orderType` varchar(255) NOT NULL,
 --   `date` varchar(255) NOT NULL,
 --   `iceCreamID` int(11) NOT NULL,
---   `customerID` int(11) NOT NULL,
---   PRIMARY KEY (`orderID`)
+--    `customerID` int(11) NOT NULL,
+--     cost float(2) NOT NULL,
+--   PRIMARY KEY (`orderID`));
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

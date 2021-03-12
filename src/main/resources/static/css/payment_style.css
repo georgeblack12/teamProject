@@ -2,7 +2,7 @@
 /* CSS Document */
 
 /*edit of the * call to get it to work with sweet alert. Thanks, George Black*/
-*:not([class*="con"],.swal2-header,[class*="styled"]){
+*:not([class*="con"],.swal2-header,[class*="styled"],.swal2-title){
 	width: 980px;
 	margin: 0px auto;
 	padding: 0px;

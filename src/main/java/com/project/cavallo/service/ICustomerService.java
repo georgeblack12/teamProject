@@ -1,9 +1,11 @@
 package com.project.cavallo.service;
 
 
+import java.util.HashMap;
+
 public interface ICustomerService {
 
-    boolean login(String username, String password);
+    HashMap<Boolean,String> login(String username, String password) throws Exception;
 
 }
 

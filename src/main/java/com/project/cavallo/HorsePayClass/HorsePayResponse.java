@@ -20,13 +20,11 @@ public class HorsePayResponse extends HorsePay {
         this.paymentResult = new PaymentResult();
     }
 
+    //Getter required for JSON. Thanks, George Black
     public PaymentResult getPaymentResult() {
         return paymentResult;
     }
 
-    public void setPaymentSuccess(PaymentResult paymentResult) {
-        this.paymentResult = paymentResult;
-    }
 }
 
 

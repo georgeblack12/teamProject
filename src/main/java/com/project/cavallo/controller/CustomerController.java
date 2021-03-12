@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 //
 //@RestController
@@ -64,8 +65,9 @@ public class CustomerController {
     @PostMapping(value = {"login", "pages/login"})
     public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password,HttpSession session) throws Exception {
 
+        HashMap<Boolean,String> credentials = customerService.login(username, password);
         //see if values are in database
-        boolean ableToLogin = customerService.login(username, password);
+        boolean ableToLogin = credentials.keySet().stream().findFirst().get();
         ModelAndView mv = new ModelAndView();
 
         if(ableToLogin){
@@ -80,7 +82,8 @@ public class CustomerController {
         }
         else {
             //error message to be displayed
-            mv.addObject("ERROR", "Error! Invalid Entries, please try again");
+
+            mv.addObject("ERROR",credentials.values().stream().findFirst().get());
              mv.setViewName("/pages/home.jsp");
         }
         return mv;

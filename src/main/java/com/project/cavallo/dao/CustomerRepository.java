@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public class CustomerRepository {
     /**
      * Method to return a Optional Customer in the database that has the specified Username and Password.Optional<Customer> is used
      * so we do not have to deal with a return of Null.
-     *
+     * <p>
      * Original author: Hanxiong Wang
      * Modifying author: George Black
      *
@@ -37,7 +38,7 @@ public class CustomerRepository {
      * @return an Optional<Customer> in the database with the specified username (email) and password.
      * @throws Exception Exception thrown if the values entered for username and password cause a bad sql statement to occur.
      */
-    public Optional<Customer> login(String username, String password) throws Exception {
+    public Optional<Customer> login(String username, String password) {
 
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         Customer customer = null;
@@ -49,8 +50,8 @@ public class CustomerRepository {
             customer = jdbcTemplate.queryForObject(sql, rowMapper, username, password);
 
 
-        //If Customer is not in the database display the user does not exist in the database
-        } catch (DataAccessException ex){
+            //If Customer is not in the database display the user does not exist in the database
+        } catch (DataAccessException ex) {
             System.out.println("User does not exist");
         }
         return Optional.ofNullable(customer);
@@ -60,15 +61,40 @@ public class CustomerRepository {
     /**
      * Gets the CustomerID of the Customer in the database with the specified username and password.
      *
-     * @author George Black
      * @param username The email of the Customer in the database
      * @param password The password of the Customer in the database
      * @return the CustomerID of the Customer with the specified username and login.
      * @throws Exception thrown if the values entered for username and password cause a bad sql statement to occur.
+     * @author George Black
      */
     //get the customerId of the person that logs in.
-    public int getLoginId(String username,String password) throws Exception {
-        Customer customer= this.login(username,password).orElse(new Customer());
+    public int getLoginId(String username, String password){
+        Customer customer = this.login(username, password).orElse(new Customer());
         return customer.getCustomerID();
     }
+
+
+    public Optional<Customer> getStringOrUsername(String whatWeWant,String value) {
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        Customer customer = null;
+        try {
+            String sql = "select * from customer where "+whatWeWant+" =?";
+
+            //get the customer with the specified value
+            customer = jdbcTemplate.queryForObject(sql, rowMapper, value);
+
+
+            //If Customer is not in the database display the user does not exist in the database
+        } catch (DataAccessException ex) {
+            System.out.println("Value not in system");
+        }
+        return Optional.ofNullable(customer);
+    }
+
+
+
+
+
+
 }
+

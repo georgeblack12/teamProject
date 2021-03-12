@@ -292,6 +292,7 @@
     var ice_json;
     for (var i = 0; i < add.length; i++) {
         add[i].id = i;
+
         add[i].onclick = function () {
             if (input_num[this.id].value <= 0) {
 
@@ -301,7 +302,7 @@
                     text: "Unable to add zero items",
                 });
 
-            } else {
+             } else {
                 var num = input_num[this.id].value;
                 var size = select[this.id].value;
                 var ice_name = type[this.id].innerHTML;
@@ -370,14 +371,14 @@
                 number_arr.push(num);
                 //alert(type_arr);
                 //封装为json
-                var ice = new Object();
-                ice.type = ice_name;
-                ice.size = size;
-                ice.number = num;
-                ice.price = sizeMoney;
-                date.push(ice)
-                ice_json = JSON.stringify(date)
-                //alert(ice_json);
+                // var ice = new Object();
+                // ice.type = ice_name;
+                // ice.size = size;
+                // ice.number = num;
+                // ice.price = sizeMoney;
+                // date.push(ice)
+                // ice_json = JSON.stringify(date)
+                // //alert(ice_json);
 
             }
         }
@@ -428,12 +429,14 @@
             } else {
                 //alert(sumMoney);
                 //json对象
-                ice_json = JSON.parse(ice_json)
-                var li = new Object();
-                li.iceCreamList = ice_json;
-                var li_json = JSON.stringify(li);
+                // ice_json = JSON.parse(ice_json)
+                // var li = new Object();
+                // li.iceCreamList = ice_json;
+
+                // var li_json = JSON.stringify(li);
                 //alert(li_json); do not thing this is needed. Thanks, George Black
-                window.open("order.html?" + sumMoney + "&" + type_arr + "&" + size_arr + "&" + sizeMoney_arr + "&" + number_arr);
+
+                window.location.replace("order.jsp?" + sumMoney + "&" + type_arr + "&" + size_arr + "&" + sizeMoney_arr + "&" + number_arr);
             }
         }
 

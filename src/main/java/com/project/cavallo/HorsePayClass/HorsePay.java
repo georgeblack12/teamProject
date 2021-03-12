@@ -32,13 +32,12 @@ public class HorsePay {
         this.currencyCode = currencyCode;
     }
 
+    //setters and getters required for JSON. Thanks, George Black
+
     public void setStoreID(String storeID) {
         this.storeID = storeID;
     }
 
-    public void setCustomerID(String customerID) {
-        this.customerID = customerID;
-    }
 
     public void setDate(String date) {
         this.date = date;
@@ -48,17 +47,11 @@ public class HorsePay {
         this.time = time;
     }
 
-    public void setTimeZone(String timeZone) {
-        this.timeZone = timeZone;
-    }
-
     public void setTransactionAmount(float transactionAmount) {
         this.transactionAmount = transactionAmount;
     }
 
-    public void setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
-    }
+
 
     public String getStoreID() {
         return storeID;
