@@ -124,13 +124,66 @@
 
 -- INSERT INTO `User` (email, password)
 -- VALUES ('admin@gmail.com', 'CavalloTeam8');
-
+--
 -- INSERT INTO `Administrator` (email)
 -- SELECT email
 -- FROM `User`
 -- WHERE email = 'admin@gmail.com';
 
+-- /----------------------------------SQL QUERIES FOR ANALYTICS------------------------------------/--
+-- /------------------------------Author: Madeleine Towes, 13/03/21--------------------------------/--
 
+
+-------------------- TOTAL NO ORDERS --------------------
+
+-- SELECT COUNT(*)
+-- FROM Order;
+
+-------------------- NO ORDERS / DAY --------------------
+
+-- SELECT COUNT(*)
+-- FROM Order o
+-- WHERE EXTRACT(DAY FROM o.`date`) = ? AND EXTRACT(MONTH FROM o.`date`) = ? AND EXTRACT(YEAR FROM o.`date`) = ?;
+
+-- insert current day/month/year (in numbers)
+
+-------------------- NO ORDERS / MONTH --------------------
+
+-- SELECT COUNT(*)
+-- FROM Order o
+-- WHERE EXTRACT(MONTH FROM o.`date`) = ? AND EXTRACT(YEAR FROM o.`date`) = ?;
+
+-- insert current month/year (in numbers)
+
+-------------------- NO ORDERS / YEAR --------------------
+
+-- SELECT COUNT(*)
+-- FROM Order o
+-- WHERE EXTRACT(YEAR FROM o.`date`) = ?;
+
+-- insert current year (in numbers)
+
+-------------------- TOTAL SALES PER FLAVOUR --------------------
+
+-- SELECT ic.flavour, SUM(oc.quantity)
+-- FROM IceCream ic, OrderContains oc
+-- WHERE ic.iceCreamID = oc.iceCreamID
+-- GROUP BY ic.flavour;
+
+-------------------- MONTH SALES PER FLAVOUR --------------------
+
+-- SELECT ic.flavour, SUM(oc.quantity)
+-- FROM IceCream ic, OrderContains oc, Order o
+-- WHERE ic.iceCreamID = oc.iceCreamID
+--     AND oc.orderID = o.orderID
+--     AND (EXTRACT(MONTH FROM o.`date`) = ?) AND (EXTRACT(YEAR FROM o.`date`) = ?)
+-- GROUP BY ic.flavour;
+
+-- insert current month/year (in numbers)
+
+-------------------- MOST POPULAR FLAVOUR --------------------
+
+--  working on it
 
 -- /-----------------------------------------------------------------------------------------------/--
 -- /------------------------------------------OLD SQL----------------------------------------------/--
