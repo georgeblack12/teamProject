@@ -1,3 +1,4 @@
+<%@ page import="jdk.swing.interop.SwingInterOpUtils" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -13,13 +14,23 @@
 </head>
 
 <body>
+
+<%if (session.getAttribute("orderID") != null) {%>
+<%
+    session.removeAttribute("orderID");
+    }
+%>
+
+
+
+
 <div id="top">
     <img id="logo" src="../images/logo.png">
     <li class="menu">
         <a href="/">logout</a>
         <%--        <a href="register.html">register</a> does not make sense to register since they are alread logged in, thanks
         george black --%>
-        <a href="/pages/admin.html">admin</a>
+<%--        <a href="/pages/admin.html">admin</a>--%>
     </li>
 </div>
 
@@ -34,21 +45,18 @@
 <div id="menu">
     <!--	one-->
     <div class="menu_information">
-        <img src="../images/vanilla.jpg">
-<%--        <h3 class="type">Plainvanilla</h3>--%>
+        <img src="../images/ice01.jpg">
         <h3 class="type">Vanilla</h3>
-
-<%--        <p>Vanilla ice cream is a kind of desserts, the main raw materials are fresh milk, eggs, sugar, solid cream and--%>
-<%--            vanilla essence. The process of adding milk must be slow, slow and not impatient.</p>--%>
-        <p>Rich and creamy vanilla. Made fresh everyday using our secret family recipe!</p>
+        <p>Vanilla ice cream is a kind of desserts, the main raw materials are fresh milk, eggs, sugar, solid cream and
+            vanilla essence. The process of adding milk must be slow, slow and not impatient.</p>
         <div class="select_box">
             <span>Size:</span>
             <select class="select">
                 <option value="Small">Small</option>
                 <option value="Medium">Medium</option>
                 <option value="Large">Large</option>
-                <option value="ExtraLarge">ExtraLarge</option>
-                <option value="ExtraExtraLarge">ExtraExtraLarge</option>
+                <option value="Extra Large">Extra Large</option>
+                <option value="Extra Extra Large">Extra Extra Large</option>
             </select>
         </div>
 
@@ -64,20 +72,19 @@
     </div>
     <!--	two-->
     <div class="menu_information">
-        <img src="../images/honeycomb.jpg">
+        <img src="../images/ice02.jpg">
         <h3 class="type">Honeycomb</h3>
-<%--        <p>The original beehive ice cream has honey and beehive, which is pure natural and has no added flavor. If you--%>
-<%--            like cheese, you can recommend cheese cake. It's cool with the mellow smell of cheese. It feels great to--%>
-<%--            melt in the mouth.</p>--%>
-        <p>Sweet caramel flavour ice cream with delicious and crunchy honeycomb pieces</p>
+        <p>The original beehive ice cream has honey and beehive, which is pure natural and has no added flavor. If you
+            like cheese, you can recommend cheese cake. It's cool with the mellow smell of cheese. It feels great to
+            melt in the mouth.</p>
         <div class="select_box">
             <span>Size:</span>
             <select class="select">
                 <option value="Small">Small</option>
                 <option value="Medium">Medium</option>
                 <option value="Large">Large</option>
-                <option value="ExtraLarge">ExtraLarge</option>
-                <option value="ExtraExtraLarge">ExtraExtraLarge</option>
+                <option value="Extra Large">Extra Large</option>
+                <option value="Extra Extra Large">Extra Extra Large</option>
             </select>
         </div>
 
@@ -93,21 +100,18 @@
     </div>
     <!--	three-->
     <div class="menu_information">
-        <img src="../images/rum-raisin.jpg">
-<%--        <h3 class="type">RumandRaisi</h3>--%>
+        <img src="../images/ice03.jpg">
         <h3 class="type">Rum and Raisin</h3>
-
-<%--        <p>Soak the raisins in rum for a while. (you can also omit this step. I soaked all night, and the raisins tasted--%>
-<%--            a little alcoholic.)</p>--%>
-        <p>Creamy and rich rum ice cream with punchy rum soaked raisins</p>
+        <p>Soak the raisins in rum for a while. (you can also omit this step. I soaked all night, and the raisins tasted
+            a little alcoholic.)</p>
         <div class="select_box">
             <span>Size:</span>
             <select class="select">
                 <option value="Small">Small</option>
                 <option value="Medium">Medium</option>
                 <option value="Large">Large</option>
-                <option value="ExtraLarge">ExtraLarge</option>
-                <option value="ExtraExtraLarge">ExtraExtraLarge</option>
+                <option value="Extra Large">Extra Large</option>
+                <option value="Extra Extra Large">Extra Extra Large</option>
             </select>
         </div>
 
@@ -123,19 +127,18 @@
     </div>
     <!--	four-->
     <div class="menu_information">
-        <img src="../images/mint.jpg">
+        <img src="../images/ice04.jpg">
         <h3 class="type">Mint</h3>
-<%--        <p>Mint ice cream is a delicious dish, the main ingredients include 2 egg yolks, 200 grams of milk, 100 grams of--%>
-<%--            light cream.</p>--%>
-        <p>Delightfully fresh and smooth mint ice cream!</p>
+        <p>Mint ice cream is a delicious dish, the main ingredients include 2 egg yolks, 200 grams of milk, 100 grams of
+            light cream.</p>
         <div class="select_box">
             <span>Size:</span>
             <select class="select">
                 <option value="Small">Small</option>
                 <option value="Medium">Medium</option>
                 <option value="Large">Large</option>
-                <option value="ExtraLarge">ExtraLarge</option>
-                <option value="ExtraExtraLarge">ExtraExtraLarge</option>
+                <option value="Extra Large">Extra Large</option>
+                <option value="Extra Extra Large">Extra Extra Large</option>
             </select>
         </div>
 
@@ -151,19 +154,17 @@
     </div>
     <!--	five-->
     <div class="menu_information">
-        <img src="../images/cherry.jpg">
+        <img src="../images/ice05.jpg">
         <h3 class="type">Cherry</h3>
-<%--        <p>Cherry ice cream is mainly made of yolk, sugar, milk, cream, cherry sauce and so on.</p>--%>
-        <p>Tangy cherry ice cream perfect for fruit lovers</p>
-
+        <p>Cherry ice cream is mainly made of yolk, sugar, milk, cream, cherry sauce and so on.</p>
         <div class="select_box">
             <span>Size:</span>
             <select class="select">
                 <option value="Small">Small</option>
                 <option value="Medium">Medium</option>
                 <option value="Large">Large</option>
-                <option value="ExtraLarge">ExtraLarge</option>
-                <option value="ExtraExtraLarge">ExtraExtraLarge</option>
+                <option value="Extra Large">Extra Large</option>
+                <option value="Extra Extra Large">Extra Extra Large</option>
             </select>
         </div>
 
@@ -179,19 +180,18 @@
     </div>
     <!--	six-->
     <div class="menu_information">
-        <img src="../images/chocolate.jpg">
+        <img src="../images/ice06.jpg">
         <h3 class="type">Chocolate</h3>
-<%--        <p>Chocolate ice cream is the prince of freezing all over the world. It is famous for its noble and attractive--%>
-<%--            appearance, indescribable delicacy and irresistible charm.</p>--%>
-        <p>This classic flavour is an indulgent combination of rich chocolate ice cream and tasty chocolate pieces</p>
+        <p>Chocolate ice cream is the prince of freezing all over the world. It is famous for its noble and attractive
+            appearance, indescribable delicacy and irresistible charm.</p>
         <div class="select_box">
             <span>Size:</span>
             <select class="select">
                 <option value="Small">Small</option>
                 <option value="Medium">Medium</option>
                 <option value="Large">Large</option>
-                <option value="ExtraLarge">ExtraLarge</option>
-                <option value="ExtraExtraLarge">ExtraExtraLarge</option>
+                <option value="Extra Large">Extra Large</option>
+                <option value="Extra Extra Large">Extra Extra Large</option>
             </select>
         </div>
         <div class="jiaOrJian">
@@ -206,20 +206,18 @@
     </div>
     <!--	seven-->
     <div class="menu_information">
-        <img src="../images/salted-caramel.jpg">
-<%--        <h3 class="type">SaltedCaramel</h3>--%>
+        <img src="../images/ice07.jpg">
         <h3 class="type">Salted Caramel</h3>
-<%--        <p>Salted caramel ice cream is a mixture of two flavors: salted caramel. Some salty caramel ice cream is a--%>
-<%--            simple vanilla ice cream mixed with salty caramel.</p>--%>
-        <p>Smooth salted caramel ice cream with moreish caramel sauce and pieces</p>
+        <p>Salted caramel ice cream is a mixture of two flavors: salted caramel. Some salty caramel ice cream is a
+            simple vanilla ice cream mixed with salty caramel.</p>
         <div class="select_box">
             <span>Size:</span>
             <select class="select">
                 <option value="Small">Small</option>
                 <option value="Medium">Medium</option>
                 <option value="Large">Large</option>
-                <option value="ExtraLarge">ExtraLarge</option>
-                <option value="ExtraExtraLarge">ExtraExtraLarge</option>
+                <option value="Extra Large">Extra Large</option>
+                <option value="Extra Extra Large">Extra Extra Large</option>
             </select>
         </div>
         <div class="jiaOrJian">
@@ -234,19 +232,18 @@
     </div>
     <!--	eight-->
     <div class="menu_information">
-        <img src="../images/strawberry.jpg">
+        <img src="../images/ice08.jpg">
         <h3 class="type">Strawberry</h3>
-<%--        <p>Strawberry ice cream, the world's most popular ice princess. It is famous for its noble and attractive--%>
-<%--            appearance, indescribable delicacy and irresistible charm.</p>--%>
-        <p>Delicious and creamy flavour made with fresh, juicy strawberries</p>
+        <p>Strawberry ice cream, the world's most popular ice princess. It is famous for its noble and attractive
+            appearance, indescribable delicacy and irresistible charm.</p>
         <div class="select_box">
             <span>Size:</span>
             <select class="select">
                 <option value="Small">Small</option>
                 <option value="Medium">Medium</option>
                 <option value="Large">Large</option>
-                <option value="ExtraLarge">Extra Large</option>
-                <option value="ExtraExtraLarge">ExtraExtraLarge</option>
+                <option value="Extra Large">Extra Large</option>
+                <option value="Extra Extra Large">Extra Extra Large</option>
             </select>
         </div>
         <div class="jiaOrJian">
@@ -316,12 +313,12 @@
                     text: "Unable to add zero items",
                 });
 
-             } else {
+            } else {
                 var num = input_num[this.id].value;
                 var size = select[this.id].value;
                 var ice_name = type[this.id].innerHTML;
                 var sizeMoney;
-                if (ice_name == "SaltedCaramel") {
+                if (ice_name == "Salted Caramel") {
                     switch (size) {
                         case "Small":
                             sizeMoney = 1.75 + 0.75;
@@ -332,10 +329,10 @@
                         case "Large":
                             sizeMoney = 2.75 + 0.75;
                             break;
-                        case "ExtraLarge":
+                        case "Extra Large":
                             sizeMoney = 3.50 + 0.75;
                             break;
-                        case "ExtraExtraLarge":
+                        case "Extra Extra Large":
                             sizeMoney = 5.75 + 0.75;
                             break;
                     }
@@ -350,10 +347,10 @@
                         case "Large":
                             sizeMoney = 2.75;
                             break;
-                        case "ExtraLarge":
+                        case "Extra Large":
                             sizeMoney = 3.50;
                             break;
-                        case "ExtraExtraLarge":
+                        case "Extra Extra Large":
                             sizeMoney = 5.75;
                             break;
                     }
@@ -366,16 +363,17 @@
                 var hasHave;
                 if (num > 1) {
                     orderString = " orders of ";
-                    hasHave="have";
+                    hasHave = "have";
                 } else {
                     orderString = " order of ";
-                    hasHave="has";
+                    hasHave = "has";
                 }
 
                 //changed wording and used swal. Thanks, George Black
                 swal.fire({
-                    text:num + " " + size + orderString + ice_name + " ice cream "
-                    +hasHave+" been added to your total order"});
+                    text: num + " " + size + orderString + ice_name + " ice cream "
+                        + hasHave + " been added to your total order"
+                });
 
 
                 information.innerHTML += "Type:" + ice_name + "; &nbsp;&nbsp;&nbsp;&nbsp;" + "Size:" + size + "; &nbsp;&nbsp;&nbsp;&nbsp;" + "Number:" + num + ";&nbsp;&nbsp;&nbsp;&nbsp;Money:" + sizeMoney + "<br>";
@@ -428,15 +426,17 @@
             swal.fire({
                 icon: "error",
                 text: "Maximum number of ice creams per order is 5"
-            });
-            location.reload();
+            }).then((result) =>
+            {
+                location.reload();
+            })
         } else {
             if (count.value <= 0) {
 
                 //changed wording and used swal. Thanks, George Black
                 swal.fire({
                     icon: "error",
-                    text:"Unable to make an order with 0 items"
+                    text: "Unable to make an order with 0 items"
                 });
 
                 return false;

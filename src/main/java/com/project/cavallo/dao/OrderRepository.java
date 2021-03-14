@@ -1,18 +1,39 @@
 package com.project.cavallo.dao;
 
-import com.project.cavallo.HorsePayClass.HorsePayResponse;
+import com.project.cavallo.domain.HorsePayClass.HorsePayResponse;
+import com.project.cavallo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
+
+import java.sql.Date;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 
 import static java.lang.Integer.parseInt;
 
 /**
  * Repository to store the Order in the database if the payment goes through.
+ *
  * @author George Black
  */
 @Repository
 public class OrderRepository {
+
+
+
+     SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("HH:mm");
+
+    SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd/MM/yyyy");
 
     //Here is my change
     private String blah;
@@ -26,31 +47,63 @@ public class OrderRepository {
      * the database. Otherwise, nothing happens. Note: There are currently some dummy values used to enter the
      * iceCreamOrder in the database. This is because I need more info/code to get these values correctly
      *
-     * @author George Black
      * @param hResponse The HorsePay JSON (with paymentSuccess) that is to be sent.
-     * @param totalCost The total cost of the order the Customer wants to complete.
-     *
+     * @author George Black
      */
-    public void createOrderFromHResponse(HorsePayResponse hResponse, float totalCost){
+    public int createOrderFromHResponse(HorsePayResponse hResponse) throws ParseException {
+        SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("HH:mm");
+
+        SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd/MM/yyyy");
+
+
+
         //if the (with paymentSuccess) that is to be sent has Status=true, store the order in the
         //database
-        if(hResponse.getPaymentResult().isStatus()){
-            String sql="INSERT INTO iceCreamOrder(orderType,date,iceCreamID,customerID,cost) values(?,?,?,?,?)";
+        int insert=0;
+        if (hResponse.getPaymentResult().isStatus()) {
 
-            //Dummy values of delivery and 1 currently.
-            //Note: if this is sent properly 1 row will be affected causing insert to have a value of 1. Otherwise
-            //insert will have a value of 0.
-            int insert = jdbcTemplate.update(sql,"Delivery",hResponse.getDate(),1,
-                    parseInt(hResponse.getCustomerID()),totalCost);
+            String sql = "INSERT INTO iceCreamOrder(customerID,`date`,`time`,`type`,address,distanceFromShop,cost)" +
+                    " values(?,?,?,?,?,?,?)";
+
+            System.out.println(hResponse.getTransactionAmount());
+
+           //Used as delivery right now
+            System.out.println(hResponse.getDate());
+            System.out.println(hResponse.getTime());
+            insert = jdbcTemplate.update(sql, hResponse.getCustomerID(),
+                    dateFormat.parse(hResponse.getDate()), timeFormat.parse(hResponse.getTime()), "Pick up", "NA", 0, hResponse.getTransactionAmount());
 
             //display the order was successful in console
-            if(insert==1){
+            if (insert == 1) {
                 System.out.println("order added into order table");
             }
         }
         //otherwise nothing will happen
-
+        return insert;
     }
+
+    //went with this for safety reason avoids issues
+    public int getOrderID(HorsePayResponse hResponse) throws ParseException {
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
+
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        LocalDate dateToGet= LocalDate.parse(hResponse.getDate(),dateFormat);
+
+        LocalTime timeToGet = LocalTime.parse(hResponse.getTime(),timeFormat);
+
+
+
+        RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
+
+        String sql="Select orderID FROM iceCreamOrder WHERE (customerID=? AND `date`=? AND `time`=?)";
+
+        int orderId=jdbcTemplate.queryForObject(sql,new Object[]{hResponse.getCustomerID(),dateToGet,timeToGet},Integer.class);
+
+        return orderId;
+    }
+
+
 
 
 }

@@ -1,4 +1,4 @@
-package com.project.cavallo.HorsePayClass;
+package com.project.cavallo.domain.HorsePayClass;
 
 
 /**

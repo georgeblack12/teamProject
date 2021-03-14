@@ -22,6 +22,10 @@
 <%session.removeAttribute("custId");%>
 <%
     }
+    if (session.getAttribute("orderID") != null) {%>
+<%
+        session.removeAttribute("orderID");
+    }
 %>
 <img id="logo" src="../images/logo.png">
 
@@ -31,12 +35,12 @@
     <div class="left">
         <h2>login</h2>
 
-<%--        If the user tries to login and and they enter incorrect credentials an error message is displayed.
-            This will need to be styled. Thanks, George Black. --%>
+        <%--        If the user tries to login and and they enter incorrect credentials an error message is displayed.
+                    This will need to be styled. Thanks, George Black. --%>
         <% if (request.getAttribute("ERROR") != null) { %>
         <%=request.getAttribute("ERROR")%>
         <%
-        }%>
+            }%>
 
 
         <form action="login" method="post" name="form">
@@ -45,7 +49,7 @@
                     <td class="tit">Email address:</td>
                 </tr>
                 <tr>
-                    <td><input type="text" id="username" name="username" placeholder="
+                    <td><input type="text" id="email" name="email" placeholder="
 Please log in by email" onblur="validate_username(this.value)"/></td>
                 </tr>
                 <tr>

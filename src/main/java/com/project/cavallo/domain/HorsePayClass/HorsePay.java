@@ -1,7 +1,4 @@
-package com.project.cavallo.HorsePayClass;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+package com.project.cavallo.domain.HorsePayClass;
 
 
 /**

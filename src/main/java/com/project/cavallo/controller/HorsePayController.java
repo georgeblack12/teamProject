@@ -1,13 +1,17 @@
 package com.project.cavallo.controller;
 
 
-import com.project.cavallo.HorsePayClass.HorsePay;
-import com.project.cavallo.HorsePayClass.HorsePayResponse;
 import com.project.cavallo.dao.OrderRepository;
+import com.project.cavallo.domain.HorsePayClass.HorsePay;
+import com.project.cavallo.domain.HorsePayClass.HorsePayResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
 
 /**
  * RestController to receive the horsePay Json and send back the required JSon with the payment values.
@@ -25,13 +29,12 @@ public class HorsePayController {
      * Method that takes the JSON needed for horsePay from the client and then sends back the JSON with the paymentSucess
      * added to it.
      *
-     * @author George Black
      * @param hReceive The horsePay JSON that was received from the client with needed values.
-     * @param totalCost The totalCost of the order.
      * @return The HorsePay JSON with the paymentSuccess added to it.
+     * @author George Black
      */
-    @PostMapping(value={"horsePay","horsePay"}, consumes="application/json", produces="application/json")
-    public HorsePayResponse checkHorsePay(@RequestBody HorsePay hReceive, @RequestParam("totalCost") float totalCost){
+    @PostMapping(value = {"horsePay"}, consumes = "application/json", produces = "application/json")
+    public HorsePayResponse checkHorsePay(@RequestBody HorsePay hReceive, HttpSession session) throws ParseException {
 
         //get the Received JSON and get the JSON with paymentSuccess added.
         HorsePayResponse hSend = new HorsePayResponse(hReceive);
@@ -39,7 +42,12 @@ public class HorsePayController {
 //        System.out.println(totalCost); for testing
 
         //if the Payment is successful put the order in the database.
-        orderRepository.createOrderFromHResponse(hSend,totalCost);
+        int insert=orderRepository.createOrderFromHResponse(hSend);
+
+        if(insert==1){
+            session.setAttribute("orderID",orderRepository.getOrderID(hSend));
+        }
+        //else do not add an orderID;
 
 
 //        System.out.println(hSend); for testing
@@ -47,17 +55,18 @@ public class HorsePayController {
         //return the JSON with paymentSuccess added
         return hSend;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
