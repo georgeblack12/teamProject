@@ -1,11 +1,18 @@
 package com.project.cavallo.domain;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Optional;
+import java.util.Random;
 
 
 /**
@@ -13,12 +20,13 @@ import javax.persistence.Table;
  * not have an order. original code is commented out below.
  * Original author: Hanxiong Wang
  * Modifying author: George Black. Note: I just removed the orderId.
+ * Modifying author: Madeleine Towes (generating customer ID)
  */
 @Entity
 public class Customer {
 
     @Id
-    private Integer customerID;
+    private Integer customerID; //this needs to be String!!
     private String customerName;
     private String phoneNum;
     private String address;
@@ -72,6 +80,38 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * Generating a random string, found here
+     * https://www.programiz.com/java-programming/examples/generate-random-string
+     * Original Author - Programiz
+     * Modifying Author - Madeleine Towes, 14/03/21
+     *
+     * Generates a random customer ID consisting of a String of length 3
+     * and a random three digit number.
+     *
+     * From a String of the alphabet and Random, uses a StringBuilder to
+     * create a String with the length of 3
+     * Uses Random to generate a number between 100 and 999
+     * @return String of the random String and random number
+     */
+    private String generateCustomerID() {
+        //generates String
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        StringBuilder s = new StringBuilder();
+        Random r = new Random();
+        for (int i = 0; i < 3; i++) {
+            int index = r.nextInt(alphabet.length());
+            char randomChar = alphabet.charAt(index);
+            s.append(randomChar);
+        }
+
+        //generates digits
+        Random r2 = new Random();
+        int i = r2.nextInt(999 - 100) + 100;
+
+        return String.valueOf(s.append(i));
     }
 
     @Override
