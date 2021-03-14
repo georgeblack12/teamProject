@@ -17,7 +17,7 @@
 
 <%if (session.getAttribute("orderID") != null) {%>
 <%
-    session.removeAttribute("orderID");
+        session.removeAttribute("orderID");
     }
 %>
 
@@ -30,7 +30,7 @@
         <a href="/">logout</a>
         <%--        <a href="register.html">register</a> does not make sense to register since they are alread logged in, thanks
         george black --%>
-<%--        <a href="/pages/admin.html">admin</a>--%>
+        <%--        <a href="/pages/admin.html">admin</a>--%>
     </li>
 </div>
 
@@ -43,9 +43,9 @@
 
 
 <div id="menu">
-    <!--	one-->
+    <!--   one-->
     <div class="menu_information">
-        <img src="../images/ice01.jpg">
+        <img src="../images/vanilla.jpg">
         <h3 class="type">Vanilla</h3>
         <p>Vanilla ice cream is a kind of desserts, the main raw materials are fresh milk, eggs, sugar, solid cream and
             vanilla essence. The process of adding milk must be slow, slow and not impatient.</p>
@@ -70,9 +70,9 @@
             <span>Add To Cart</span>
         </div>
     </div>
-    <!--	two-->
+    <!--   two-->
     <div class="menu_information">
-        <img src="../images/ice02.jpg">
+        <img src="../images/honeycomb.jpg">
         <h3 class="type">Honeycomb</h3>
         <p>The original beehive ice cream has honey and beehive, which is pure natural and has no added flavor. If you
             like cheese, you can recommend cheese cake. It's cool with the mellow smell of cheese. It feels great to
@@ -98,9 +98,9 @@
             <span>Add To Cart</span>
         </div>
     </div>
-    <!--	three-->
+    <!--   three-->
     <div class="menu_information">
-        <img src="../images/ice03.jpg">
+        <img src="../images/rum-raisin.jpg">
         <h3 class="type">Rum and Raisin</h3>
         <p>Soak the raisins in rum for a while. (you can also omit this step. I soaked all night, and the raisins tasted
             a little alcoholic.)</p>
@@ -125,9 +125,9 @@
             <span>Add To Cart</span>
         </div>
     </div>
-    <!--	four-->
+    <!--   four-->
     <div class="menu_information">
-        <img src="../images/ice04.jpg">
+        <img src="../images/mint.jpg">
         <h3 class="type">Mint</h3>
         <p>Mint ice cream is a delicious dish, the main ingredients include 2 egg yolks, 200 grams of milk, 100 grams of
             light cream.</p>
@@ -152,9 +152,9 @@
             <span>Add To Cart</span>
         </div>
     </div>
-    <!--	five-->
+    <!--   five-->
     <div class="menu_information">
-        <img src="../images/ice05.jpg">
+        <img src="../images/cherry.jpg">
         <h3 class="type">Cherry</h3>
         <p>Cherry ice cream is mainly made of yolk, sugar, milk, cream, cherry sauce and so on.</p>
         <div class="select_box">
@@ -178,9 +178,9 @@
             <span>Add To Cart</span>
         </div>
     </div>
-    <!--	six-->
+    <!--   six-->
     <div class="menu_information">
-        <img src="../images/ice06.jpg">
+        <img src="../images/chocolate.jpg">
         <h3 class="type">Chocolate</h3>
         <p>Chocolate ice cream is the prince of freezing all over the world. It is famous for its noble and attractive
             appearance, indescribable delicacy and irresistible charm.</p>
@@ -204,9 +204,9 @@
             <span>Add To Cart</span>
         </div>
     </div>
-    <!--	seven-->
+    <!--   seven-->
     <div class="menu_information">
-        <img src="../images/ice07.jpg">
+        <img src="../images/salted-caramel.jpg">
         <h3 class="type">Salted Caramel</h3>
         <p>Salted caramel ice cream is a mixture of two flavors: salted caramel. Some salty caramel ice cream is a
             simple vanilla ice cream mixed with salty caramel.</p>
@@ -230,9 +230,9 @@
             <span>Add To Cart</span>
         </div>
     </div>
-    <!--	eight-->
+    <!--   eight-->
     <div class="menu_information">
-        <img src="../images/ice08.jpg">
+        <img src="../images/strawberry.jpg">
         <h3 class="type">Strawberry</h3>
         <p>Strawberry ice cream, the world's most popular ice princess. It is famous for its noble and attractive
             appearance, indescribable delicacy and irresistible charm.</p>
@@ -461,3 +461,4 @@
 
 </script>
 </html>
+
