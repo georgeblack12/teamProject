@@ -1,3 +1,7 @@
+<%@ page import="com.project.cavallo.domain.Customer" %>
+<%@ page import="com.project.cavallo.domain.IceCream" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.project.cavallo.dao.IceCreamRepository" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -16,6 +20,13 @@
     to make-a payment. Thanks, George Black-->
     <script src="../SweetAlertJavaScript/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="../css/sweetalert2.css">
+
+
+    <script rel="javascript" type="text/javascript" href="js/jquery-1.11.3.min.js"></script>
+
+
+
+
 </head>
 
 <body>
@@ -64,8 +75,8 @@
     //alert(infor);
 
     //选择时区获取时间
-    var shiQu = document.getElementById("shiQu");
-    var date = document.getElementById("date");
+    // var shiQu = document.getElementById("shiQu");
+    // var date = document.getElementById("date");
 
 
     // function getTimeString(date, timezone) {
@@ -145,30 +156,68 @@
     // };
 
 
+
+
+
+    function getSpaces(typeOfIceCream){
+        while(typeOfIceCream.includes("%20")){
+            typeOfIceCream = typeOfIceCream.replace("%20"," ");
+        }
+        return typeOfIceCream;
+    }
+
     var infor = window.location.search.substring(1).split("&");
+    infor[1]=getSpaces(infor[1]);
+    infor[2]=getSpaces(infor[2]);
+
+
+
+
     var sumMoney = infor[0];	//总额
     var type_arr = infor[1].split(",");	//冰激凌类型数组
     var size_arr = infor[2].split(",");	//尺寸数组
     var sizeMoney_arr = infor[3].split(",");	//尺寸价格数组
     var number_arr = infor[4].split(",");	//数量数组
+    var iceCreamOrderList=[];
+    
+
     //alert(sumMoney);
     //alert(type_arr);
     //alert(type_arr[0]);
     //alert(type_arr[1]);
 
+
+
     var tbody = document.getElementById("tbody1");
     var tableData = "";
-    //动态增加5个td,并且把data数组的五个值赋给每个td
+
+
     for (var i = 0; i < type_arr.length; i++) {
 
-        tableData += "<tr><td>" + type_arr[i] + "</td>" + "<td>" + size_arr[i] + "</td>" + "<td>" + sizeMoney_arr[i] + "</td>" + "<td>" + number_arr[i] + "</td></tr>"
+        tableData += "<tr><td>" + type_arr[i] + "</td>" + "<td>" + size_arr[i] + "</td>" + "<td>" + sizeMoney_arr[i] + "</td>" + "<td>" + number_arr[i] + "</td></tr>";
+
+
+        for (j=0; j<number_arr[i];j++) {
+            var iceCreamOrder={
+                "flavour": String(type_arr[i]),
+                "size": String(size_arr[i]),
+                "price": String(sizeMoney_arr[i])
+            }
+            iceCreamOrderList.push(iceCreamOrder);
+        }
+
     }
+
+    console.log(iceCreamOrderList);
     tbody.innerHTML += tableData;
     //alert(tbody.innerHTML);
 
     //设置总额
     var numMoney = document.getElementById("numMoney");
     numMoney.innerHTML += sumMoney;
+
+
+
 
     //选择配送或自提
     // var address = document.getElementById("address");
@@ -221,7 +270,7 @@
 
     //Had to edit this to get the totalCost to be moved properly as a request Parameter. Thanks, George Black
     //点击提交订单
-    var confirm = document.getElementById("confirm");
+    // var confirm = document.getElementById("confirm");
     //英国时间（小时和分钟）
     // var date = getTimeString(new Date(), 0).split(":");
     // var hour = date[0];
@@ -310,16 +359,23 @@
     var timeToSend = getFormattedTime();
 
 
+
+
     //The original horsePay JSON to be sent to server to get proper JSON back with the paymentResult.
     var originalHorseObject = {
         "storeID": "Team08",
-        "customerID": String(<%=session.getAttribute("custId")%>), //the customersID in the website
+        "customerID": "<%=((Customer) session.getAttribute("cust")).getCustomerID()%>", //the customersID in the website
         "date": dateToSend,
         "time": timeToSend,
         "timeZone": "GMT",
         "transactionAmount": String(sumMoney), //the totalCost of the order
         "currencyCode": "GBP",
     }
+
+
+
+
+
 
     /**
      * Method that is run after the user hits Pay now £(their total cost). It does a pop up asking if they are sure
@@ -345,16 +401,10 @@
             //if Confirm Order is clicked then send HorsePayJSON
         }).then((result) => {
                 if (result.isConfirmed) {
-                    this.sendJson()
+                    this.sendHorsePayJson()
                 }
             }
         )
-    }
-
-    function getCredentials(){
-        Swal.mixin({
-
-        })
     }
 
 
@@ -374,11 +424,14 @@
      * Modifying author: George Black
      *
      */
-    function sendJson() {
+    function sendHorsePayJson() {
         let xhr = new XMLHttpRequest();
         let url = '/horsePay';
+
+
+
         // open a connection to post (add the totalCost as a requestParameter
-        xhr.open("POST", url + "?totalCost=" +sumMoney, true);
+        xhr.open("POST", url, true);
 
 
         //say I am sending a json and then send it
@@ -392,6 +445,8 @@
         //to be internal error with horsePay server.
         xhr.onreadystatechange = function () {
             if (xhr.readyState == XMLHttpRequest.DONE) {
+
+
                 getAlertMessage(JSON.parse(xhr.response));
             } else {
                 let paymentResult = {
@@ -407,6 +462,29 @@
     }
 
 
+
+    iceCreamOrderStringify=JSON.stringify(iceCreamOrderList);
+
+
+
+
+    function sendIceCreamJson(){
+        let xhr = new XMLHttpRequest();
+        let url ='/getIceCreams';
+
+        xhr.open("POST",url,true);
+
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(iceCreamOrderStringify);
+
+        xhr.onreadystatechange=function(){
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+
+            }
+
+        }
+    }
+
     /**
      * Method that displays if the horsePayment was successful or not. A proper message is displayed based on what the
      * paymentSuccess result is.
@@ -421,27 +499,27 @@
      */
     function getAlertMessage(result) {
         if (result.paymentResult["Status"]) {
-
+             sendIceCreamJson();
             Swal.fire({
                 icon: 'success',
                 title: result.paymentResult["reason"],
-                text: "Thank you for shopping with Cavallo",
+                text: "Thank you for shopping with Cavallo! If you wish to purchase more ice cream, there will be" +
+                    " a 60 second timeout before you can start shopping again",
                 showCancelButton: true,
-                showDenyButton: true,
                 confirmButtonText: 'Logout',
                 cancelButtonText: 'make another order',
-                denyButtonText: 'button for maddie (testing)',
                 allowOutsideClick: false // do not allow user to leave box by clickig outside of it.
             }).then((result) => {
                 if (result.isConfirmed) {
 
                     //remove the customerId from the session
+
                     window.location.replace("/");
 
-                } else if (result.isDismissed) {
+                } else {
+
                     window.location.replace("/pages/shopping.jsp");
                 }
-                //else stay here
             })
         } else {
 
@@ -450,23 +528,26 @@
                 title: "HorsePay Error",
                 text: result.paymentResult["reason"],
                 showCancelButton: true,
-                showDenyButton: true,
                 confirmButtonText: 'stay on page and try again',
                 cancelButtonText: 'logout',
-                denyButtonText: 'button for maddie (testing)',
+
                 allowOutsideClick: false // do not allow user to leave box by clickig outside of it.
             }).then((result) => {
                 if (result.isConfirmed) {
                     //stay here do nothing
 
-                } else if (result.isDismissed) {
+                } else {
                     window.location.replace("/");
                 }
-                //else stay here
+
             })
         }
-
     }
+
+
+
+
+
 
 
 </script>
