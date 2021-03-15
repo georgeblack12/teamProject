@@ -18,8 +18,8 @@
 
 <%--If the user already has the custId in the session remove it. This is to be used if the user decides to go back into--%>
 <%--the login page after making/trying to make  an order. Thanks, George Black--%>
-<%if (session.getAttribute("custId") != null) {%>
-<%session.removeAttribute("custId");%>
+<%if (session.getAttribute("cust") != null) {%>
+<%session.removeAttribute("cust");%>
 <%
     }
     if (session.getAttribute("orderID") != null) {%>

@@ -14,17 +14,6 @@ public class IceCream{
     private float price;
 
 
-
-    public IceCream(){}
-
-
-
-    public IceCream(String flavour,String size, float price){
-        this.flavour=flavour;
-        this.size=size;
-        this.price=price;
-    }
-
     public String getFlavour() {
         return flavour;
     }
