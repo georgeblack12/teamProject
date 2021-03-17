@@ -33,10 +33,10 @@
 
 -------------------- ORDER TABLE --------------------
 
--- DROP TABLE IF EXISTS `Order`;
--- CREATE TABLE `Order` (
+-- DROP TABLE IF EXISTS `iceCreamOrder`;
+-- CREATE TABLE `iceCreamOrder` (
 -- 	`orderID` int NOT NULL AUTO_INCREMENT,
--- 	`email` varchar(100) NOT NULL,
+-- 	`customerID` varchar(6) NOT NULL,
 -- 	`date` date NOT NULL,
 -- 	`time` time NOT NULL,
 -- 	`type` varchar(10) NOT NULL,
@@ -44,7 +44,7 @@
 -- 	`distanceFromShop` float(2),
 -- 	`cost` float(2) NOT NULL,
 -- 	PRIMARY KEY(`orderID`),
--- 	FOREIGN KEY(`email`) REFERENCES `Customer`(`email`)
+-- 	FOREIGN KEY(`customerID`) REFERENCES `Customer`(`customerID`)
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -------------------- ICE CREAM TABLE --------------------
@@ -53,7 +53,7 @@
 -- CREATE TABLE `IceCream` (
 -- 	`iceCreamID` int NOT NULL AUTO_INCREMENT,
 -- 	`flavour` varchar(20) NOT NULL,
--- 	`size` varchar(3) NOT NULL,
+-- 	`size` varchar(20) NOT NULL,
 -- 	`price` float(2) NOT NULL,
 -- 	PRIMARY KEY(`iceCreamID`)
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -65,7 +65,6 @@
 -- 	`orderID` int NOT NULL,
 -- 	`iceCreamID` int NOT NULL,
 -- 	`quantity` int NOT NULL,
--- 	`cost` float(2) NOT NULL,
 -- 	PRIMARY KEY(`orderID`,`iceCreamID`),
 -- 	FOREIGN KEY(`orderID`) REFERENCES `Order`(`orderID`),
 -- 	FOREIGN KEY(`iceCreamID`) REFERENCES `IceCream`(`iceCreamID`)
@@ -74,51 +73,51 @@
 -------------------- ICE CREAM DATA --------------------
 
 -- INSERT INTO `IceCream` (flavour,`size`, price)
--- VALUES ('Vanilla', 'S', 1.75),
--- 	   ('Vanilla', 'M', 2.25),
--- 	   ('Vanilla', 'L', 2.75),
--- 	   ('Vanilla', 'XL', 3.50),
--- 	   ('Vanilla', 'XXL', 5.75),
--- 	   ('Dairy Free Vanilla', 'S', 1.75),
--- 	   ('Dairy Free Vanilla', 'M', 2.25),
--- 	   ('Dairy Free Vanilla', 'L', 2.75),
--- 	   ('Dairy Free Vanilla', 'XL', 3.50),
--- 	   ('Dairy Free Vanilla', 'XXL', 5.75),
--- 	   ('Honeycomb', 'S', 1.75),
--- 	   ('Honeycomb', 'M', 2.25),
--- 	   ('Honeycomb', 'L', 2.75),
--- 	   ('Honeycomb', 'XL', 3.50),
--- 	   ('Honeycomb', 'XXL', 5.75),
--- 	   ('Rum and Raisin', 'S', 1.75),
--- 	   ('Rum and Raisin', 'M', 2.25),
--- 	   ('Rum and Raisin', 'L', 2.75),
--- 	   ('Rum and Raisin', 'XL', 3.50),
--- 	   ('Rum and Raisin', 'XXL', 5.75),
--- 	   ('Mint', 'S', 1.75),
--- 	   ('Mint', 'M', 2.25),
--- 	   ('Mint', 'L', 2.75),
--- 	   ('Mint', 'XL', 3.50),
--- 	   ('Mint', 'XXL', 5.75),
--- 	   ('Cherry', 'S', 1.75),
--- 	   ('Cherry', 'M', 2.25),
--- 	   ('Cherry', 'L', 2.75),
--- 	   ('Cherry', 'XL', 3.50),
--- 	   ('Cherry', 'XXL', 5.75),
--- 	   ('Chocolate', 'S', 1.75),
--- 	   ('Chocolate', 'M', 2.25),
--- 	   ('Chocolate', 'L', 2.75),
--- 	   ('Chocolate', 'XL', 3.50),
--- 	   ('Chocolate', 'XXL', 5.75),
--- 	   ('Salted Caramel', 'S', 2.50),
--- 	   ('Salted Caramel', 'M', 3.00),
--- 	   ('Salted Caramel', 'L', 3.50),
--- 	   ('Salted Caramel', 'XL', 4.25),
--- 	   ('Salted Caramel', 'XXL', 6.50),
--- 	   ('Strawberry', 'S', 1.75),
--- 	   ('Strawberry', 'M', 2.25),
--- 	   ('Strawberry', 'L', 2.75),
--- 	   ('Strawberry', 'XL', 3.50),
--- 	   ('Strawberry', 'XXL', 5.75);
+-- VALUES ('Vanilla', 'Small', 1.75),
+-- 	   ('Vanilla', 'Medium', 2.25),
+-- 	   ('Vanilla', 'Large', 2.75),
+-- 	   ('Vanilla', 'Extra Large', 3.50),
+-- 	   ('Vanilla', 'Extra Extra Large', 5.75),
+-- 	   ('Dairy Free Vanilla', 'Small', 1.75),
+-- 	   ('Dairy Free Vanilla', 'Medium', 2.25),
+-- 	   ('Dairy Free Vanilla', 'Large', 2.75),
+-- 	   ('Dairy Free Vanilla', 'Extra Large', 3.50),
+-- 	   ('Dairy Free Vanilla', 'Extra Extra Large', 5.75),
+-- 	   ('Honeycomb', 'Small', 1.75),
+-- 	   ('Honeycomb', 'Medium', 2.25),
+-- 	   ('Honeycomb', 'Large', 2.75),
+-- 	   ('Honeycomb', 'Extra Large', 3.50),
+-- 	   ('Honeycomb', 'Extra Extra Large', 5.75),
+-- 	   ('Rum and Raisin', 'Small', 1.75),
+-- 	   ('Rum and Raisin', 'Medium', 2.25),
+-- 	   ('Rum and Raisin', 'Large', 2.75),
+-- 	   ('Rum and Raisin', 'Extra Large', 3.50),
+-- 	   ('Rum and Raisin', 'Extra Extra Large', 5.75),
+-- 	   ('Mint', 'Small', 1.75),
+-- 	   ('Mint', 'Medium', 2.25),
+-- 	   ('Mint', 'Large', 2.75),
+-- 	   ('Mint', 'Extra Large', 3.50),
+-- 	   ('Mint', 'Extra Extra Large', 5.75),
+-- 	   ('Cherry', 'Small', 1.75),
+-- 	   ('Cherry', 'Medium', 2.25),
+-- 	   ('Cherry', 'Large', 2.75),
+-- 	   ('Cherry', 'Extra Large', 3.50),
+-- 	   ('Cherry', 'Extra Extra Large', 5.75),
+-- 	   ('Chocolate', 'Small', 1.75),
+-- 	   ('Chocolate', 'Medium', 2.25),
+-- 	   ('Chocolate', 'Large', 2.75),
+-- 	   ('Chocolate', 'Extra Large', 3.50),
+-- 	   ('Chocolate', 'Extra Extra Large', 5.75),
+-- 	   ('Salted Caramel', 'Small', 2.50),
+-- 	   ('Salted Caramel', 'Medium', 3.00),
+-- 	   ('Salted Caramel', 'Large', 3.50),
+-- 	   ('Salted Caramel', 'Extra Large', 4.25),
+-- 	   ('Salted Caramel', 'Extra Extra Large', 6.50),
+-- 	   ('Strawberry', 'Small', 1.75),
+-- 	   ('Strawberry', 'Medium', 2.25),
+-- 	   ('Strawberry', 'Large', 2.75),
+-- 	   ('Strawberry', 'Extra Large', 3.50),
+-- 	   ('Strawberry', 'Extra Extra Large', 5.75);
 
 -------------------- ADMIN DATA --------------------
 
