@@ -25,8 +25,6 @@
     <script rel="javascript" type="text/javascript" href="js/jquery-1.11.3.min.js"></script>
 
 
-
-
 </head>
 
 <body>
@@ -53,10 +51,9 @@
 <%--</div>--%>
 
 
-
-    <%--	<div id="pay">Pay now  £<span id="money"></span></div>--%>
-    <%--Edited to display total cost. Additionally, now calls the askToCompeteOrder function. Thanks, George Black--%>
-    <div id="confirm" onclick=askToCompleteOrder()>Complete Order</div>
+<%--	<div id="pay">Pay now  £<span id="money"></span></div>--%>
+<%--Edited to display total cost. Additionally, now calls the askToCompeteOrder function. Thanks, George Black--%>
+<div id="confirm" onclick=getDeliveryInfo()>Complete Order</div>
 
 
 </div>
@@ -64,6 +61,40 @@
 
 
 <script type="text/javascript">
+
+    function getDeliveryInfo() {
+
+
+        swal.fire({
+            title: 'Get order Information',
+            html: `
+            <div class="form-delivery">
+                <label for="deliveryType">Is this order for delivery or carry out?</label>
+                    <p>
+                        <input type="radio" name="deliveryType" value="carryOut" onclick="getAddressFor(this.value)" checked>Carry out</input>
+                    </p>
+                    <p>
+                        <input type="radio" name="deliveryType" value="delivery" onclick="getAddressFor(this.value)"
+                            >Delivery</input>
+                    </p>
+            </div>
+    `,
+            focusConfirm: false,
+            preConfirm: () => {
+                console.log('Is checkbox1 checked:' + document.getElementById('delivery_type').checked);
+            }
+        });
+    }
+
+    function getAddressFor(deliveryType){
+        if(deliveryType=="delivery"){
+            console.log("delivery is chosen");
+        }else{
+            console.log("carry out is selected");
+        }
+    }
+
+
     //I believe this code is no longer needed based on how I am getting the totalCost now. Feel free to change if
     //need be. Could you please translate/change your chinese? Thanks, George Black.
 
@@ -156,21 +187,16 @@
     // };
 
 
-
-
-
-    function getSpaces(typeOfIceCream){
-        while(typeOfIceCream.includes("%20")){
-            typeOfIceCream = typeOfIceCream.replace("%20"," ");
+    function getSpaces(typeOfIceCream) {
+        while (typeOfIceCream.includes("%20")) {
+            typeOfIceCream = typeOfIceCream.replace("%20", " ");
         }
         return typeOfIceCream;
     }
 
     var infor = window.location.search.substring(1).split("&");
-    infor[1]=getSpaces(infor[1]);
-    infor[2]=getSpaces(infor[2]);
-
-
+    infor[1] = getSpaces(infor[1]);
+    infor[2] = getSpaces(infor[2]);
 
 
     var sumMoney = infor[0];	//总额
@@ -178,14 +204,13 @@
     var size_arr = infor[2].split(",");	//尺寸数组
     var sizeMoney_arr = infor[3].split(",");	//尺寸价格数组
     var number_arr = infor[4].split(",");	//数量数组
-    var iceCreamOrderList=[];
-    
+    var iceCreamOrderList = [];
+
 
     //alert(sumMoney);
     //alert(type_arr);
     //alert(type_arr[0]);
     //alert(type_arr[1]);
-
 
 
     var tbody = document.getElementById("tbody1");
@@ -197,8 +222,8 @@
         tableData += "<tr><td>" + type_arr[i] + "</td>" + "<td>" + size_arr[i] + "</td>" + "<td>" + sizeMoney_arr[i] + "</td>" + "<td>" + number_arr[i] + "</td></tr>";
 
 
-        for (j=0; j<number_arr[i];j++) {
-            var iceCreamOrder={
+        for (j = 0; j < number_arr[i]; j++) {
+            var iceCreamOrder = {
                 "flavour": String(type_arr[i]),
                 "size": String(size_arr[i]),
                 "price": String(sizeMoney_arr[i])
@@ -215,8 +240,6 @@
     //设置总额
     var numMoney = document.getElementById("numMoney");
     numMoney.innerHTML += sumMoney;
-
-
 
 
     //选择配送或自提
@@ -314,7 +337,6 @@
     //     window.open("map.html?" + inputAddress.value);
 
 
-
     /**
      * Method to get the current date and turn it into a String with the required format
      * @returns {string} A string of the current date with the required format for the project.
@@ -359,8 +381,6 @@
     var timeToSend = getFormattedTime();
 
 
-
-
     //The original horsePay JSON to be sent to server to get proper JSON back with the paymentResult.
     var originalHorseObject = {
         "storeID": "Team08",
@@ -371,10 +391,6 @@
         "transactionAmount": String(sumMoney), //the totalCost of the order
         "currencyCode": "GBP",
     }
-
-
-
-
 
 
     /**
@@ -391,7 +407,7 @@
 
             //displays the companies logo
             imageUrl: "../images/logo.png",
-            text: "Confirm order for  £"+sumMoney+ " ?",
+            text: "Confirm order for  £" + sumMoney + " ?",
             showCancelButton: true,
             confirmButtonText: 'Confirm order',
 
@@ -406,8 +422,6 @@
             }
         )
     }
-
-
 
 
     //horsePay JSON turned into a string to be sent to the server. Thanks, George Black.
@@ -427,7 +441,6 @@
     function sendHorsePayJson() {
         let xhr = new XMLHttpRequest();
         let url = '/horsePay';
-
 
 
         // open a connection to post (add the totalCost as a requestParameter
@@ -462,22 +475,19 @@
     }
 
 
-
-    iceCreamOrderStringify=JSON.stringify(iceCreamOrderList);
-
+    iceCreamOrderStringify = JSON.stringify(iceCreamOrderList);
 
 
-
-    function sendIceCreamJson(){
+    function sendIceCreamJson() {
         let xhr = new XMLHttpRequest();
-        let url ='/getIceCreams';
+        let url = '/getIceCreams';
 
-        xhr.open("POST",url,true);
+        xhr.open("POST", url, true);
 
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(iceCreamOrderStringify);
 
-        xhr.onreadystatechange=function(){
+        xhr.onreadystatechange = function () {
             if (xhr.readyState == XMLHttpRequest.DONE) {
 
             }
@@ -499,7 +509,7 @@
      */
     function getAlertMessage(result) {
         if (result.paymentResult["Status"]) {
-             sendIceCreamJson();
+            sendIceCreamJson();
             Swal.fire({
                 icon: 'success',
                 title: result.paymentResult["reason"],
@@ -543,11 +553,6 @@
             })
         }
     }
-
-
-
-
-
 
 
 </script>

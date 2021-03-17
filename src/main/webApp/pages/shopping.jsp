@@ -102,7 +102,7 @@
     </div>
     <!--   three-->
     <div class="menu_information">
-        <img src="../images/rum-raisin.jpg">
+        <img src="../images/rum raisin.jpg">
         <h3 class="type">Rum and Raisin</h3>
 <%--        <p>Soak the raisins in rum for a while. (you can also omit this step. I soaked all night, and the raisins tasted--%>
 <%--            a little alcoholic.)</p>--%>
@@ -212,7 +212,7 @@
     </div>
     <!--   seven-->
     <div class="menu_information">
-        <img src="../images/salted-caramel.jpg">
+        <img src="../images/salted caramel.jpg">
         <h3 class="type">Salted Caramel</h3>
 <%--        <p>Salted caramel ice cream is a mixture of two flavors: salted caramel. Some salty caramel ice cream is a--%>
 <%--            simple vanilla ice cream mixed with salty caramel.</p>--%>
