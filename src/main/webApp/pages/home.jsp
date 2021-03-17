@@ -27,13 +27,13 @@
         session.removeAttribute("orderID");
     }
 %>
-<img id="logo" src="../images/logo.png">
+<div id="all">
+    <img id="logo" src="images/logo.png" >
+    <br>
 
-<br>
-
-<div id="nav">
-    <div class="left">
-        <h2>login</h2>
+    <div id="nav">
+        <div class="left">
+            <h2>login</h2>
 
         <%--        If the user tries to login and and they enter incorrect credentials an error message is displayed.
                     This will need to be styled. Thanks, George Black. --%>
@@ -43,38 +43,35 @@
             }%>
 
 
-        <form action="login" method="post" name="form">
-            <table>
-                <tr>
-                    <td class="tit">Email address:</td>
-                </tr>
-                <tr>
-                    <td><input type="text" id="email" name="email" placeholder="
+            <form action="shopping.html" method="post" name="form" >
+                <table>
+                    <tr>
+                        <td class="tit">Email address:</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" id="username" name="username" placeholder="
 Please log in by email" onblur="validate_username(this.value)"/></td>
-                </tr>
-                <tr>
-                    <td id="test_user"></td>
-                </tr>
-                <tr>
-                    <td class="tit">Password:</td>
-                </tr>
-                <tr>
-                    <td><input type="password" id="password" name="password"
-                               placeholder="The 8-16 bit password consists of numbers and uppercase and lowercase letters！"
-                               onblur="validate_password(this.value)"/></td>
-                </tr>
-                <tr>
-                    <td id="test_pw"></td>
-                </tr>
-                <tr>
-                    <td>
-
-                        <input type="submit" id="submit_form" value="Login" onclick="return validate_form()"/>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
+                    </tr>
+                    <tr>
+                        <td id="test_user"></td>
+                    </tr>
+                    <tr>
+                        <td class="tit">Password:</td>
+                    </tr>
+                    <tr>
+                        <td><input type="password" id="password" name="password" placeholder="The 8-16 bit password consists of numbers and uppercase and lowercase letters！" onblur="validate_password(this.value)"/></td>
+                    </tr>
+                    <tr>
+                        <td id="test_pw"></td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <input type="submit" id="submit_form" value="Login" onclick="return validate_form()"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
     <div class="right">
         <h2>register</h2>
         <p class="tips">Notice for registration:</p>
