@@ -113,19 +113,28 @@
 
 .form-delivery
 {
-	padding:10px;
+	padding:10px 10px 20px 10px;
 }
 
 
 
-.form-delivery *:not(label){
+.form-delivery *:not(label,input[type="text"]){
 	display:table-cell;
-	padding-right:2rem;
+
+	padding:.5rem 2rem 0 0;
+
 	font-size:120%;
 }
-.form-delivery *:not(label):first-of-type{
+.form-delivery *:not(label,input[type="text"]):first-of-type{
 	padding-left:75px;
 }
+
+input[type="text"]{
+	position:static;
+	width:225px;
+}
+
+
 
 
 

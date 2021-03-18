@@ -22,7 +22,24 @@
     <link rel="stylesheet" href="../css/sweetalert2.css">
 
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
+
+
+
+
     <script rel="javascript" type="text/javascript" href="js/jquery-1.11.3.min.js"></script>
+
 
 
 </head>
@@ -66,31 +83,72 @@
 
 
         swal.fire({
-            title: 'Get order Information',
+            title: 'Get Order Information',
+            allowOutsideClick: false,
+            showCancelButton: true,
             html: `
             <div class="form-delivery">
                 <label for="deliveryType">Is this order for delivery or carry out?</label>
                     <p>
-                        <input type="radio" name="deliveryType" value="carryOut" onclick="getAddressFor(this.value)" checked>Carry out</input>
+                        <input type="radio" name="deliveryType" onclick="showAddressQuestion(true)"
+                            checked>Delivery</input>
                     </p>
                     <p>
-                        <input type="radio" name="deliveryType" value="delivery" onclick="getAddressFor(this.value)"
-                            >Delivery</input>
+                        <input type="radio" name="deliveryType"  onclick="showAddressQuestion(false)"
+                            >Carry out</input>
                     </p>
+
             </div>
-    `,
-            focusConfirm: false,
-            preConfirm: () => {
-                console.log('Is checkbox1 checked:' + document.getElementById('delivery_type').checked);
+            <div class="form-delivery" id="getAddress">
+                <label for="deliverAddress">Note: We only deliver to places that are within a 5 mile distance from the store.</label>
+                <p>
+                    <input type="text" name="address" placeholder="Enter DeliveryAddress Here">
+            <div>`
+        }).then((result) =>{
+            if(result.isConfirmed) {
+                doGeocode();
             }
+                //else do nothing
+        })
+    }
+
+    https://www.youtube.com/watch?v=pRiQeo17u6c&t=731s
+    function doGeocode() {
+        var location='22 Main st Boston MA';
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
+            params: {
+                address: location,
+                key: 'AIzaSyDwC5IMKz7knixriHKausCU2N7IamWno6s'
+            }
+        })
+        .then(function(response){
+
+            //log full response
+            console.log(response)
+
+
+            console.log(response.data.results[0].formatted_address)
+        })
+        .catch(function(error){
+            console.log(error);
         });
     }
 
-    function getAddressFor(deliveryType){
-        if(deliveryType=="delivery"){
-            console.log("delivery is chosen");
+
+
+
+
+
+
+
+
+
+
+    function showAddressQuestion(showQuestion){
+        if(showQuestion){
+            document.getElementById("getAddress").style.visibility="visible";
         }else{
-            console.log("carry out is selected");
+            document.getElementById("getAddress").style.visibility="hidden";
         }
     }
 
