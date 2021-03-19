@@ -24,7 +24,7 @@ body{
 	float: left;
 }
 #top li{
-	width: 280px;
+	width: 380px;
 	list-style: none;
 	padding-left: 300px;
 	float: right;
@@ -38,6 +38,17 @@ body{
 	cursor: pointer;
 	color: #D69F2E;
 	text-decoration: none;
+}
+
+#cancellation{
+	width: 120px;
+	font-size: 18px;
+	height: 90px;
+	line-height: 90px;
+	padding: 0 10px;
+	cursor: pointer;
+	color: #D69F2E;
+	background: none;
 }
 #head{
 	width: 980px;
@@ -142,3 +153,4 @@ body{
 	background: url("../images/bg3.jpg") repeat-x;
 	background-size: 400px 200px;
 }
+
