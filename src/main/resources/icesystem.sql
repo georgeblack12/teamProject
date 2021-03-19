@@ -41,7 +41,6 @@
 -- 	`time` time NOT NULL,
 -- 	`type` varchar(10) NOT NULL,
 -- 	`address` varchar(300),
--- 	`distanceFromShop` float(2),
 -- 	`cost` float(2) NOT NULL,
 -- 	PRIMARY KEY(`orderID`),
 -- 	FOREIGN KEY(`customerID`) REFERENCES `Customer`(`customerID`)
@@ -66,7 +65,7 @@
 -- 	`iceCreamID` int NOT NULL,
 -- 	`quantity` int NOT NULL,
 -- 	PRIMARY KEY(`orderID`,`iceCreamID`),
--- 	FOREIGN KEY(`orderID`) REFERENCES `Order`(`orderID`),
+-- 	FOREIGN KEY(`orderID`) REFERENCES `iceCreamOrder`(`orderID`),
 -- 	FOREIGN KEY(`iceCreamID`) REFERENCES `IceCream`(`iceCreamID`)
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
