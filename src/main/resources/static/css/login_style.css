@@ -21,12 +21,12 @@ body{
 
 #nav{
 	width: 980px;
-	height: 480px;
+	height: 490px;
 	border-top: 1px solid #999999;
 	padding-top: 10px;
 }
 #nav .left{
-	height: 400px;
+	height: 440px;
 	width: 490px;
 	float: left;
 	border-right: 1px solid #999999;
@@ -83,7 +83,7 @@ input{
 	margin-top: 20px;
 	margin-left: 100px;
 	border: 1px solid #999999;
-	margin-top: 64px;
+	margin-top: 108px;
 	text-align: center;
 	cursor: pointer;
 	margin-left: 150px;
@@ -100,4 +100,23 @@ input{
 .right .tips{
 	width: 100%;
 	margin-top: 50px;
+}
+label{
+	cursor: pointer;
+}
+#user{
+	width:20px;
+	height:20px;
+	line-height: 20px;
+
+}
+#admin{
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	margin-left: 50px;
+	margin-bottom: 20px;
+}
+.check{
+	float: left;
 }
