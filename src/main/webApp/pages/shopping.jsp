@@ -32,6 +32,7 @@
         <%--        <a href="register.html">register</a> does not make sense to register since they are alread logged in, thanks
         george black --%>
         <%--        <a href="/pages/admin.html">admin</a>--%>
+            <input type="button" id="cancellation" value="cancellation">
     </li>
 </div>
 
@@ -467,6 +468,11 @@
     }
     //管理员界面
     var admin = document.getElementById("")
+    //login out
+    var cancellation = document.getElementById("cancellation");
+    cancellation.onclick = function(){
+        location.replace("index.html");
+    }
 
 </script>
 </html>
