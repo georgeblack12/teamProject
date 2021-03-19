@@ -28,11 +28,10 @@
     <div id="top">
         <img id="logo" src="images/logo.png" >
         <li class="menu">
-        <a href="/">logout</a>
         <%--        <a href="register.html">register</a> does not make sense to register since they are alread logged in, thanks
         george black --%>
         <%--        <a href="/pages/admin.html">admin</a>--%>
-            <input type="button" id="cancellation" value="cancellation">
+            <input type="button" id="logout" value="logout">
     </li>
 </div>
 
@@ -469,7 +468,7 @@
     //管理员界面
     var admin = document.getElementById("")
     //login out
-    var cancellation = document.getElementById("cancellation");
+    var cancellation = document.getElementById("logout");
     cancellation.onclick = function(){
         location.replace("index.html");
     }
