@@ -1,3 +1,4 @@
+<%@ page import="com.project.cavallo.dao.StatisticsRepository" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -26,8 +27,13 @@
 <%
         session.removeAttribute("orderID");
     }
+    if(session.getAttribute("statsRepo") != null) {
+        session.removeAttribute("statsRepo");
+    }
 %>
-<img id="logo" src="../images/logo.png">
+
+
+            <img id="logo" src="../images/logo.png">
 
 <br>
 

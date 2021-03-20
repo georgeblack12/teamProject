@@ -1,16 +1,17 @@
 package com.project.cavallo.dao;
 
-import com.project.cavallo.Response.IceCreamRes;
-import com.project.cavallo.domain.Customer;
-import com.project.cavallo.domain.Order;
+import com.project.cavallo.domain.iceCreamOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Repository
 public class StatisticsRepository {
@@ -18,17 +19,36 @@ public class StatisticsRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    private LocalDate now=LocalDate.now();
 
-    public List<IceCreamRes> getSalesBytaste(){
-        String sql = "SELECT a.iceCreamName as name,count(b.iceCreamID) as num from icecream a LEFT JOIN `order` b ON a.iceCreamID=b.iceCreamID GROUP BY a.iceCreamName";
-        RowMapper<IceCreamRes> rowMapper = new BeanPropertyRowMapper<>(IceCreamRes.class);
-        return jdbcTemplate.query(sql, rowMapper);
+    public int getTotalOrders() {
+        String sql = "SELECT COUNT(*) FROM iceCreamOrder";
+        int total = jdbcTemplate.queryForObject(sql, Integer.class);
+        return total;
     }
 
-    public List<Order> getOrderNumByDate(){
-        String sql = "SELECT COUNT(orderID) AS num, date FROM `order` GROUP BY date";
-        RowMapper<Order> rowMapper = new BeanPropertyRowMapper<>(Order.class);
-        return jdbcTemplate.query(sql, rowMapper);
+    public int getOrdersToday() {
+
+
+        String sql = "SELECT COUNT(*)FROM iceCreamOrder o WHERE o.date = ?";
+
+        int total = jdbcTemplate.queryForObject(sql, new Object[]{now}, Integer.class);
+        return total;
     }
+
+    public int getOrdersThisWeek(){
+        LocalDate lastWeek = now.minusWeeks(1);
+        String sql="SELECT COUNT(*) FROM iceCreamOrder o " +
+                "WHERE o.`date` BETWEEN '"+lastWeek+"' and '"+now+"'";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+
+    public int getOrdersPastThirty(){
+        LocalDate lastThirty=now.minusDays(30);
+        String sql="SELECT COUNT(*) FROM iceCreamOrder o WHERE o.`date` BETWEEN '"+lastThirty+"' and '"+now+"'";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+
+
 
 }

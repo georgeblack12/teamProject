@@ -1,10 +1,13 @@
 package com.project.cavallo.controller;
 
 import com.project.cavallo.dao.CustomerRepository;
+import com.project.cavallo.dao.StatisticsRepository;
 import com.project.cavallo.dao.UserRepository;
 import com.project.cavallo.domain.Customer;
 import com.project.cavallo.service.impl.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +33,13 @@ public class LoginController {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private StatisticsRepository statisticsRepository;
+
+
+
+
+
 
 
 
@@ -51,7 +61,7 @@ public class LoginController {
      * (an example would be a null value). Note: This will never happened due to the good work of our front end.
      */
     @PostMapping(value = {"login", "pages/login"})
-    public ModelAndView login(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session) throws Exception {
+    public ModelAndView login(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) throws Exception {
 
         HashMap<Boolean,String> credentials = loginService.login(email, password);
         //see if values are in database
@@ -68,7 +78,8 @@ public class LoginController {
                 //move to a the shopping page
                 mv.setViewName("redirect:/pages/shopping.jsp");
             } else {
-                mv.setViewName("redirect:/pages/admin.html");
+                session.setAttribute("statsRepo",statisticsRepository);
+                mv.setViewName("redirect:/pages/analytics.jsp");
             }
 
         }
