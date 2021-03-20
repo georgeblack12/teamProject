@@ -5,19 +5,43 @@
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="this is my page">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<link href="../../resources/static/css/register_style.css" type="text/css" rel="stylesheet">
+	<link href="../css/register_style.css" type="text/css" rel="stylesheet">
+
+
+	<!--    Files needed to be added in order to get Sweet alert 2. These are used in the pop ups when the person wishes
+    to make-a payment. Thanks, George Black-->
+	<script src="../SweetAlertJavaScript/sweetalert2.min.js"></script>
+	<link rel="stylesheet" href="../css/sweetalert2.css">
+
 </head>
 
 <body>
-<img id="logo" src="../../resources/static/images/logo.png" >
+<img id="logo" src="../images/logo.png" >
 <br>
 <div id="user_reg">create a new user</div>
-<form action="./index.html" method="post" name="form" >
+<form action="/" method="post" name="form" >
 	<table>
 		<tr>
+			<td class="tit">Full Name:</td>
+			<td><input type="text" id="name" name="name"
+					   placeholder="Please enter your first and last name" onblur="validateName(this.value)"/></td>
+			<td id="name_user"></td>
+
+		</tr>
+		<tr>
 			<td class="tit">Email address:</td>
-			<td><input type="text" id="username" name="username" placeholder="Please register by email" onblur="validate_username(this.value)"/></td>
-			<td id="test_user"></td>
+			<td><input type="text" id="email" name="email"
+					   placeholder="Please enter your email" onblur="validate_email(this.value)"/></td>
+			<td id="email_user"></td>
+		</tr>
+		<tr>
+			<td class="tit">Phone Number:</td>
+			<td><input type="text" id="phoneNumber" name="phoneNumberUser"
+					   placeholder="This should only contain 9 to 10 digits" onblur="validatePhoneNumber(this.value)"
+					   onblur="validate_username(this.value)"/></td>
+			<td id="phone_user"></td>
+
+
 		</tr>
 		<tr>
 			<td class="tit">Password:</td>
@@ -39,21 +63,48 @@
 </body>
 
 <script type="text/javascript">
+
+	//COME BACK HERE
+	function validateName(name){
+		if(name=""){
+			document.getElementById("name_user").innerHTML = "<font color='red' size='3px'>There is no name entered</font>";
+		}else if(!(name.contains(" "))){
+			document.getElementById("name_user").innerHTML = "<font color='red' size='3px'>Please enter first and last name</font>";
+		}
+	}
+
+
+
 	//onblur失去焦点事件，用户离开输入框时执行 JavaScript 代码：
 	//函数1：验证邮箱格式
 	// Onblur loses focus events and executes JavaScript code when the user leaves the input box:
 	// Function 1: Verify mailbox format
-	function validate_username(username){
+	function validate_email(email){
 		//定义正则表达式的变量:邮箱正则
 		var emailReg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 		//console.log(username);
-		if(username !="" && username.search(emailReg) != -1)
+		if(email !="" && email.search(emailReg) != -1)
 		{
-			document.getElementById("test_user").innerHTML = "<font color='green' size='3px'>√ Email format is correct</font>";
+			document.getElementById("email_user").innerHTML = "<font color='green' size='3px'>Email accepted</font>";
 		}else{
-			document.getElementById("test_user").innerHTML = "<font color='red' size='3px'>Email format error</font>";
+			document.getElementById("email_user").innerHTML = "<font color='red' size='3px'>Email format error</font>";
 		}
 	}
+
+	function validatePhoneNumber(number){
+
+		if(number.length<9 || number.length>10){
+			document.getElementById("phone_user").innerHTML = "<font color='red' size='3px'>Phone number length is incorrect</font>";
+
+		} else if(number.match(/^[0-9]+$/) == null){
+			document.getElementById("phone_user").innerHTML ="<font color='red' size='3px'>Phone number should only contain numbers</font>";
+
+		} else{
+			document.getElementById("phone_user").innerHTML = "<font color='green' size='3px'>Phone number accepted</font>"
+		}
+	}
+
+
 
 	//函数2：验证密码是否符合要求：匹配6位密码，由数字和字母组成：
 	// Function 2: Verify that the password matches the requirement: Matches the 6-digit password, consisting of numbers and letters:
@@ -78,14 +129,16 @@
 		//测试：console.log(password);
 		//测试：console.log(password2);
 		if (password == ""){
-			document.getElementById("is_test_pw").innerHTML = "<font color='red' size='3px'>Password is not empty</font>";
+			document.getElementById("is_test_pw").innerHTML = "<font color='red' size='3px'>Password is empty</font>";
 		}else if(password==password2){
-			document.getElementById("is_test_pw").innerHTML = "<font color='green' size='3px'>√ The password entered twice is the same</font>";
+			document.getElementById("is_test_pw").innerHTML = "<font color='green' size='3px'>The password entered twice is the same</font>";
 		}else{
 			document.getElementById("is_test_pw").innerHTML = "<font color='red' size='3px'>The password entered twice is not the same</font>";
 			console.log("The password has 6 digits, composed of numbers and letters!");
 		}
 	}
+
+
 
 	//函数4：验证表单是否已经填好
 	// Function 4: Verifies that the form is already filled in

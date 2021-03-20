@@ -82,7 +82,7 @@ Please log in by email" onblur="validate_username(this.value)"/></td>
         <br>
         <p>Please register by email</p>
         <p>The password has 6 digits, composed of numbers and letters!</p>
-        <div id="goto_register"><a href="../register.html">Register</a>
+        <div id="goto_register"><a href="/pages/register.jsp">Register</a>
         </div>
     </div>
 
@@ -92,6 +92,12 @@ Please log in by email" onblur="validate_username(this.value)"/></td>
 </body>
 
 <script type="text/javascript">
+
+
+
+
+
+
     //函数1：验证邮箱格式
     function validate_username(username) {
         //定义正则表达式的变量:邮箱正则

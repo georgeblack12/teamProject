@@ -28,7 +28,7 @@
     <div id="top">
         <img id="logo" src="../images/logo.png" >
         <li class="menu">
-        <%--        <a href="register.html">register</a> does not make sense to register since they are alread logged in, thanks
+        <%--        <a href="register.jsp">register</a> does not make sense to register since they are alread logged in, thanks
         george black --%>
         <%--        <a href="/pages/admin.html">admin</a>--%>
             <input type="button" id="logout" value="logout">
@@ -429,12 +429,12 @@
         for (var i = 0; i < number_arr.length; i++) {
             s += parseInt(number_arr[i]);
         }
-        if (s > 5) {
+        if (s > 20) {
 
             //changed wording and used swal. Thanks, George Black
             swal.fire({
                 icon: "error",
-                text: "Maximum number of ice creams per order is 5"
+                text: "Maximum number of ice creams per order is 20"
             }).then((result) =>
             {
                 location.reload();

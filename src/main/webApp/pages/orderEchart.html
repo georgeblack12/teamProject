@@ -1,66 +1,66 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>Calculate order quantity</title>
-		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-		<!-- import echarts.js -->
-		<script src = "https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
-		
-	</head>
-	<body>
-		<!-- Prepare a DOM with size (width and height) for Ecarts -->
-		<div id="main" style="width: 600px;height:400px;"></div>
-		<script type="text/javascript">
-			$(function() {
-				$.ajax({
-					type: "GET",
-					url: "http://localhost:8080/tj/getOrderNumByDate",
-					data: {},
-					dataType: "json",
-					success: function(data) {
-						
-						var dateArr = [];
-						var numArr = [];
-						for(var i=0;i<data.length;i++){
-							dateArr.push(data[i].date);
-							numArr.push(data[i].num);
-						}
-						console.log("data:"+data.num);
-						// Based on the prepared DOM, initialize the Ecarts instance
-						var myChart = echarts.init(document.getElementById('main'));
-						
-						// Specify the configuration items and data for the chart
-						var option = {
-							title: {
-								text: ''
-							},
-							tooltip: {
-							},
-							legend: {
-								data: ['销量']
-							},
-							xAxis: {
-								data: dateArr
-							},
-							yAxis: {
-								minInterval: 1, //Set to 1 to ensure that the axis division scale is displayed as an integer.
-							},
-							series: [{
-								name: '销量',
-								type: 'line',
-								data: numArr
-							}]
-						};
-						
-						// Displays the chart using the configuration item and data you just specified.
-						myChart.setOption(option);
-					}
-				});
-			});
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--	<head>-->
+<!--		<meta charset="utf-8">-->
+<!--		<title>Calculate order quantity</title>-->
+<!--		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>-->
+<!--		&lt;!&ndash; import echarts.js &ndash;&gt;-->
+<!--		<script src = "https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>-->
+<!--		-->
+<!--	</head>-->
+<!--	<body>-->
+<!--		&lt;!&ndash; Prepare a DOM with size (width and height) for Ecarts &ndash;&gt;-->
+<!--		<div id="main" style="width: 600px;height:400px;"></div>-->
+<!--		<script type="text/javascript">-->
+<!--			$(function() {-->
+<!--				$.ajax({-->
+<!--					type: "GET",-->
+<!--					url: "http://localhost:8080/tj/getOrderNumByDate",-->
+<!--					data: {},-->
+<!--					dataType: "json",-->
+<!--					success: function(data) {-->
+<!--						-->
+<!--						var dateArr = [];-->
+<!--						var numArr = [];-->
+<!--						for(var i=0;i<data.length;i++){-->
+<!--							dateArr.push(data[i].date);-->
+<!--							numArr.push(data[i].num);-->
+<!--						}-->
+<!--						console.log("data:"+data.num);-->
+<!--						// Based on the prepared DOM, initialize the Ecarts instance-->
+<!--						var myChart = echarts.init(document.getElementById('main'));-->
+<!--						-->
+<!--						// Specify the configuration items and data for the chart-->
+<!--						var option = {-->
+<!--							title: {-->
+<!--								text: ''-->
+<!--							},-->
+<!--							tooltip: {-->
+<!--							},-->
+<!--							legend: {-->
+<!--								data: ['销量']-->
+<!--							},-->
+<!--							xAxis: {-->
+<!--								data: dateArr-->
+<!--							},-->
+<!--							yAxis: {-->
+<!--								minInterval: 1, //Set to 1 to ensure that the axis division scale is displayed as an integer.-->
+<!--							},-->
+<!--							series: [{-->
+<!--								name: '销量',-->
+<!--								type: 'line',-->
+<!--								data: numArr-->
+<!--							}]-->
+<!--						};-->
+<!--						-->
+<!--						// Displays the chart using the configuration item and data you just specified.-->
+<!--						myChart.setOption(option);-->
+<!--					}-->
+<!--				});-->
+<!--			});-->
 
 
-			
-		</script>
-	</body>
-</html>
+<!--			-->
+<!--		</script>-->
+<!--	</body>-->
+<!--</html>-->
