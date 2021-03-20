@@ -409,7 +409,7 @@
         var minutes=possibleRemoveZeros(time.substring(3));
 
         if(typeOfOrder == "carryOut"){
-            if(hours<0 || (hours>=18) || (hours==17 && minutes>45)){
+            if((hours<11) || (hours>=18) || (hours==17 && minutes>45)){
                 Swal.fire({
                     icon:'error',
                     text: 'We are sorry. We are unable to collect orders for carry out during ' +
@@ -805,13 +805,24 @@
                     window.location.replace("/");
 
                 } else {
-                    text:
+                    setTimeout(function(){window.location.replace("/pages/shopping.jsp");},60000);
                     Swal.fire({
-                        imageUrl:"../images/icecreamload.gif",
-                        text:"You will be sent to the shopping page in 60 seconds!"
+                        imageUrl:"../images/horseRunningGif.gif",
+                        imageHeight:200,
+                        imageWidth:300,
+                        allowOutsideClick: false,
+                        showConfirmButton:false,
+                        timer:60000,
+                        html:"Thank you for shopping with Cavallo! You will be sent back to the shopping page in <b></b> seconds.",
+                        willOpen: ()=>{
+                             timerInterval = setInterval(() => {
+                                Swal.getContent().querySelector('b')
+                                    .textContent = (Swal.getTimerLeft() / 1000)
+                                    .toFixed(0)
+                            }, 100)
+                        }
                     })
 
-                    //setTimeout(window.location.replace("/pages/shopping.jsp"),60000);
                 }
             })
         } else {
