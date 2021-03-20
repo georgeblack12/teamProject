@@ -19,7 +19,7 @@ public class StatisticsRepository {
     private JdbcTemplate jdbcTemplate;
 
 
-    public List<IceCreamRes> getXlByCw(){
+    public List<IceCreamRes> getSalesBytaste(){
         String sql = "SELECT a.iceCreamName as name,count(b.iceCreamID) as num from icecream a LEFT JOIN `order` b ON a.iceCreamID=b.iceCreamID GROUP BY a.iceCreamName";
         RowMapper<IceCreamRes> rowMapper = new BeanPropertyRowMapper<>(IceCreamRes.class);
         return jdbcTemplate.query(sql, rowMapper);

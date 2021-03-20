@@ -27,9 +27,9 @@ public class StatisticsController {
     /**
      * Sales by taste
      */
-    @GetMapping(value = "/getXlByCw")
-    public List<IceCreamRes> getXlByCw() {
-        return service.getXlByCw();
+    @GetMapping(value = "/getSalesBytaste")
+    public List<IceCreamRes> getSalesBytaste() {
+        return service.getSalesBytaste();
     }
 
     /**

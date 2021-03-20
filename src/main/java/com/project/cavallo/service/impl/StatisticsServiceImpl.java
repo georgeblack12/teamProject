@@ -15,9 +15,9 @@ public class StatisticsServiceImpl implements IstatisticService {
     private StatisticsRepository statisticsRepository;
 
     @Override
-    public List<IceCreamRes> getXlByCw() {
+    public List<IceCreamRes> getSalesBytaste() {
 
-        return statisticsRepository.getXlByCw();
+        return statisticsRepository.getSalesBytaste();
     }
 
     @Override

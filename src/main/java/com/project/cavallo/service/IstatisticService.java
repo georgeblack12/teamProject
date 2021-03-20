@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IstatisticService {
 
-    List<IceCreamRes> getXlByCw();
+    List<IceCreamRes> getSalesBytaste();
 
     List<Order> getOrderNumByDate();
 }
