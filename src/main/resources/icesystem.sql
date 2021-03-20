@@ -183,6 +183,85 @@
 
 --  working on it
 
+
+-------------------- TOTAL NO ORDERS --------------------
+
+-- SELECT COUNT(*)
+-- FROM iceCreamOrder;
+
+-------------------- NO ORDERS / DAY --------------------
+
+-- SELECT COUNT(*)
+-- FROM iceCreamOrder o
+-- WHERE o.date = ‘YYYY-MM-DD’
+
+-- insert today’s date / insert chosen date
+
+-------------------- NO ORDERS / LAST 7 DAYS  --------------------
+
+-- SELECT COUNT(*)
+-- FROM iceCreamOrder o
+-- WHERE o.`date` BETWEEN 'YYYY-MM-DD' and 'YYYY-MM-DD';
+
+
+-- insert today’s date and today date -7
+
+-------------------- NO ORDERS / MONTH --------------------
+
+-- SELECT COUNT(*)
+-- FROM iceCreamOrder o
+-- WHERE EXTRACT(MONTH FROM o.`date`) = ? AND EXTRACT(YEAR FROM o.`date`) = ?;
+-- -- insert current month/year (in numbers)
+--
+-- --or last 30 days
+-- WHERE o.`date` BETWEEN 'YYYY-MM-DD' and 'YYYY-MM-DD';
+-- -- insert today’s date and today date -30
+
+-------------------- NO ORDERS / HOUR --------------------
+
+--
+-- SELECT EXTRACT(HOUR FROM o.`time`), COUNT(*)
+-- FROM iceCreamOrder o
+-- WHERE o.`date` = 'YYYY-MM-DD'
+-- GROUP BY EXTRACT(HOUR FROM o.`time`);
+
+-- insert selected date
+
+-------------------- TOTAL SALES PER FLAVOUR --------------------
+
+-- SELECT ic.flavour, SUM(oc.quantity)
+-- FROM IceCream ic, OrderContains oc
+-- WHERE ic.iceCreamID = oc.iceCreamID
+-- GROUP BY ic.flavour;
+
+-------------------- MONTH SALES PER FLAVOUR --------------------
+
+-- SELECT ic.flavour, SUM(oc.quantity)
+-- FROM IceCream ic, OrderContains oc, Order o
+-- WHERE ic.iceCreamID = oc.iceCreamID
+--     AND oc.orderID = o.orderID
+--     AND (EXTRACT(MONTH FROM o.`date`) = ?) AND (EXTRACT(YEAR FROM o.`date`) = ?)
+-- GROUP BY ic.flavour;
+
+-- insert current month/year (in numbers)
+
+
+
+
+
+-------------------- MOST POPULAR FLAVOUR --------------------
+
+-- SELECT Flavour
+-- FROM (SELECT ic.flavour Flavour, SUM(oc.quantity) SumQuantity
+-- 		FROM IceCream1 ic, OrderContains1 oc
+-- 		WHERE ic.iceCreamID = oc.iceCreamID
+-- 		GROUP BY ic.flavour) a
+-- WHERE a.SumQuantity = (SELECT MAX(s.SumQuantity)
+-- 			   FROM (SELECT ic.flavour, SUM(oc.quantity) SumQuantity
+-- 				   FROM IceCream1 ic, OrderContains1 oc
+-- 				   WHERE ic.iceCreamID = oc.iceCreamID
+-- 				   GROUP BY ic.flavour) s);
+
 -- /-----------------------------------------------------------------------------------------------/--
 -- /------------------------------------------OLD SQL----------------------------------------------/--
 -- /-----------------------------------------------------------------------------------------------/--
