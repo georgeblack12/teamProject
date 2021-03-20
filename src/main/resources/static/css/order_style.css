@@ -134,6 +134,12 @@ input[type="text"]{
 	width:225px;
 }
 
+input[type="text"]:not(#deliveryZip){
+	margin-bottom:.4rem;
+}
+
+
+
 
 
 

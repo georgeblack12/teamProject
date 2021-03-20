@@ -26,7 +26,7 @@
 
 <div id="all">
     <div id="top">
-        <img id="logo" src="images/logo.png" >
+        <img id="logo" src="../images/logo.png" >
         <li class="menu">
         <%--        <a href="register.html">register</a> does not make sense to register since they are alread logged in, thanks
         george black --%>

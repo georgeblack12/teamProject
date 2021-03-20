@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
+import java.net.http.HttpRequest;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.ParseException;
@@ -50,7 +51,7 @@ public class OrderRepository {
      * @param hResponse The HorsePay JSON (with paymentSuccess) that is to be sent.
      * @author George Black
      */
-    public int createOrderFromHResponse(HorsePayResponse hResponse) throws ParseException {
+    public int createOrderFromHResponse(HorsePayResponse hResponse, String address) throws ParseException {
         SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("HH:mm");
 
         SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd/MM/yyyy");
@@ -62,16 +63,23 @@ public class OrderRepository {
         int insert=0;
         if (hResponse.getPaymentResult().isStatus()) {
 
-            String sql = "INSERT INTO iceCreamOrder(customerID,`date`,`time`,`type`,address,distanceFromShop,cost)" +
-                    " values(?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO iceCreamOrder(customerID,`date`,`time`,`type`,address,cost)" +
+                    " values(?,?,?,?,?,?)";
 
             System.out.println(hResponse.getTransactionAmount());
 
            //Used as delivery right now
             System.out.println(hResponse.getDate());
             System.out.println(hResponse.getTime());
-            insert = jdbcTemplate.update(sql, hResponse.getCustomerID(),
-                    dateFormat.parse(hResponse.getDate()), timeFormat.parse(hResponse.getTime()), "Pick up", "NA", 0, hResponse.getTransactionAmount());
+
+            if(address.equals("NA")) {
+                insert = jdbcTemplate.update(sql, hResponse.getCustomerID(),
+                        dateFormat.parse(hResponse.getDate()), timeFormat.parse(hResponse.getTime()), "Pick up", "NA", hResponse.getTransactionAmount());
+            }else{
+                insert = jdbcTemplate.update(sql, hResponse.getCustomerID(),
+                        dateFormat.parse(hResponse.getDate()), timeFormat.parse(hResponse.getTime()), "Delivery", address, hResponse.getTransactionAmount());
+
+            }
 
             //display the order was successful in console
             if (insert == 1) {

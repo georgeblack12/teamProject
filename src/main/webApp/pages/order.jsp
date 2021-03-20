@@ -31,15 +31,13 @@
             crossorigin="anonymous"></script>
 
 
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
-
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
 
 
     <script rel="javascript" type="text/javascript" href="js/jquery-1.11.3.min.js"></script>
-
 
 
 </head>
@@ -79,78 +77,12 @@
 
 <script type="text/javascript">
 
-    function getDeliveryInfo() {
-
-
-        swal.fire({
-            title: 'Get Order Information',
-            allowOutsideClick: false,
-            showCancelButton: true,
-            html: `
-            <div class="form-delivery">
-                <label for="deliveryType">Is this order for delivery or carry out?</label>
-                    <p>
-                        <input type="radio" name="deliveryType" onclick="showAddressQuestion(true)"
-                            checked>Delivery</input>
-                    </p>
-                    <p>
-                        <input type="radio" name="deliveryType"  onclick="showAddressQuestion(false)"
-                            >Carry out</input>
-                    </p>
-
-            </div>
-            <div class="form-delivery" id="getAddress">
-                <label for="deliverAddress">Note: We only deliver to places that are within a 5 mile distance from the store.</label>
-                <p>
-                    <input type="text" name="address" placeholder="Enter DeliveryAddress Here">
-            <div>`
-        }).then((result) =>{
-            if(result.isConfirmed) {
-                doGeocode();
-            }
-                //else do nothing
-        })
-    }
-
-    https://www.youtube.com/watch?v=pRiQeo17u6c&t=731s
-    function doGeocode() {
-        var location='22 Main st Boston MA';
-        axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
-            params: {
-                address: location,
-                key: 'AIzaSyDwC5IMKz7knixriHKausCU2N7IamWno6s'
-            }
-        })
-        .then(function(response){
-
-            //log full response
-            console.log(response)
-
-
-            console.log(response.data.results[0].formatted_address)
-        })
-        .catch(function(error){
-            console.log(error);
-        });
-    }
 
 
 
 
 
 
-
-
-
-
-
-    function showAddressQuestion(showQuestion){
-        if(showQuestion){
-            document.getElementById("getAddress").style.visibility="visible";
-        }else{
-            document.getElementById("getAddress").style.visibility="hidden";
-        }
-    }
 
 
     //I believe this code is no longer needed based on how I am getting the totalCost now. Feel free to change if
@@ -395,6 +327,267 @@
     //     window.open("map.html?" + inputAddress.value);
 
 
+    function showAddressQuestion(showQuestion) {
+        if (showQuestion) {
+            document.getElementById("getAddress").style.visibility = "visible";
+        } else {
+            document.getElementById("getAddress").style.visibility = "hidden";
+        }
+    }
+
+    function getDeliveryInfo() {
+
+
+        swal.fire({
+            title: 'Get Order Information',
+            allowOutsideClick: false,
+            showCancelButton: true,
+            html: `
+            <div class="form-delivery">
+                <label for="deliveryType">Is this order for delivery or carry out?</label>
+                    <p>
+                        <input type="radio" name="deliveryType" onclick="showAddressQuestion(true)" value="delivery"
+                            checked>Delivery</input>
+                    </p>
+                    <p>
+                        <input type="radio" name="deliveryType" onclick="showAddressQuestion(false)" value="carryOut"
+                            >Carry out</input>
+                    </p>
+
+            </div>
+            <div class="form-delivery" id="getAddress">
+                <label for="deliverAddress">Note: We only deliver to places that are within a 5 mile distance from the store.</label>
+
+                    <input type="text" name="address" id="deliveryAddress" placeholder="Enter Delivery Address Here">
+
+                    <input type="text" name="city" id="deliveryCity" placeholder="Enter Delivery City Here">
+
+                    <input type="text" name="zipCode" id="deliveryZip" placeholder="Enter Delivery Zip Code Here">
+
+            </div>
+`
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                checkWithinTime(getRadioValue("deliveryType"));
+
+
+                // console.log(document.getElementById("deliveryAddress").value.length);
+            }
+            //else do nothing stay here
+        })
+    }
+
+
+    // https:stackoverflow.com/questions/604167/how-can-we-access-the-value-of-a-radio-button-using-the-dom
+    function getRadioValue(theRadioGroup) {
+        var elements = document.getElementsByName(theRadioGroup);
+        for (var i = 0, l = elements.length; i < l; i++) {
+            if (elements[i].checked) {
+                return elements[i].value;
+            }
+        }
+    }
+
+    // function deliverOrCarryOut(buttonValue) {
+    //     if (buttonValue == "carryOut") {
+    //         checkWithinTime(buttonValue)
+    //         console.log("carryOut is called");
+    //     } else {
+    //         checkWithinTime(buttonValue)
+    //         console.log("delivery is called");
+    //     }
+    //
+    // }
+
+
+    function checkWithinTime(typeOfOrder){
+
+        var time=getUKTime();
+        var hours=possibleRemoveZeros(time.substring(0,2));
+
+        var minutes=possibleRemoveZeros(time.substring(3));
+
+        if(typeOfOrder == "carryOut"){
+            if(hours<0 || (hours>=18) || (hours==17 && minutes>45)){
+                Swal.fire({
+                    icon:'error',
+                    text: 'We are sorry. We are unable to collect orders for carry out during ' +
+                        'this time. Please try again during the times between 11:00 and 17:45'
+                })
+            }else{
+                askToCompleteCarry("NA");
+            }
+
+        } else{
+            if(hours<11  || hours>18 ){
+                Swal.fire({
+                    icon:'error',
+                    text:"We are sorry, The store is not open during this time. " +
+                        "Please try again during the times between 11:00 and 18:00"
+                })
+            }else{
+                doGeocode();
+            }
+
+        }
+
+    }
+
+
+
+    function getUKTime() {
+        let options = {
+                timeZone: 'Europe/London',
+                hour: 'numeric',
+                hour12: false,
+                minute: 'numeric',
+            },
+            formatter = new Intl.DateTimeFormat([], options);
+
+
+        return formatter.format(new Date());
+    }
+
+
+    function possibleRemoveZeros(string){
+        console.log(string);
+        if(string.charAt(0)==0){
+            string=string.substring(1);
+        }
+        console.log(string);
+        return string
+    }
+
+
+
+
+    function checkValueLength(value) {
+        if (value.length == 0) {
+            Swal.fire({
+                icon: 'error',
+                text: "You did not enter in all the values needed for a delivery address. Please try again."
+            })
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+
+
+
+    var storeCoordinates=[];
+    axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+        params: {
+            address: "Avenue Cres, Seaton Delaval, Whitley Bay NE25 0DN, UK",
+            key: 'AIzaSyDwC5IMKz7knixriHKausCU2N7IamWno6s'
+
+        }
+    })
+        .then(function (response) {
+
+
+            storeCoordinates.push(response.data.results[0].geometry.location.lat);
+            storeCoordinates.push(response.data.results[0].geometry.location.lng);
+            return storeCoordinates;
+
+        })
+
+
+
+
+
+    https://www.youtube.com/watch?v=pRiQeo17u6c&t=731s
+        function doGeocode() {
+            var haveError;
+            var city = document.getElementById("deliveryCity").value;
+            var address = document.getElementById("deliveryAddress").value;
+            var zip = document.getElementById("deliveryZip").value;
+
+            haveError = checkValueLength(address);
+            if (!haveError) {
+                haveError = checkValueLength(city);
+            }
+            if (!haveError) {
+                haveError = checkValueLength(zip);
+            }
+
+
+            if (!haveError) {
+                var location = document.getElementById("deliveryAddress").value;
+                axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+                    params: {
+                        components: 'country:UK',
+                        city: city,
+                        address: address,
+                        zip: zip,
+                        key: 'AIzaSyDwC5IMKz7knixriHKausCU2N7IamWno6s'
+
+                    }
+                })
+                    .then(function (response) {
+                        console.log(response);
+                        if (response.data.status != "OK") {
+                            Swal.fire({
+                                icon: 'error',
+                                text: 'The where as an issue finding your address.' +
+                                    'Please try again. '
+                            })
+
+                        } else if ((response.data.results[0].types[0] != "premise"
+                            && response.data.results[0].types[0] != "subpremise"
+                            && response.data.results[0].types[0] != "street_address")) {
+
+                            Swal.fire({
+                                icon: 'error',
+                                text: "The address " + response.data.results[0].formatted_address + " is not " +
+                                    "specific enough for delivery. Please enter a more specific address."
+                            })
+
+                        } else {
+
+                            //explain why you used an array.
+                            var deliveryCoordinates=[];
+                            deliveryCoordinates.push(response.data.results[0].geometry.location.lat);
+                            deliveryCoordinates.push(response.data.results[0].geometry.location.lng);
+
+                            var distance=getDistance(storeCoordinates,deliveryCoordinates);
+
+
+                            if(distance>5){
+                                Swal.fire({
+                                    icon:'error',
+                                    text:"We are sorry "+address+" is too far away for us to deliver to."
+                                })
+                            }else{
+                                askToCompleteDelivery(address);
+                            }
+                        }
+                    })
+            }
+        }
+
+
+    var rad = function (x) {
+        return x * Math.PI / 180;
+    };
+
+    var getDistance = function (p1, p2) {
+        var R = 6378137; // Earth’s mean radius in meter
+        var dLat = rad(p2[0] - p1[0]);
+        var dLong = rad(p2[1] - p1[1]);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(rad(p1[0])) * Math.cos(rad(p2[0])) *
+            Math.sin(dLong / 2) * Math.sin(dLong / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c; //in meters need to change to miles
+        return d/1609.344; //convert to miles
+    };
+
+
     /**
      * Method to get the current date and turn it into a String with the required format
      * @returns {string} A string of the current date with the required format for the project.
@@ -458,14 +651,14 @@
      *
      * @author George Black
      */
-    function askToCompleteOrder() {
-
+    function askToCompleteCarry(address) {
         Swal.fire({
             title: "Confirm Order",
 
             //displays the companies logo
             imageUrl: "../images/logo.png",
-            text: "Confirm order for  £" + sumMoney + " ?",
+            text: "Confirm carry out order for  £" + sumMoney + " ? After placing the order" +
+                " it will be ready for collection in 10 minutes time.",
             showCancelButton: true,
             confirmButtonText: 'Confirm order',
 
@@ -475,11 +668,38 @@
             //if Confirm Order is clicked then send HorsePayJSON
         }).then((result) => {
                 if (result.isConfirmed) {
-                    this.sendHorsePayJson()
+                    this.sendHorsePayJson(address)
                 }
             }
         )
     }
+
+
+    function askToCompleteDelivery(address) {
+
+        Swal.fire({
+            title: "Confirm Order",
+
+            //displays the companies logo
+            imageUrl: "../images/logo.png",
+            text: "Confirm delivery order to "+address+" for £" + sumMoney + "?",
+            showCancelButton: true,
+            confirmButtonText: 'Confirm order',
+
+            //cannot make click outside of the box
+            allowOutsideClick: false
+
+            //if Confirm Order is clicked then send HorsePayJSON
+        }).then((result) => {
+                if (result.isConfirmed) {
+                    this.sendHorsePayJson(address)
+                }
+            }
+        )
+    }
+
+
+
 
 
     //horsePay JSON turned into a string to be sent to the server. Thanks, George Black.
@@ -496,13 +716,13 @@
      * Modifying author: George Black
      *
      */
-    function sendHorsePayJson() {
+    function sendHorsePayJson(address) {
         let xhr = new XMLHttpRequest();
         let url = '/horsePay';
 
 
         // open a connection to post (add the totalCost as a requestParameter
-        xhr.open("POST", url, true);
+        xhr.open("POST", url + "?address=" + address, true);
 
 
         //say I am sending a json and then send it
@@ -585,8 +805,13 @@
                     window.location.replace("/");
 
                 } else {
+                    text:
+                    Swal.fire({
+                        imageUrl:"../images/icecreamload.gif",
+                        text:"You will be sent to the shopping page in 60 seconds!"
+                    })
 
-                    window.location.replace("/pages/shopping.jsp");
+                    //setTimeout(window.location.replace("/pages/shopping.jsp"),60000);
                 }
             })
         } else {

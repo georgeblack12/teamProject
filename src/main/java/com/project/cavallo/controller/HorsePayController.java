@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -34,7 +35,8 @@ public class HorsePayController {
      * @author George Black
      */
     @PostMapping(value = {"horsePay"}, consumes = "application/json", produces = "application/json")
-    public HorsePayResponse checkHorsePay(@RequestBody HorsePay hReceive, HttpSession session) throws ParseException {
+    public HorsePayResponse checkHorsePay(@RequestBody HorsePay hReceive, HttpSession session,
+                                          @RequestParam("address") String address) throws ParseException {
 
         //get the Received JSON and get the JSON with paymentSuccess added.
         HorsePayResponse hSend = new HorsePayResponse(hReceive);
@@ -42,7 +44,7 @@ public class HorsePayController {
 //        System.out.println(totalCost); for testing
 
         //if the Payment is successful put the order in the database.
-        int insert=orderRepository.createOrderFromHResponse(hSend);
+        int insert=orderRepository.createOrderFromHResponse(hSend,address);
 
         if(insert==1){
             session.setAttribute("orderID",orderRepository.getOrderID(hSend));

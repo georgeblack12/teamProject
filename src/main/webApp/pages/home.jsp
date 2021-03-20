@@ -27,13 +27,13 @@
         session.removeAttribute("orderID");
     }
 %>
-<div id="all">
-    <img id="logo" src="images/logo.png" >
-    <br>
+<img id="logo" src="../images/logo.png">
 
-    <div id="nav">
-        <div class="left">
-            <h2>login</h2>
+<br>
+
+<div id="nav">
+    <div class="left">
+        <h2>login</h2>
 
         <%--        If the user tries to login and and they enter incorrect credentials an error message is displayed.
                     This will need to be styled. Thanks, George Black. --%>
@@ -43,76 +43,75 @@
             }%>
 
 
-            <form action="shopping.html" method="post" name="form" >
-                <table>
-                    <tr>
-                        <td class="check"><label ><input type="radio" name="identity"  checked="checked" id="user" value="user">user</label></td>
-                        <td class="check"><label ><input type="radio" name="identity"  value="admin" id="admin">admin</label></td>
-                    </tr>
-                    <tr>
-                        <td class="tit">Email address:</td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" id="username" name="username" placeholder="
+        <form action="login" method="post" name="form">
+            <table>
+                <tr>
+                    <td class="tit">Email address:</td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="email" name="email" placeholder="
 Please log in by email" onblur="validate_username(this.value)"/></td>
-                    </tr>
-                    <tr>
-                        <td id="test_user"></td>
-                    </tr>
-                    <tr>
-                        <td class="tit">Password:</td>
-                    </tr>
-                    <tr>
-                        <td><input type="password" id="password" name="password" placeholder="The 8-16 bit password consists of numbers and uppercase and lowercase letters！" onblur="validate_password(this.value)"/></td>
-                    </tr>
-                    <tr>
-                        <td id="test_pw"></td>
-                    </tr>
-                    <tr>
-                        <td >
-                            <input type="submit" id="submit_form" value="Login" onclick="return validate_form()"/>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
-        <div class="right">
-            <h2>register</h2>
-            <p class="tips">Notice for registration:</p>
-            <br>
-            <p>Please register by email</p>
-            <p>The password has 6 digits, composed of numbers and letters!</p>
-            <div id="goto_register"><a href="register.html">Register</a></div>
-        </div>
+                </tr>
+                <tr>
+                    <td id="test_user"></td>
+                </tr>
+                <tr>
+                    <td class="tit">Password:</td>
+                </tr>
+                <tr>
+                    <td><input type="password" id="password" name="password"
+                               placeholder="The 8-16 bit password consists of numbers and uppercase and lowercase letters！"
+                               onblur="validate_password(this.value)"/></td>
+                </tr>
+                <tr>
+                    <td id="test_pw"></td>
+                </tr>
+                <tr>
+                    <td>
 
+                        <input type="submit" id="submit_form" value="Login" onclick="return validate_form()"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="right">
+        <h2>register</h2>
+        <p class="tips">Notice for registration:</p>
+        <br>
+        <br>
+        <p>Please register by email</p>
+        <p>The password has 6 digits, composed of numbers and letters!</p>
+        <div id="goto_register"><a href="../register.html">Register</a>
+        </div>
     </div>
 
 </div>
+
 
 </body>
 
 <script type="text/javascript">
     //函数1：验证邮箱格式
-    function validate_username(username){
+    function validate_username(username) {
         //定义正则表达式的变量:邮箱正则
-        var emailReg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+        var emailReg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
         //console.log(username);
-        if(username !="" && username.search(emailReg) != -1)
-        {
+        if (username != "" && username.search(emailReg) != -1) {
             document.getElementById("test_user").innerHTML = "<font color='green' size='3px'>√ email format is correct</font>";
-        }else{
+        } else {
             document.getElementById("test_user").innerHTML = "<font color='red' size='3px'> email format error</font>";
         }
     }
+
     //函数2：验证密码是否符合要求：匹配6位密码，由数字和字母组成：
-    function validate_password(password){
+    function validate_password(password) {
         //^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6-10}$
         //测试密码：12345y
-        var passwordReg=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
-        if(password != "" && password.search(passwordReg) != -1)
-        {
+        var passwordReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
+        if (password != "" && password.search(passwordReg) != -1) {
             document.getElementById("test_pw").innerHTML = "<font color='green' size='3px'>√ the password format is correct</font>";
-        }else{
+        } else {
             document.getElementById("test_pw").innerHTML = "<font color='red' size='3px'>password format error</font>";
             alert("The password consists of 8-16 digits. The password consists of numbers and upper and lower case letters");
         }
