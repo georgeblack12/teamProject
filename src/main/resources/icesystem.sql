@@ -182,18 +182,6 @@
 -- WHERE ic.iceCreamID = oc.iceCreamID
 -- GROUP BY ic.flavour;
 
--------------------- MONTH SALES PER FLAVOUR --------------------
-
--- SELECT ic.flavour, SUM(oc.quantity)
--- FROM IceCream ic, OrderContains oc, Order o
--- WHERE ic.iceCreamID = oc.iceCreamID
---     AND oc.orderID = o.orderID
---     AND (EXTRACT(MONTH FROM o.`date`) = ?) AND (EXTRACT(YEAR FROM o.`date`) = ?)
--- GROUP BY ic.flavour;
-
--- insert current month/year (in numbers)
-
-
 
 
 

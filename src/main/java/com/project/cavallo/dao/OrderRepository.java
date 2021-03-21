@@ -101,7 +101,7 @@ public class OrderRepository {
 
 
 
-        RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
+//        RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
 
         String sql="Select orderID FROM iceCreamOrder WHERE (customerID=? AND `date`=? AND `time`=?)";
 

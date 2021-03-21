@@ -72,6 +72,34 @@
             <span>Add To Cart</span>
         </div>
     </div>
+    <div class="menu_information">
+        <img src="../images/vanilla.jpg">
+        <h3 class="type">Dairy Free Vanilla</h3>
+        <%--        <p>Strawberry ice cream, the world's most popular ice princess. It is famous for its noble and attractive--%>
+        <%--            appearance, indescribable delicacy and irresistible charm.</p>--%>
+        <p>Rich and dairy free vanilla. Made fresh everyday using our super duper secret family recipe!</p>
+        <div class="select_box">
+            <span>Size:</span>
+            <select class="select">
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+                <option value="Extra Large">Extra Large</option>
+                <option value="Extra Extra Large">Extra Extra Large</option>
+            </select>
+        </div>
+        <div class="jiaOrJian">
+            <span>Number:</span>
+            <span id="num-jian" class="num-jian">-</span>
+            <input type="text" class="input-num" id="input-num" value="0"/>
+            <span id="num-jia" class="num-jia">+</span>
+        </div>
+        <div class="add">
+            <span>Add To Cart</span>
+        </div>
+    </div>
+
+
     <!--   two-->
     <div class="menu_information">
         <img src="../images/honeycomb.jpg">
@@ -266,6 +294,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 <div id="order">
     <a id="productionOrder">Production order</a>
