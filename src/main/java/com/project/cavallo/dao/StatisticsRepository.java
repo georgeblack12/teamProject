@@ -1,5 +1,6 @@
 package com.project.cavallo.dao;
 
+import com.project.cavallo.controller.StatisticsController;
 import com.project.cavallo.domain.iceCreamOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +20,11 @@ public class StatisticsRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+
+
     private LocalDate now=LocalDate.now();
+
+    private LocalDate adminDate=LocalDate.now();
 
     public int getTotalOrders() {
         String sql = "SELECT COUNT(*) FROM iceCreamOrder";
@@ -48,7 +53,6 @@ public class StatisticsRepository {
         String sql="SELECT COUNT(*) FROM iceCreamOrder o WHERE o.`date` BETWEEN '"+lastThirty+"' and '"+now+"'";
         return jdbcTemplate.queryForObject(sql, Integer.class);
     }
-
 
 
 }

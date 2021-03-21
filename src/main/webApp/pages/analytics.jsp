@@ -63,7 +63,6 @@
         <div id="order_calendar">
             <p>Select a date to view orders:</p>
             <script>
-                var dateChosen;
                 $(function () {
                     $("#datepicker2").datepicker({
                         onSelect: function (dateText) {
@@ -73,18 +72,13 @@
                     });
                 });
 
-
                 function sendJSONDate(dateToGet) {
                     let xhr = new XMLHttpRequest();
                     let url = '/analyticsDate';
                     xhr.open("POST", url, true);
                     xhr.setRequestHeader("Content-Type", "application/json");
                     xhr.send(dateToGet);
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState == XMLHttpRequest.DONE) {
-                            dateChosen = JSON.parse(xhr.response);
-                        }
-                    }
+                    document.getElementById("dateChosen").innerHTML=dateToGet;
                 }
 
 
@@ -93,9 +87,13 @@
 
 
 
+
+
+
             </script>
-            <p>Date:
             <div id="datepicker2"></div>
+            <p>Date:
+            <div id="dateChosen"></div>
             </p>
         </div>
 
