@@ -10,7 +10,7 @@
     <title>shopping</title>
     <link href="../css/shopping_style.css" type="text/css" rel="stylesheet">
 
-    <script src="../SweetAlertJavaScript/sweetalert2.min.js"></script>
+    <script src="../javascript/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="../css/sweetalert2.css">
 
 

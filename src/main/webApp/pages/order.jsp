@@ -18,7 +18,7 @@
 
     <!--    Files needed to be added in order to get Sweet alert 2. These are used in the pop ups when the person wishes
     to make-a payment. Thanks, George Black-->
-    <script src="../SweetAlertJavaScript/sweetalert2.min.js"></script>
+    <script src="../javascript/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="../css/sweetalert2.css">
 
 
