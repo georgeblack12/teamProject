@@ -196,7 +196,7 @@
             }
 
         } else {
-            if (hours < 11 || hours > 17) {
+            if (hours < 11 || hours > 24) {
                 Swal.fire({
                     icon: 'error',
                     text: "We are sorry, The store is not open during this time. " +
@@ -266,6 +266,22 @@
         })
 
 
+    function checkNotStore(address){
+
+
+        if(address==="Avenue Cres, Seaton Delaval" || address=="Avenue Cres Seaton Delaval"){
+            Swal.fire({
+                icon:'error',
+                text:"You have entered the store's address. Please choose carry out if you would like to " +
+                    "pick the ice cream up from the store. Thank you. "
+            })
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+
     https://www.youtube.com/watch?v=pRiQeo17u6c&t=731s
         function doGeocode() {
             var haveError;
@@ -280,10 +296,10 @@
             if (!haveError) {
                 haveError = checkValueLength(zip);
             }
-
-
+            if(!haveError){
+                haveError=checkNotStore(address);
+            }
             if (!haveError) {
-                var location = document.getElementById("deliveryAddress").value;
                 axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
                     params: {
                         components: 'country:UK',
@@ -299,7 +315,7 @@
                         if (response.data.status != "OK") {
                             Swal.fire({
                                 icon: 'error',
-                                text: 'The where as an issue finding your address.' +
+                                text: 'There was an issue finding your address.' +
                                     'Please try again. '
                             })
 
@@ -340,6 +356,9 @@
     var rad = function (x) {
         return x * Math.PI / 180;
     };
+
+
+
 
     var getDistance = function (p1, p2) {
         var R = 6378137; // Earth’s mean radius in meter
