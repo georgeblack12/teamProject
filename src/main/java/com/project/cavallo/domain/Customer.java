@@ -28,7 +28,7 @@ public class Customer {
 
     private String name;
     private String phoneNo;
-    private String password; //go over this
+    private String password;
 
     public String getEmail() {
         return email;

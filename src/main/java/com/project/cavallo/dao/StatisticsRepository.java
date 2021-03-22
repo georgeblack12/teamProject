@@ -1,21 +1,14 @@
 package com.project.cavallo.dao;
 
-import com.project.cavallo.controller.StatisticsController;
-import com.project.cavallo.domain.iceCreamOrder;
-import com.sun.xml.bind.v2.schemagen.xmlschema.Any;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
+
 
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
-import java.sql.Time;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Repository
@@ -113,7 +106,7 @@ public class StatisticsRepository {
         LinkedHashMap<String, Integer> mapForCreamGraph = new LinkedHashMap<>();
 
 
-         String[] iceCream={"Vanilla","Dairy Free Vanilla","HoneyComb","Rum and Raisin",
+         String[] iceCream={"Vanilla","Dairy Free Vanilla","Honeycomb","Rum and Raisin",
         "Mint","Cherry","Chocolate","Salted Caramel","Strawberry"};
 
          for(int i=0; i< iceCream.length; i++){

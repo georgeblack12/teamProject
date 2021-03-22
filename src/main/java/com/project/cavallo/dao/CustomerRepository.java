@@ -1,14 +1,13 @@
 package com.project.cavallo.dao;
 
 import com.project.cavallo.domain.Customer;
-import com.project.cavallo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
+
 
 import java.util.Optional;
 import java.util.Random;

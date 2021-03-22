@@ -2,11 +2,9 @@ package com.project.cavallo.controller;
 
 import com.project.cavallo.dao.CustomerRepository;
 import com.project.cavallo.dao.StatisticsRepository;
-import com.project.cavallo.dao.UserRepository;
 import com.project.cavallo.domain.Customer;
 import com.project.cavallo.service.impl.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

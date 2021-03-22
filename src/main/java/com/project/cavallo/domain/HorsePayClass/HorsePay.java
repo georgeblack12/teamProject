@@ -79,6 +79,18 @@ public class HorsePay {
     }
 
 
+    @Override
+    public String toString() {
+        return "HorsePay{" +
+                "storeID='" + storeID + '\'' +
+                ", customerID='" + customerID + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", timeZone='" + timeZone + '\'' +
+                ", transactionAmount=" + transactionAmount +
+                ", currencyCode='" + currencyCode + '\'' +
+                '}';
+    }
 }
 
 

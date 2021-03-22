@@ -5,7 +5,6 @@ import com.project.cavallo.dao.OrderRepository;
 import com.project.cavallo.domain.HorsePayClass.HorsePay;
 import com.project.cavallo.domain.HorsePayClass.HorsePayResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,7 +40,10 @@ public class HorsePayController {
         //get the Received JSON and get the JSON with paymentSuccess added.
         HorsePayResponse hSend = new HorsePayResponse(hReceive);
 
-//        System.out.println(totalCost); for testing
+        System.out.println(hReceive);
+        System.out.println(hSend);
+
+
 
         //if the Payment is successful put the order in the database.
         int insert=orderRepository.createOrderFromHResponse(hSend,address);
@@ -51,8 +53,6 @@ public class HorsePayController {
         }
         //else do not add an orderID;
 
-
-//        System.out.println(hSend); for testing
 
         //return the JSON with paymentSuccess added
         return hSend;

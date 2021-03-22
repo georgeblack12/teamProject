@@ -1,18 +1,13 @@
 package com.project.cavallo.dao;
 
-import com.project.cavallo.domain.Customer;
+
 import com.project.cavallo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
-import javax.servlet.http.HttpSession;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -22,11 +17,7 @@ public class UserRepository {
     private JdbcTemplate jdbcTemplate;
 
 
-//    public List<Customer> findAll() {
-//        String sql = "select * from customer";
-//        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
-//        return jdbcTemplate.query(sql, rowMapper);
-//    }
+
 
 
     /**

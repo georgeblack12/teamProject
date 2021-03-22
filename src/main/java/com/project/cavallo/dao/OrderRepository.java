@@ -1,26 +1,13 @@
 package com.project.cavallo.dao;
 
 import com.project.cavallo.domain.HorsePayClass.HorsePayResponse;
-import com.project.cavallo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
-
-import java.net.http.HttpRequest;
-import java.sql.Date;
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
-
-import static java.lang.Integer.parseInt;
 
 /**
  * Repository to store the Order in the database if the payment goes through.
@@ -31,12 +18,9 @@ import static java.lang.Integer.parseInt;
 public class OrderRepository {
 
 
-     SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("HH:mm");
 
-    SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd/MM/yyyy");
 
-    //Here is my change
-    private String blah;
+
 
     //autowired so we do not have to worry about creating the jdbcTemplate to use
     @Autowired

@@ -14,16 +14,9 @@ public class iceCreamOrder {
     private Time time;
     private String type;
     private String address;
-    private float distanceFromShop;
     private float cost;
 
-    public int getOrderID() {
-        return orderID;
-    }
 
-    public String getCustomerID() {
-        return customerID;
-    }
 
     public Date getDate() {
         return date;
@@ -41,11 +34,5 @@ public class iceCreamOrder {
         return address;
     }
 
-    public float getDistanceFromShop() {
-        return distanceFromShop;
-    }
 
-    public float getCost() {
-        return cost;
-    }
 }
