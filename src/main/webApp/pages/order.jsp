@@ -185,7 +185,7 @@
         var minutes = possibleRemoveZeros(time.substring(3));
 
         if (typeOfOrder == "carryOut") {
-            if ((hours < 11) || (hours >= 24) || (hours == 17 && minutes >= 45)) {
+            if ((hours < 11) || (hours >= 18) || (hours == 17 && minutes >= 45)) {
                 Swal.fire({
                     icon: 'error',
                     text: 'We are sorry. We are unable to collect orders for carry out during ' +
@@ -196,7 +196,7 @@
             }
 
         } else {
-            if (hours < 11 || hours > 24) {
+            if (hours < 11 || hours > 17) {
                 Swal.fire({
                     icon: 'error',
                     text: "We are sorry, The store is not open during this time. " +
