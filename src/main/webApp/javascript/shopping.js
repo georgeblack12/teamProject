@@ -1,25 +1,26 @@
 
 
-    //数量加减
+    console.log("we are inside");
+//数量加减
     var num_jia = document.getElementsByClassName("num-jia");
     var num_jian = document.getElementsByClassName("num-jian");
     var input_num = document.getElementsByClassName("input-num");
     for (var i = 0; i < num_jia.length; i++) {
-    num_jia[i].id = i;
-    num_jia[i].onclick = function () {
-    input_num[this.id].value = parseInt(input_num[this.id].value) + 1;
-    }
-    num_jian[i].id = i;
-    num_jian[i].onclick = function () {
-    if (input_num[this.id].value <= 0) {
-    input_num[this.id].value = 0;
-    } else {
-    input_num[this.id].value = parseInt(input_num[this.id].value) - 1;
-}
-    }
+        num_jia[i].id = i;
+        num_jia[i].onclick = function () {
+            input_num[this.id].value = parseInt(input_num[this.id].value) + 1;
+        }
+        num_jian[i].id = i;
+        num_jian[i].onclick = function () {
+            if (input_num[this.id].value <= 0) {
+                input_num[this.id].value = 0;
+            } else {
+                input_num[this.id].value = parseInt(input_num[this.id].value) - 1;
+            }
+        }
     }
 
-    //数量为零则提示,否则获取当前数量和尺寸
+//数量为零则提示,否则获取当前数量和尺寸
     var add = document.getElementsByClassName("add");
     var select = document.getElementsByClassName("select");
     var count = document.getElementById("count");
@@ -108,16 +109,16 @@
 
 
                 information.innerHTML += "Type:" + ice_name + "; &nbsp;&nbsp;&nbsp;&nbsp;" + "Size:" + size + "; &nbsp;&nbsp;&nbsp;&nbsp;" + "Number:" + num + ";&nbsp;&nbsp;&nbsp;&nbsp;Money:" + sizeMoney + "<br>";
-    type_arr.push(ice_name);
-    size_arr.push(size);
-    sizeMoney_arr.push(sizeMoney);
-    number_arr.push(num);
-    }
-    }
+                type_arr.push(ice_name);
+                size_arr.push(size);
+                sizeMoney_arr.push(sizeMoney);
+                number_arr.push(num);
+            }
+        }
     }
 
-    //查看已选
-    var count = document.getElementById("count");
+//查看已选
+    var count = document.getElementById("count")
     var information = document.getElementById("orderInformation");
     count.onmouseover = function () {
         information.style.display = "block";
@@ -132,45 +133,46 @@
         information.style.display = "none";
     }
 
-    //生成订单
+//生成订单
     var productionOrder = document.getElementById("productionOrder");
     productionOrder.onclick = function () {
         //冰淇淋数量
         var s = 0;
         for (var i = 0; i < number_arr.length; i++) {
-        s += parseInt(number_arr[i]);
-    }
+            s += parseInt(number_arr[i]);
+        }
         if (s > 20) {
 
-        //changed wording and used swal. Thanks, George Black
-        swal.fire({
-        icon: "error",
-        text: "Maximum number of ice creams per order is 20"
-    }).then((result) => {
-        location.reload();
-    })
-    } else {
-        if (count.value <= 0) {
+            //changed wording and used swal. Thanks, George Black
+            swal.fire({
+                icon: "error",
+                text: "Maximum number of ice creams per order is 20"
+            }).then((result) => {
+                location.reload();
+            })
+        } else {
+            if (count.value <= 0) {
 
-        //changed wording and used swal. Thanks, George Black
-        swal.fire({
-        icon: "error",
-        text: "Unable to make an order with 0 items"
-    });
+                //changed wording and used swal. Thanks, George Black
+                swal.fire({
+                    icon: "error",
+                    text: "Unable to make an order with 0 items"
+                });
 
-        return false;
-    } else {
-        window.location.replace("order.jsp?" + sumMoney + "&" + type_arr + "&" + size_arr + "&" + sizeMoney_arr + "&" + number_arr);
+                return false;
+            } else {
+                window.location.replace("order.jsp?" + sumMoney + "&" + type_arr + "&" + size_arr + "&" + sizeMoney_arr + "&" + number_arr);
+            }
+        }
+
+
     }
-    }
-
-
-    }
-    //管理员界面
+//管理员界面
     var admin = document.getElementById("")
-    //login out
+//login out
     var cancellation = document.getElementById("logout");
     cancellation.onclick = function () {
         location.replace("/");
     }
+
 

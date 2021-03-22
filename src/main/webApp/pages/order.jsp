@@ -34,7 +34,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
-    <%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
 
 
     <script rel="javascript" type="text/javascript" href="js/jquery-1.11.3.min.js"></script>
@@ -47,8 +46,7 @@
 <br>
 
 <h4 id="numMoney">total:£</h4>
-<%--<input type="text" id="inputAddress" name="inputAddress" placeholder="Please enter address here"/>--%>
-<%--<a id="address">Determine address</a>--%>
+
 <table>
     <tbody id="tbody1">
     <tr class="tit">
@@ -60,123 +58,14 @@
     </tbody>
 </table>
 
-<%--<div id="choice">--%>
-<%--    <a id="peisong">Distribution</a>&nbsp;&nbsp;&nbsp;&nbsp;--%>
-<%--    <a id="self">SelfExtraction</a>--%>
-<%--</div>--%>
 
-
-<%--	<div id="pay">Pay now  £<span id="money"></span></div>--%>
-<%--Edited to display total cost. Additionally, now calls the askToCompeteOrder function. Thanks, George Black--%>
 <div id="confirm" onclick=getDeliveryInfo()>Complete Order</div>
 
 
 </div>
 </body>
 
-
 <script type="text/javascript">
-
-
-
-
-
-
-
-
-
-    //I believe this code is no longer needed based on how I am getting the totalCost now. Feel free to change if
-    //need be. Could you please translate/change your chinese? Thanks, George Black.
-
-    //获取总额
-    //var infor = window.location.search.substring(1).split("&");
-    //var money = document.getElementById("money");
-
-    //money.innerHTML = infor;
-    //alert(infor);
-
-    //选择时区获取时间
-    // var shiQu = document.getElementById("shiQu");
-    // var date = document.getElementById("date");
-
-
-    // function getTimeString(date, timezone) {
-    // 	//获取时差（返回当地时间与伦敦时间的分钟的差值）
-    // 	var sc = date.getTimezoneOffset();
-    // 	//获取日期对象
-    // 	var newDate = new Date();
-    // 	//重置日期对象
-    // 	newDate.setTime(date.getTime() + sc * 60000 + timezone * 3600000);
-    // 	//年
-    // 	var Y = format(newDate.getFullYear());
-    // 	//月
-    // 	var M = format(newDate.getMonth() + 1);
-    // 	//日
-    // 	var D = format(newDate.getDate());
-    // 	//小时
-    // 	var H = format(newDate.getHours());
-    // 	//分钟
-    // 	var m = format(newDate.getMinutes());
-    // 	//秒
-    // 	var S = format(newDate.getSeconds());
-    //
-    // 	//格式化时间
-    // 	function format(n) {
-    // 		if (n < 10) {
-    // 			return '0' + n;
-    // 		} else {
-    // 			return '' + n;
-    // 		}
-    // 	}
-    //
-    // 	//返回时间字符串
-    // 	return Y + '-' + M + '-' + D + '&nbsp;' + H + ':' + m + ':' + S;
-    // };
-    // setInterval(function () {
-    // 	var now = new Date();
-    // 	switch (shiQu.value) {
-    // 		case "ZeroTimeZone(UKTime)":
-    // 			date.innerHTML = getTimeString(now, 8);
-    // 			break;
-    // 		case "EastEightTimeZone(BeijingTime)":
-    // 			date.innerHTML = getTimeString(now, 9);
-    // 			break;
-    // 		case "WestDistrict5(UsTime)":
-    // 			date.innerHTML = getTimeString(now, 0);
-    // 			break;
-    // 		case "DongjiuDistrict(JapanTime)":
-    // 			date.innerHTML = getTimeString(now, -5);
-    // 			break;
-    // 	}
-    // }, 1000)
-
-
-    //颜色转换
-    // String.prototype.colorHex = function () {
-    //     // RGB颜色值的正则
-    //     var reg = /^(rgb|RGB)/;
-    //     var color = this;
-    //     if (reg.test(color)) {
-    //         var strHex = "#";
-    //         // 把RGB的3个数值变成数组
-    //         var colorArr = color.replace(/(?:\(|\)|rgb|RGB)*/g, "").split(",");
-    //         // 转成16进制
-    //         for (var i = 0; i < colorArr.length; i++) {
-    //             var hex = Number(colorArr[i]).toString(16);
-    //             if (hex === "0") {
-    //                 hex += hex;
-    //             }
-    //             strHex += hex;
-    //         }
-    //         return strHex;
-    //     } else {
-    //         return String(color);
-    //     }
-    //     //返回时间字符串
-    //     return H + ':' + m;
-    // };
-
-
     function getSpaces(typeOfIceCream) {
         while (typeOfIceCream.includes("%20")) {
             typeOfIceCream = typeOfIceCream.replace("%20", " ");
@@ -195,12 +84,6 @@
     var sizeMoney_arr = infor[3].split(",");	//尺寸价格数组
     var number_arr = infor[4].split(",");	//数量数组
     var iceCreamOrderList = [];
-
-
-    //alert(sumMoney);
-    //alert(type_arr);
-    //alert(type_arr[0]);
-    //alert(type_arr[1]);
 
 
     var tbody = document.getElementById("tbody1");
@@ -225,106 +108,11 @@
 
     console.log(iceCreamOrderList);
     tbody.innerHTML += tableData;
-    //alert(tbody.innerHTML);
+
 
     //设置总额
     var numMoney = document.getElementById("numMoney");
     numMoney.innerHTML += sumMoney;
-
-
-    //选择配送或自提
-    // var address = document.getElementById("address");
-    // var peisong = document.getElementById("peisong");
-    // var self = document.getElementById("self");
-    // peisong.onclick = function () {
-    //     peisong.style.background = "#FF0004";
-    //     self.style.background = "000000";
-    //     address.style.display = "block";
-    // }
-    // self.onclick = function () {
-    //     self.style.background = "#FF0004";
-    //     peisong.style.background = "000000";
-    //     address.style.display = "none";
-    // }
-
-    // //当前英国时间
-    // function getTimeString(date, timezone) {
-    //     //获取时差（返回当地时间与伦敦时间的分钟的差值）
-    //     var sc = date.getTimezoneOffset();
-    //     //获取日期对象
-    //     var newDate = new Date();
-    //     //重置日期对象
-    //     newDate.setTime(date.getTime() + sc * 60000 + timezone * 3600000);
-    //     //年
-    //     var Y = format(newDate.getFullYear());
-    //     //月
-    //     var M = format(newDate.getMonth() + 1);
-    //     //日
-    //     var D = format(newDate.getDate());
-    //     //小时
-    //     var H = format(newDate.getHours());
-    //     //分钟
-    //     var m = format(newDate.getMinutes());
-    //     //秒
-    //     var S = format(newDate.getSeconds());
-    //
-    //     //格式化时间
-    //     function format(n) {
-    //         if (n < 10) {
-    //             return '0' + n;
-    //         } else {
-    //             return '' + n;
-    //         }
-    //     }
-    //     //返回时间字符串
-    //     return H + ':' + m;
-    // }
-
-
-    //Had to edit this to get the totalCost to be moved properly as a request Parameter. Thanks, George Black
-    //点击提交订单
-    // var confirm = document.getElementById("confirm");
-    //英国时间（小时和分钟）
-    // var date = getTimeString(new Date(), 0).split(":");
-    // var hour = date[0];
-    // var minu = date[1];
-    //手机号
-
-    // confirm.onclick = function () {
-    //     if (inputAddress.value == "") {
-    //         alert("Please enter the shipping address");
-    //     } else {
-    //         //alert(peisong.style.background);
-    //         //判断选择配送还是自提
-    //         // if (peisong.style.background == "" || peisong.style.background.toString().colorHex() == "#ff004") {
-    //
-    //
-    //             // if ("11" <= hour <= "18") {
-    //             //     alert("During the delivery time");
-    //             //     window.open("/pages/payment.jsp?totalCost=" + sumMoney);
-    //             // } else {
-    //             //     alert("Not during the delivery time, the delivery time is 11:00-18:00");
-    //             // }
-    //         // } else {
-    //         //     if ("11" <= hour <= "17" || ((hour == "17") && (minu < "45"))) {
-    //         //         alert("In self - lift time");
-    //                 askToCompleteOrder();
-    //             // } else {
-    //             //     alert("It is not during self - lift time, self - lift time is 11:00-17:45");
-    //             // }
-    //         }
-    //
-    //     }
-    // }
-
-
-    // //判断地址是否可用
-    // var inputAddress = document.getElementById("inputAddress");
-    // address.onclick = function () {
-    //     if (inputAddress == "") {
-    //         alert("Please enter the shipping address");
-    //     }
-    //     window.open("map.html?" + inputAddress.value);
 
 
     function showAddressQuestion(showQuestion) {
@@ -343,28 +131,28 @@
             allowOutsideClick: false,
             showCancelButton: true,
             html: `
-            <div class="form-delivery">
-                <label for="deliveryType">Is this order for delivery or carry out?</label>
-                    <p>
-                        <input type="radio" name="deliveryType" onclick="showAddressQuestion(true)" value="delivery"
-                            checked>Delivery</input>
-                    </p>
-                    <p>
-                        <input type="radio" name="deliveryType" onclick="showAddressQuestion(false)" value="carryOut"
-                            >Carry out</input>
-                    </p>
+<div class="form-delivery">
+    <label for="deliveryType">Is this order for delivery or carry out?</label>
+    <p>
+        <input type="radio" name="deliveryType" onclick="showAddressQuestion(true)" value="delivery"
+               checked>Delivery</input>
+    </p>
+    <p>
+        <input type="radio" name="deliveryType" onclick="showAddressQuestion(false)" value="carryOut"
+        >Carry out</input>
+    </p>
 
-            </div>
-            <div class="form-delivery" id="getAddress">
-                <label for="deliverAddress">Note: We only deliver to places that are within a 5 mile distance from the store.</label>
+</div>
+<div class="form-delivery" id="getAddress">
+    <label for="deliverAddress">Note: We only deliver to places that are within a 5 mile distance from the store.</label>
 
-                    <input type="text" name="address" id="deliveryAddress" placeholder="Enter Delivery Address Here">
+    <input type="text" name="address" id="deliveryAddress" placeholder="Enter Delivery Address Here">
 
-                    <input type="text" name="city" id="deliveryCity" placeholder="Enter Delivery City Here">
+    <input type="text" name="city" id="deliveryCity" placeholder="Enter Delivery City Here">
 
-                    <input type="text" name="zipCode" id="deliveryZip" placeholder="Enter Delivery Zip Code Here">
+    <input type="text" name="zipCode" id="deliveryZip" placeholder="Enter Delivery Zip Code Here">
 
-            </div>
+</div>
 `
         }).then((result) => {
             if (result.isConfirmed) {
@@ -372,9 +160,8 @@
                 checkWithinTime(getRadioValue("deliveryType"));
 
 
-                // console.log(document.getElementById("deliveryAddress").value.length);
             }
-            //else do nothing stay here
+//else do nothing stay here
         })
     }
 
@@ -389,51 +176,39 @@
         }
     }
 
-    // function deliverOrCarryOut(buttonValue) {
-    //     if (buttonValue == "carryOut") {
-    //         checkWithinTime(buttonValue)
-    //         console.log("carryOut is called");
-    //     } else {
-    //         checkWithinTime(buttonValue)
-    //         console.log("delivery is called");
-    //     }
-    //
-    // }
 
+    function checkWithinTime(typeOfOrder) {
 
-    function checkWithinTime(typeOfOrder){
+        var time = getUKTime();
+        var hours = possibleRemoveZeros(time.substring(0, 2));
 
-        var time=getUKTime();
-        var hours=possibleRemoveZeros(time.substring(0,2));
+        var minutes = possibleRemoveZeros(time.substring(3));
 
-        var minutes=possibleRemoveZeros(time.substring(3));
-
-        if(typeOfOrder == "carryOut"){
-            if((hours<11) || (hours>=24) || (hours==17 && minutes>=45)){
+        if (typeOfOrder == "carryOut") {
+            if ((hours < 11) || (hours >= 24) || (hours == 17 && minutes >= 45)) {
                 Swal.fire({
-                    icon:'error',
+                    icon: 'error',
                     text: 'We are sorry. We are unable to collect orders for carry out during ' +
                         'this time. Please try again during the times between 11:00 and 17:45'
                 })
-            }else{
+            } else {
                 askToCompleteCarry("NA");
             }
 
-        } else{
-            if(hours<11  || hours>17 ){
+        } else {
+            if (hours < 11 || hours > 17) {
                 Swal.fire({
-                    icon:'error',
-                    text:"We are sorry, The store is not open during this time. " +
+                    icon: 'error',
+                    text: "We are sorry, The store is not open during this time. " +
                         "Please try again during the times between 11:00 and 18:00"
                 })
-            }else{
+            } else {
                 doGeocode();
             }
 
         }
 
     }
-
 
 
     function getUKTime() {
@@ -450,16 +225,14 @@
     }
 
 
-    function possibleRemoveZeros(string){
+    function possibleRemoveZeros(string) {
         console.log(string);
-        if(string.charAt(0)==0){
-            string=string.substring(1);
+        if (string.charAt(0) == 0) {
+            string = string.substring(1);
         }
         console.log(string);
         return string
     }
-
-
 
 
     function checkValueLength(value) {
@@ -475,7 +248,7 @@
 
     }
 
-    var storeCoordinates=[];
+    var storeCoordinates = [];
     axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
         params: {
             address: "Avenue Cres, Seaton Delaval, Whitley Bay NE25 0DN, UK",
@@ -491,9 +264,6 @@
             return storeCoordinates;
 
         })
-
-
-
 
 
     https://www.youtube.com/watch?v=pRiQeo17u6c&t=731s
@@ -545,21 +315,21 @@
 
                         } else {
 
-                            //explain why you used an array.
-                            var deliveryCoordinates=[];
+//explain why you used an array.
+                            var deliveryCoordinates = [];
                             deliveryCoordinates.push(response.data.results[0].geometry.location.lat);
                             deliveryCoordinates.push(response.data.results[0].geometry.location.lng);
 
-                            var distance=getDistance(storeCoordinates,deliveryCoordinates);
+                            var distance = getDistance(storeCoordinates, deliveryCoordinates);
 
 
-                            if(distance>5){
+                            if (distance > 5) {
                                 Swal.fire({
-                                    icon:'error',
-                                    text:"We are sorry "+address+" is too far away for us to deliver to."
+                                    icon: 'error',
+                                    text: "We are sorry " + address + " is too far away for us to deliver to."
                                 })
-                            }else{
-                                askToCompleteDelivery(address,city,zip);
+                            } else {
+                                askToCompleteDelivery(address, city, zip);
                             }
                         }
                     })
@@ -580,7 +350,7 @@
             Math.sin(dLong / 2) * Math.sin(dLong / 2);
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         var d = R * c; //in meters need to change to miles
-        var toReturn=d/1609.344
+        var toReturn = d / 1609.344
         console.log(d);
         console.log(toReturn);
         return toReturn; //convert to miles
@@ -598,11 +368,11 @@
     function getFormattedDate() {
         var horseDate = new Date()
 
-        //Add 0 and then slice to get the last two numbers. If there already two number ex: 12 then it will have
-        //012 so 12 will be sent to MM. If the date is a single number  ex:5 then the number is 05 and 05 is
-        //returned
+//Add 0 and then slice to get the last two numbers. If there already two number ex: 12 then it will have
+//012 so 12 will be sent to MM. If the date is a single number  ex:5 then the number is 05 and 05 is
+//returned
 
-        //+1 added with montn because month goes 0-11 and we need 1-12
+//+1 added with montn because month goes 0-11 and we need 1-12
         var MM = ('0' + String(horseDate.getMonth() + 1)).slice(-2);
 
         var yyyy = String(horseDate.getFullYear());
@@ -629,12 +399,12 @@
 
     function createHorsePay() {
 
-        //the current date and time with proper format to be sent with the original horsePay JSON. Thanks, George Black
+//the current date and time with proper format to be sent with the original horsePay JSON. Thanks, George Black
         var dateToSend = getFormattedDate();
         var timeToSend = getFormattedTime();
 
 
-        //The original horsePay JSON to be sent to server to get proper JSON back with the paymentResult.
+//The original horsePay JSON to be sent to server to get proper JSON back with the paymentResult.
         var originalHorseObject = {
             "storeID": "Team08",
             "customerID": "<%=((Customer) session.getAttribute("cust")).getCustomerID()%>", //the customersID in the website
@@ -649,8 +419,6 @@
     }
 
 
-
-
     /**
      * Method that is run after the user hits Pay now £(their total cost). It does a pop up asking if they are sure
      * they want to make this purchase. If confirm order is clicked, then the horsePay JSON is sent to server to see if
@@ -662,17 +430,17 @@
         Swal.fire({
             title: "Confirm Order",
 
-            //displays the companies logo
+//displays the companies logo
             imageUrl: "../images/logo.png",
             text: "Confirm carry out order for  £" + sumMoney + " ? After placing the order" +
                 " it will be ready for collection in 10 minutes time.",
             showCancelButton: true,
             confirmButtonText: 'Confirm order',
 
-            //cannot make click outside of the box
+//cannot make click outside of the box
             allowOutsideClick: false
 
-            //if Confirm Order is clicked then send HorsePayJSON
+//if Confirm Order is clicked then send HorsePayJSON
         }).then((result) => {
                 if (result.isConfirmed) {
                     this.sendHorsePayJson(address)
@@ -682,21 +450,21 @@
     }
 
 
-    function askToCompleteDelivery(address,city,zip) {
+    function askToCompleteDelivery(address, city, zip) {
 
         Swal.fire({
             title: "Confirm Order",
 
-            //displays the companies logo
+//displays the companies logo
             imageUrl: "../images/logo.png",
-            text: "Confirm delivery order to "+address+", "+city+", "+zip+" for £" + sumMoney + "?",
+            text: "Confirm delivery order to " + address + ", " + city + ", " + zip + " for £" + sumMoney + "?",
             showCancelButton: true,
             confirmButtonText: 'Confirm order',
 
-            //cannot make click outside of the box
+//cannot make click outside of the box
             allowOutsideClick: false
 
-            //if Confirm Order is clicked then send HorsePayJSON
+//if Confirm Order is clicked then send HorsePayJSON
         }).then((result) => {
                 if (result.isConfirmed) {
                     this.sendHorsePayJson(address)
@@ -704,13 +472,6 @@
             }
         )
     }
-
-
-
-
-
-    //horsePay JSON turned into a string to be sent to the server. Thanks, George Black.
-   // var stringHorseObject = JSON.stringify(originalHorseObject);
 
 
     /**
@@ -728,21 +489,17 @@
         let url = '/horsePay';
 
 
-        // open a connection to post (add the totalCost as a requestParameter
         xhr.open("POST", url + "?address=" + address, true);
 
 
-        //say I am sending a json and then send it
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(createHorsePay());
 
-        // var horseObject=createHorsePay();
 
-
-        //if the sending back and forth is successful  then the horsePay with the PaymentResult added is
-        //sent to see if the transaction was complete or not and then display the proper alert.
-        //If the sending back and forth is not successful, add the PaymentResult Status to false and reason
-        //to be internal error with horsePay server.
+//if the sending back and forth is successful  then the horsePay with the PaymentResult added is
+//sent to see if the transaction was complete or not and then display the proper alert.
+//If the sending back and forth is not successful, add the PaymentResult Status to false and reason
+//to be internal error with horsePay server.
         xhr.onreadystatechange = function () {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 getAlertMessage(JSON.parse(xhr.response));
@@ -791,22 +548,24 @@
             }).then((result) => {
                 if (result.isConfirmed) {
 
-                    //remove the customerId from the session
+//remove the customerId from the session
 
                     window.location.replace("/");
 
                 } else {
-                    setTimeout(function(){window.location.replace("/pages/shopping.jsp");},5000);
+                    setTimeout(function () {
+                        window.location.replace("/pages/shopping.jsp");
+                    }, 5000);
                     Swal.fire({
-                        imageUrl:"../images/horseRunningGif.gif",
-                        imageHeight:200,
-                        imageWidth:300,
+                        imageUrl: "../images/horseRunningGif.gif",
+                        imageHeight: 200,
+                        imageWidth: 300,
                         allowOutsideClick: false,
-                        showConfirmButton:false,
-                        timer:5000,
-                        html:"Thank you for shopping with Cavallo! You will be sent back to the shopping page in <b></b> seconds.",
-                        willOpen: ()=>{
-                             timerInterval = setInterval(() => {
+                        showConfirmButton: false,
+                        timer: 5000,
+                        html: "Thank you for shopping with Cavallo! You will be sent back to the shopping page in <b></b> seconds.",
+                        willOpen: () => {
+                            timerInterval = setInterval(() => {
                                 Swal.getContent().querySelector('b')
                                     .textContent = (Swal.getTimerLeft() / 1000)
                                     .toFixed(0)
@@ -829,7 +588,7 @@
                 allowOutsideClick: false // do not allow user to leave box by clickig outside of it.
             }).then((result) => {
                 if (result.isConfirmed) {
-                    //stay here do nothing
+
 
                 } else {
                     window.location.replace("/");
@@ -838,7 +597,6 @@
             })
         }
     }
-
-
 </script>
+
 </html>
