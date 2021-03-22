@@ -75,7 +75,7 @@ Please log in by email" onblur="validate_username(this.value)"/></td>
                 <tr>
                     <td>
 
-                        <input type="submit" id="submit_form" value="Login" onclick="return validate_form()"/>
+                        <input type="submit" id="submit_form" value="Login"/>
                     </td>
                 </tr>
             </table>
@@ -98,11 +98,6 @@ Please log in by email" onblur="validate_username(this.value)"/></td>
 </body>
 
 <script type="text/javascript">
-
-
-
-
-
 
     //函数1：验证邮箱格式
     function validate_username(username) {
@@ -129,36 +124,5 @@ Please log in by email" onblur="validate_username(this.value)"/></td>
         }
     }
 
-    //Edited this out since it seemed to be a test case and no longer needed now we are connected to database. At least
-    //locally, feel free to change it if need be Thanks, George Black.
-
-
-    //函数4：验证表单是否已经填好
-    // function validate_form() {
-    //     var username = document.getElementById("username").value;
-    //     var password = document.getElementById("password").value;
-    //     //console.log("表单填写正确，可以正常提交！");
-    //
-    //     //这三个，如果任何一个有问题，都返回false
-    //     //18128@qq.com		12345y
-    //     var emailReg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-    //     var passwordReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
-    //
-    //     if (username != "" && emailReg.test(username)) {
-    //         if (password != "" && passwordReg.test(password)) {
-    //             alert("信息填写正确，可以正常提交！");
-    //             console.log("信息填写正确，可以正常提交！");
-    //             return true;
-    //         } else {
-    //             alert("密码格式错误，提交失败，请重新填写！");
-    //             console.log("密码格式错误，提交失败，请重新填写！");
-    //             return false;
-    //         }
-    //     } else {
-    //         alert("注册的账号不符合要求，提交失败，请重新填写！");
-    //         console.log("注册的账号不符合要求，提交失败，请重新填写！");
-    //         return false;
-    //     }
-    // }
 </script>
 </html>

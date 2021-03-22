@@ -140,18 +140,6 @@
                     }
                 }
 
-
-
-
-
-
-
-
-
-
-
-
-
             </script>
             <div id="datepicker2"></div>
             <p>Date:
