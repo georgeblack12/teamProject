@@ -584,7 +584,10 @@
             Math.sin(dLong / 2) * Math.sin(dLong / 2);
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         var d = R * c; //in meters need to change to miles
-        return d/1609.344; //convert to miles
+        var toReturn=d/1609.344
+        console.log(d);
+        console.log(toReturn);
+        return toReturn; //convert to miles
     };
 
 
