@@ -6,7 +6,7 @@
 -- DROP TABLE IF EXISTS `User`;
 -- CREATE TABLE `User` (
 -- 	`email` varchar(100) NOT NULL,
--- 	`password` varchar(16) NOT NULL,
+-- 	`password` varchar(16) NOT NULL COLLATE utf8_bin,
 -- 	PRIMARY KEY (`email`)
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
