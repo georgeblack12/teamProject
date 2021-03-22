@@ -627,20 +627,26 @@
         return hh + ":" + mm;
     }
 
-    //the current date and time with proper format to be sent with the original horsePay JSON. Thanks, George Black
-    var dateToSend = getFormattedDate();
-    var timeToSend = getFormattedTime();
+
+    function createHorsePay() {
+
+        //the current date and time with proper format to be sent with the original horsePay JSON. Thanks, George Black
+        var dateToSend = getFormattedDate();
+        var timeToSend = getFormattedTime();
 
 
-    //The original horsePay JSON to be sent to server to get proper JSON back with the paymentResult.
-    var originalHorseObject = {
-        "storeID": "Team08",
-        "customerID": "<%=((Customer) session.getAttribute("cust")).getCustomerID()%>", //the customersID in the website
-        "date": dateToSend,
-        "time": timeToSend,
-        "timeZone": "GMT",
-        "transactionAmount": String(sumMoney), //the totalCost of the order
-        "currencyCode": "GBP",
+        //The original horsePay JSON to be sent to server to get proper JSON back with the paymentResult.
+        var originalHorseObject = {
+            "storeID": "Team08",
+            "customerID": "<%=((Customer) session.getAttribute("cust")).getCustomerID()%>", //the customersID in the website
+            "date": dateToSend,
+            "time": timeToSend,
+            "timeZone": "GMT",
+            "transactionAmount": String(sumMoney), //the totalCost of the order
+            "currencyCode": "GBP",
+        }
+
+        return JSON.stringify(originalHorseObject);
     }
 
 
@@ -705,7 +711,7 @@
 
 
     //horsePay JSON turned into a string to be sent to the server. Thanks, George Black.
-    var stringHorseObject = JSON.stringify(originalHorseObject);
+   // var stringHorseObject = JSON.stringify(originalHorseObject);
 
 
     /**
@@ -729,7 +735,9 @@
 
         //say I am sending a json and then send it
         xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(stringHorseObject);
+        xhr.send(createHorsePay());
+
+        var horseObject=createHorsePay();
 
 
         //if the sending back and forth is successful  then the horsePay with the PaymentResult added is
@@ -747,8 +755,8 @@
                     "reason": "internal error with horsePay server"
                 }
                 //add paymentResult to the object.
-                originalHorseObject["paymentResult"] = paymentResult;
-                getAlertMessage(originalHorseObject);
+                horseObject["paymentResult"] = paymentResult;
+                getAlertMessage(horseObject);
                 //console.log(originalHorseObject) for testing
             }
         }
@@ -766,13 +774,6 @@
 
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(iceCreamOrderStringify);
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == XMLHttpRequest.DONE) {
-
-            }
-
-        }
     }
 
     /**
@@ -807,14 +808,14 @@
                     window.location.replace("/");
 
                 } else {
-                    setTimeout(function(){window.location.replace("/pages/shopping.jsp");},60000);
+                    setTimeout(function(){window.location.replace("/pages/shopping.jsp");},5000);
                     Swal.fire({
                         imageUrl:"../images/horseRunningGif.gif",
                         imageHeight:200,
                         imageWidth:300,
                         allowOutsideClick: false,
                         showConfirmButton:false,
-                        timer:60000,
+                        timer:5000,
                         html:"Thank you for shopping with Cavallo! You will be sent back to the shopping page in <b></b> seconds.",
                         willOpen: ()=>{
                              timerInterval = setInterval(() => {

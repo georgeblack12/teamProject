@@ -67,16 +67,21 @@
 	//COME BACK HERE
 	function validateName(){
 		var name = document.getElementById("name").value;
-		console.log(name);
 
 		var accept=false;
-		if(name.length<1){
+		if(name.length<1 ){
 			document.getElementById("name_user").innerHTML = "<font color='red' size='3px'>There is no name entered</font>";
 		}else if(!(name.includes(" "))){
 			document.getElementById("name_user").innerHTML = "<font color='red' size='3px'>Please enter first and last name</font>";
 		} else {
-			document.getElementById("name_user").innerHTML = "<font color='green' size='3px'>Valid Name</font>";
-			accept=true;
+			var names=name.split(' ');
+
+			if(names[0].length<1 || names[1].length<1){
+				document.getElementById("name_user").innerHTML = "<font color='red' size='3px'>Please enter first and last name</font>";
+			}else {
+				document.getElementById("name_user").innerHTML = "<font color='green' size='3px'>Valid Name</font>";
+				accept = true;
+			}
 		}
 		return accept;
 	}

@@ -62,6 +62,7 @@ public class OrderRepository {
         int insert=0;
         if (hResponse.getPaymentResult().isStatus()) {
 
+
             String sql = "INSERT INTO iceCreamOrder(customerID,`date`,`time`,`type`,address,cost)" +
                     " values(?,?,?,?,?,?)";
 
@@ -69,7 +70,7 @@ public class OrderRepository {
 
            //Used as delivery right now
             System.out.println(hResponse.getDate());
-            System.out.println(hResponse.getTime());
+            System.out.println(LocalDateTime.now());
 
             if(address.equals("NA")) {
                 System.out.println(hResponse.getCustomerID());
@@ -92,26 +93,13 @@ public class OrderRepository {
 
     //went with this for safety reason avoids issues
     public int getOrderID(HorsePayResponse hResponse) throws ParseException {
-        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
 
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String sql="SELECT max(orderID) from iceCreamOrder where customerID= ?";
 
-        LocalDate dateToGet= LocalDate.parse(hResponse.getDate(),dateFormat);
-
-        LocalTime timeToGet = LocalTime.parse(hResponse.getTime(),timeFormat);
-
-
-
-//        RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
-
-        String sql="Select orderID FROM iceCreamOrder WHERE (customerID=? AND `date`=? AND `time`=?)";
-
-        int orderId=jdbcTemplate.queryForObject(sql,new Object[]{hResponse.getCustomerID(),dateToGet,timeToGet},Integer.class);
+        int orderId=jdbcTemplate.queryForObject(sql,new Object[]{hResponse.getCustomerID()},Integer.class);
 
         return orderId;
     }
-
-
 
 
 }
