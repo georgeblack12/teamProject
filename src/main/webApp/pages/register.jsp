@@ -166,7 +166,7 @@
 
 		var passwordReg=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
 
-		if(password.length>0 && password.search(passwordReg) != -1)
+		if(password.length>0 && password.search(passwordReg) != -1 && password.length<17)
 		{
 			document.getElementById("test_pw").innerHTML = "<font color='green' size='3px'>Password accepted</font>";
 			return true;
