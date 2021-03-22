@@ -19,26 +19,25 @@
 <img id="logo" src="../images/logo.png" >
 <br>
 <div id="user_reg">create a new user</div>
-<form action="register" method="post" name="form" >
+<form id="registerForm" onsubmit="return false;">
 	<table>
 		<tr>
 			<td class="tit">Full Name:</td>
 			<td><input type="text" id="name" name="name"
-					   placeholder="Please enter your first and last name" onblur="validateName()"/></td>
+					   placeholder="Please enter your first and last name" oninput="validateName()"/></td>
 			<td id="name_user"></td>
 
 		</tr>
 		<tr>
 			<td class="tit">Email address:</td>
 			<td><input type="text" id="email" name="email"
-					   placeholder="Please enter your email" onblur="validateEmail()"/></td>
+					   placeholder="Please enter your email" oninput="validateEmail()"/></td>
 			<td id="email_user"></td>
 		</tr>
 		<tr>
 			<td class="tit">Phone Number:</td>
 			<td><input type="text" id="phoneNumber" name="phoneNumberUser"
-					   placeholder="This should only contain 9 to 10 digits" onblur="validatePhoneNumber()"
-					   onblur="validate_username(this.value)"/></td>
+					   placeholder="This should only contain 9 to 10 digits" oninput="validatePhoneNumber()"/></td>
 			<td id="phone_user"></td>
 
 
@@ -46,17 +45,17 @@
 		<tr>
 			<td class="tit">Password:</td>
 			<td><input type="password" id="password" name="password" placeholder="Needs 8-16 digits and upper and lower case letters."
-					   onblur="validatePassword()"/></td>
+					   oninput="validatePassword()"/></td>
 			<td id="test_pw"></td>
 		</tr>
 		<tr>
 			<td class="tit">Confirm password:</td>
-			<td><input type="password" id="password2" name="password2" onblur="validatePasswordCheck()" /></td>
+			<td><input type="password" id="password2" name="password2" oninput="validatePasswordCheck()" /></td>
 			<td id="is_test_pw"></td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="submit" id="submit_form" value="Register" onclick="return validate_form()"/></td>
+			<td><input type="submit" id="submit_form" value="Register" onclick="validateForm()"/></td>
 			<td></td>
 		</tr>
 	</table>
@@ -76,51 +75,59 @@
 		}else if(!(name.includes(" "))){
 			document.getElementById("name_user").innerHTML = "<font color='red' size='3px'>Please enter first and last name</font>";
 		} else {
+			document.getElementById("name_user").innerHTML = "<font color='green' size='3px'>Valid Name</font>";
 			accept=true;
 		}
 		return accept;
 	}
 
 
-	function checkIfInUse(email){
-		let xhr = new XMLHttpRequest();
-		let url = '/checkEmailInUse';
-		xhr.open("POST", url, true);
-		xhr.setRequestHeader("Content-Type", "application/json");
-		xhr.send(email);
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState == XMLHttpRequest.DONE) {
-				console.log(JSON.parse(xhr.response));
-				return JSON.parse(xhr.response);
+	var isEmail;
+	var emailAccepted;
+	function validateEmail() {
+		var email=document.getElementById("email").value;
 
+		if(email.length<1){
+			document.getElementById("email_user").innerHTML = "<font color='red' size='3px'>No Email Entered</font>"
+			emailAccepted=false;
+		}else {
+			let xhr = new XMLHttpRequest();
+			let url = '/checkEmailInUse';
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.send(email);
+
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == XMLHttpRequest.DONE) {
+					isEmail = JSON.parse(xhr.response);
+					emailAccepted=validateRestOfEmail();
+				}
 			}
 		}
+		console.log(emailAccepted);
+		return emailAccepted;
 	}
 
+	function validateRestOfEmail(){
+		var accepted;
 
-
-	//onblur失去焦点事件，用户离开输入框时执行 JavaScript 代码：
-	//函数1：验证邮箱格式
-	// Onblur loses focus events and executes JavaScript code when the user leaves the input box:
-	// Function 1: Verify mailbox format
-	function validateEmail(){
 		var email=document.getElementById("email").value;
+
 		//定义正则表达式的变量:邮箱正则
 		var emailReg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 
-		var alreadyInUse=checkIfInUse(email);
-		//console.log(username);
-		if(email !="" && email.search(emailReg) != -1)
+		if (isEmail){
+			document.getElementById("email_user").innerHTML = "<font color='red' size='3px'>This email is already registered</font>";
+			accepted= false;
+		} else if(email.search(emailReg) != -1)
 		{
 			document.getElementById("email_user").innerHTML = "<font color='green' size='3px'>Email accepted</font>";
-			return true;
-		}else if (alreadyInUse){
-			document.getElementById("email_user").innerHTML = "<font color='red' size='3px'>This email is already registered</font>";
-			return false
+			accepted=true;
 		}else{
 			document.getElementById("email_user").innerHTML = "<font color='red' size='3px'>Email format error</font>";
-			return false;
+			accepted= false;
 		}
+		return accepted;
 	}
 
 	function validatePhoneNumber(){
@@ -153,7 +160,8 @@
 		var password=document.getElementById("password").value;
 
 		var passwordReg=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
-		if(password != "" && password.search(passwordReg) != -1)
+
+		if(password.length>0 && password.search(passwordReg) != -1)
 		{
 			document.getElementById("test_pw").innerHTML = "<font color='green' size='3px'>Password accepted</font>";
 			return true;
@@ -187,43 +195,79 @@
 	}
 
 
-	function validate_form() {
+	function validateForm() {
 		var accepted;
 		accepted = validateName();
+
 		if (accepted) {
 			accepted = validateEmail();
+
 		}
 		if (accepted) {
 			accepted = validatePhoneNumber();
+
 		}
 		if (accepted) {
-			accepted = validatePassword()
+			accepted = validatePassword();
+
 		}
 		if (accepted) {
 			accepted = validatePasswordCheck();
+
 		}
-		if (accepted) {
+
+		console.log(accepted);
+
+		if(accepted) {
+			registerCustomer();
 			Swal.fire({
-				imageURL: "../images/dancingCream.gif",
-				text: "You are currently being added to our system! Login to the website to make your first " +
+				imageUrl: "../images/dancingCream.gif",
+				imageWidth:"300px",
+				imageHeight:"300px",
+				title:"You're In!",
+				text: "You have been added to our system! Login to the website to make your first " +
 						"ice cream purchase",
-				confirmButtonText: "Back to login page"
+				confirmButtonText: "Back to login page",
+				allowOutsideClick: false
 			}).then(() => {
-				return accepted;
+				window.location.replace("/");
+			})
+		}else{
+			Swal.fire({
+				icon:'error',
+				title:"Unable to register",
+				text:"Some of the required fields have not been filled out or there is an error in your entry",
+				allowOutsideClick:false
 			})
 		}
 	}
 
 
+	function registerCustomer(){
+		var formData=document.getElementById("registerForm");
+
+		var personToRegister={
+			"email": formData.elements[1].value.toString(),
+			"name": formData.elements[0].value.toString(),
+			"phoneNo": formData.elements[2].value.toString(),
+			"password": formData.elements[3].value.toString()
+		}
 
 
 
 
+			let xhr = new XMLHttpRequest();
+			let url = '/registerCustomerUser';
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.send(JSON.stringify(personToRegister));
 
-
-
-
-
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == XMLHttpRequest.DONE) {
+					console.log("it is finished");
+				}
+			}
+	}
 
 </script>
 

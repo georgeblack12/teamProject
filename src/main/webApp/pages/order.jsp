@@ -420,7 +420,7 @@
             }
 
         } else{
-            if(hours<11  || hours>18 ){
+            if(hours<11  || hours>17 ){
                 Swal.fire({
                     icon:'error',
                     text:"We are sorry, The store is not open during this time. " +
@@ -642,6 +642,8 @@
         "transactionAmount": String(sumMoney), //the totalCost of the order
         "currencyCode": "GBP",
     }
+
+
 
 
     /**

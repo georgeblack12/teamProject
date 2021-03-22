@@ -72,6 +72,7 @@ public class OrderRepository {
             System.out.println(hResponse.getTime());
 
             if(address.equals("NA")) {
+                System.out.println(hResponse.getCustomerID());
                 insert = jdbcTemplate.update(sql, hResponse.getCustomerID(),
                         dateFormat.parse(hResponse.getDate()), timeFormat.parse(hResponse.getTime()), "Pick up", "NA", hResponse.getTransactionAmount());
             }else{

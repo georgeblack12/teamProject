@@ -64,10 +64,9 @@ public class UserRepository {
 
 
     public Optional<String> checkEmail(String email){
-        RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
         String result=null;
         try {
-            String sql = "SELECT email from `User` WHERE email =?";
+            String sql = "SELECT email FROM `User` WHERE email =?";
             result = jdbcTemplate.queryForObject(sql, new Object[]{email}, String.class);
         } catch(DataAccessException ex){
             System.out.println("Email does not exist in the system");
@@ -76,6 +75,8 @@ public class UserRepository {
 
         return Optional.ofNullable(result);
     }
+
+
 
 
 

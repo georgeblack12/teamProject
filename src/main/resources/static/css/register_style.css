@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 
-*{
+**:not([class*="con"],.swal2-header,[class*="styled"],.swal2-title){
 	width: 980px;
 	margin: 0px auto;
 	padding: 0px;

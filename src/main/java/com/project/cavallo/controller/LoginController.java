@@ -75,6 +75,7 @@ public class LoginController {
 
             if(cust.getEmail() != null) {
                 session.setAttribute("cust", cust);
+                System.out.println(cust);
                 //move to a the shopping page
                 mv.setViewName("redirect:/pages/shopping.jsp");
             } else {
