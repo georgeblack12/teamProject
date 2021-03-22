@@ -563,7 +563,7 @@
                                     text:"We are sorry "+address+" is too far away for us to deliver to."
                                 })
                             }else{
-                                askToCompleteDelivery(address);
+                                askToCompleteDelivery(address,city,zip);
                             }
                         }
                     })
@@ -686,14 +686,14 @@
     }
 
 
-    function askToCompleteDelivery(address) {
+    function askToCompleteDelivery(address,city,zip) {
 
         Swal.fire({
             title: "Confirm Order",
 
             //displays the companies logo
             imageUrl: "../images/logo.png",
-            text: "Confirm delivery order to "+address+" for £" + sumMoney + "?",
+            text: "Confirm delivery order to "+address+", "+city+", "+zip+" for £" + sumMoney + "?",
             showCancelButton: true,
             confirmButtonText: 'Confirm order',
 
@@ -740,7 +740,7 @@
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(createHorsePay());
 
-        var horseObject=createHorsePay();
+        // var horseObject=createHorsePay();
 
 
         //if the sending back and forth is successful  then the horsePay with the PaymentResult added is
@@ -749,17 +749,7 @@
         //to be internal error with horsePay server.
         xhr.onreadystatechange = function () {
             if (xhr.readyState == XMLHttpRequest.DONE) {
-
-
                 getAlertMessage(JSON.parse(xhr.response));
-            } else {
-                let paymentResult = {
-                    "Status": false,
-                    "reason": "internal error with horsePay server"
-                }
-                //add paymentResult to the object.
-                horseObject["paymentResult"] = paymentResult;
-                getAlertMessage(horseObject);
             }
         }
     }
