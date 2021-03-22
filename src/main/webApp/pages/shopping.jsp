@@ -501,7 +501,7 @@
     //login out
     var cancellation = document.getElementById("logout");
     cancellation.onclick = function(){
-        location.replace("index.html");
+        location.replace("/");
     }
 
 </script>

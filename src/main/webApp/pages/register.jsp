@@ -69,7 +69,7 @@
 		var name = document.getElementById("name").value;
 
 		var accept=false;
-		if(name.length<1 ){
+		if(name.length<1 || name.length>50){
 			document.getElementById("name_user").innerHTML = "<font color='red' size='3px'>There is no name entered</font>";
 		}else if(!(name.includes(" "))){
 			document.getElementById("name_user").innerHTML = "<font color='red' size='3px'>Please enter first and last name</font>";
@@ -141,7 +141,7 @@
 
 		var number=document.getElementById("phoneNumber").value;
 
-		if(number.length<9 || number.length>10){
+		if(number.length<9 || number.length>=12){
 			document.getElementById("phone_user").innerHTML = "<font color='red' size='3px'>Phone number length is incorrect</font>";
 			accepted=false;
 

@@ -757,7 +757,6 @@
                 //add paymentResult to the object.
                 horseObject["paymentResult"] = paymentResult;
                 getAlertMessage(horseObject);
-                //console.log(originalHorseObject) for testing
             }
         }
     }
