@@ -157,13 +157,16 @@
         }).then((result) => {
             if (result.isConfirmed) {
 
-                checkWithinTime(getRadioValue("deliveryType"));
+                goToCarryOrDelivery(getRadioValue("deliveryType"));
 
 
             }
 //else do nothing stay here
         })
     }
+
+
+
 
 
     // https:stackoverflow.com/questions/604167/how-can-we-access-the-value-of-a-radio-button-using-the-dom
@@ -177,7 +180,21 @@
     }
 
 
-    function checkWithinTime(typeOfOrder) {
+
+
+    function goToCarryOrDelivery(typeOfOrder){
+        if(typeOfOrder==="carryOut"){
+            askToCompleteCarry();
+        }else{
+            doGeocode();
+        }
+    }
+
+
+
+
+
+    function checkWithinTime(typeOfOrder,address) {
 
         var time = getUKTime();
         var hours = possibleRemoveZeros(time.substring(0, 2));
@@ -192,7 +209,7 @@
                         'this time. Please try again during the times between 11:00 and 17:45'
                 })
             } else {
-                askToCompleteCarry("NA");
+                sendHorsePayJson(address);
             }
 
         } else {
@@ -203,12 +220,13 @@
                         "Please try again during the times between 11:00 and 18:00"
                 })
             } else {
-                doGeocode();
+                sendHorsePayJson(address);
             }
 
         }
 
     }
+
 
 
     function getUKTime() {
@@ -284,6 +302,7 @@
 
     https://www.youtube.com/watch?v=pRiQeo17u6c&t=731s
         function doGeocode() {
+        console.log("geocode called");
             var haveError;
             var city = document.getElementById("deliveryCity").value;
             var address = document.getElementById("deliveryAddress").value;
@@ -438,6 +457,13 @@
     }
 
 
+
+
+
+
+
+
+
     /**
      * Method that is run after the user hits Pay now £(their total cost). It does a pop up asking if they are sure
      * they want to make this purchase. If confirm order is clicked, then the horsePay JSON is sent to server to see if
@@ -445,7 +471,7 @@
      *
      * @author George Black
      */
-    function askToCompleteCarry(address) {
+    function askToCompleteCarry() {
         Swal.fire({
             title: "Confirm Order",
 
@@ -462,7 +488,7 @@
 //if Confirm Order is clicked then send HorsePayJSON
         }).then((result) => {
                 if (result.isConfirmed) {
-                    this.sendHorsePayJson(address)
+                    checkWithinTime("carryOut","Na");
                 }
             }
         )
@@ -470,6 +496,7 @@
 
 
     function askToCompleteDelivery(address, city, zip) {
+
 
         Swal.fire({
             title: "Confirm Order",
@@ -486,7 +513,7 @@
 //if Confirm Order is clicked then send HorsePayJSON
         }).then((result) => {
                 if (result.isConfirmed) {
-                    this.sendHorsePayJson(address)
+                    checkWithinTime("delivery",address);
                 }
             }
         )
