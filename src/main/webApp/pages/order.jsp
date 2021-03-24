@@ -174,7 +174,7 @@
 
 </div>
 <div class="form-delivery" id="getAddress">
-    <label for="deliverAddress">Note: We only deliver to places that are within a 5 mile distance from the store.</label>
+    <label for="deliverAddress">Note: Delivery is free, but we only deliver to places that are within a 5 mile distance from the store.</label>
 
     <input type="text" name="address" id="deliveryAddress" placeholder="Enter Delivery Address Here">
 
