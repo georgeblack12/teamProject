@@ -317,7 +317,7 @@
     function checkNotStore(address){
 
 
-        if(address==="Avenue Cres, Seaton Delaval" || address=="Avenue Cres Seaton Delaval"){
+        if(address==="Avenue Crescent, Seaton Delaval" || address=="Avenue Crescent Seaton Delaval"){
             Swal.fire({
                 icon:'error',
                 text:"You have entered the store's address. Please choose carry out if you would like to " +
