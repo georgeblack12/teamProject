@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>register</title>
+	<title>Register</title>
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="this is my page">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -16,9 +16,19 @@
 </head>
 
 <body>
-<img id="logo" src="../images/logo.png" >
-<br>
-<div id="user_reg">create a new user</div>
+
+<header>
+	<img id="logo" src="../images/logo1.png">
+</header>
+
+<div id="intro">
+	<h1>Register</h1>
+	<p>Please register here</p>
+</div>
+
+<main>
+
+<h2>Create a new user</h2>
 <form id="registerForm" onsubmit="return false;">
 	<table>
 		<tr>
@@ -28,31 +38,34 @@
 			<td id="name_user"></td>
 
 		</tr>
+
 		<tr>
 			<td class="tit">Email address:</td>
 			<td><input type="text" id="email" name="email"
 					   placeholder="Please enter your email" oninput="validateEmail()"/></td>
 			<td id="email_user"></td>
 		</tr>
+
 		<tr>
 			<td class="tit">Phone Number:</td>
 			<td><input type="text" id="phoneNumber" name="phoneNumberUser"
-					   placeholder="This should only contain 9 to 10 digits" oninput="validatePhoneNumber()"/></td>
+					   placeholder="This should contain 9-11 digits" oninput="validatePhoneNumber()"/></td>
 			<td id="phone_user"></td>
-
-
 		</tr>
+
 		<tr>
 			<td class="tit">Password:</td>
-			<td><input type="password" id="password" name="password" placeholder="Needs 8-16 digits and upper and lower case letters."
+			<td><input type="password" id="password" name="password" placeholder="Must contain 8-16 characters including numbers and upper and lower case letters"
 					   oninput="validatePassword()"/></td>
 			<td id="test_pw"></td>
 		</tr>
+
 		<tr>
 			<td class="tit">Confirm password:</td>
-			<td><input type="password" id="password2" name="password2" oninput="validatePasswordCheck()" /></td>
+			<td><input type="password" id="password2" name="password2" placeholder="Enter your password again" oninput="validatePasswordCheck()" /></td>
 			<td id="is_test_pw"></td>
 		</tr>
+
 		<tr>
 			<td></td>
 			<td><input type="submit" id="submit_form" value="Register" onclick="validateForm()"/></td>
@@ -60,6 +73,21 @@
 		</tr>
 	</table>
 </form>
+</main>
+
+<footer>
+	<div class="contactleft">
+		<p>Avenue Cresent, Seaton Delaval, Northumberland, NE25 0DN </p>
+		<p>Open Monday - Sunday 11:00-18:00 </p>
+	</div>
+
+	<div class="socials">
+		<a href="https://www.instagram.com" target="_blank"><img class="icons" src="../images/instagram.png"></a>
+		<a href="https://www.twitter.com" target="_blank"><img class="icons" src="../images/twitter.png"></a>
+		<a href="https://www.facebook.com" target="_blank"><img class="icons" src="../images/facebook.png"></a>
+	</div>
+</footer>
+
 </body>
 
 <script type="text/javascript" src="../javascript/register.js"></script>
