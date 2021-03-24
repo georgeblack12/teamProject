@@ -222,6 +222,17 @@ footer p{
 	height: 2.5rem;
 }
 
+#socials{
+	display: flex;
+	justify-content: center;
+}
+
+img.icons{
+	display: inline-flex;
+	height: 3rem;
+	width: 3rem;
+}
+
 .form-delivery
 {
 	padding:10px 10px 20px 10px;
@@ -249,6 +260,66 @@ input[type="text"]:not(#deliveryZip){
 	margin-bottom:.4rem;
 }
 
+@media (max-width: 700px){
+
+	#intro p {
+		padding-left: 5rem;
+		padding-right: 5rem;
+		font-size: 1.1rem;
+	}
+
+	img.icons{
+		display: inline-flex;
+		height: 2rem;
+		width: 2rem;
+	}
+
+}
+
+@media (max-width: 600px) {
+
+	img.icons {
+		height: 1.5rem;
+		width: 1.5rem;
+	}
+
+	footer p {
+		font-size: 0.75rem;
+	}
+
+	#socials {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+
+@media (max-width: 505px) {
+
+	img.icons {
+		height: 1.2rem;
+		width: 1.2rem;
+		margin: 0;
+		padding-right: 0;
+	}
+
+	#intro p {
+		font-size: 1rem;
+	}
+
+}
+
+
+@media (max-width: 400px) {
+
+	img.icons {
+		height: 1.2rem;
+		width: 1.2rem;
+		margin: 0;
+		padding-right: 0;
+	}
+
+}
 
 
 

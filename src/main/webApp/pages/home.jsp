@@ -36,7 +36,7 @@
 
 <div id="intro">
     <h1>About Us</h1>
-    <p>kfhhcimrklmjknjkbhc;hr;hewmt;CBBKJCFBkjbkjBJKBKCBWEIB JBKIUWECKO</p>
+    <p>Welcome to Cavallo! We are a traditional Italian ice cream shop based in Northumberland. To browse our selection of goods, please login or create an account below.</p>
 </div>
 
 <div id="nav">
@@ -98,7 +98,7 @@ Please enter your email" onblur="validate_username(this.value)"/></td>
     <div class="socials">
         <a href="https://www.instagram.com" target="_blank"><img class="icons" src="../images/instagram.png"></a>
         <a href="https://www.twitter.com" target="_blank"><img class="icons" src="../images/twitter.png"></a>
-        <a href="https://www.facebook.com" target="_blank"><img class="icons" src="../images/facebook.png"></a>
+        <a href="https://www.facebook.com" target="_blank"><img class="icons" src="../images/facebook.jpg"></a>
     </div>
 </footer>
 

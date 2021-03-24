@@ -300,7 +300,7 @@
 
 
     <div id="order">
-        <a id="productionOrder">Production order</a>
+        <a id="productionOrder">View Cart</a>
         <input type="text" class="count" id="count" value="0"/>
         <div class="orderInformation" id="orderInformation"></div>
     </div>
@@ -315,7 +315,7 @@
     <div class="socials">
         <a href="https://www.instagram.com" target="_blank"><img class="icons" src="../images/instagram.png"></a>
         <a href="https://www.twitter.com" target="_blank"><img class="icons" src="../images/twitter.png"></a>
-        <a href="https://www.facebook.com" target="_blank"><img class="icons" src="../images/facebook.png"></a>
+        <a href="https://www.facebook.com" target="_blank"><img class="icons" src="../images/facebook.jpg"></a>
     </div>
 </footer>
 

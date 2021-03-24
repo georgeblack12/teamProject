@@ -48,7 +48,7 @@
 
 <div id="intro">
     <h1>Checkout</h1>
-    <p>Complete your order</p>
+    <p>Complete or restart your order below</p>
 </div>
 
 <div id="checkout">
@@ -89,7 +89,7 @@
     <div class="socials">
         <a href="https://www.instagram.com" target="_blank"><img class="icons" src="../images/instagram.png"></a>
         <a href="https://www.twitter.com" target="_blank"><img class="icons" src="../images/twitter.png"></a>
-        <a href="https://www.facebook.com" target="_blank"><img class="icons" src="../images/facebook.png"></a>
+        <a href="https://www.facebook.com" target="_blank"><img class="icons" src="../images/facebook.jpg"></a>
     </div>
 </footer>
 
