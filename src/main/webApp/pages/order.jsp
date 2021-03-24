@@ -67,9 +67,16 @@
     </tbody>
 </table>
 
-
-<div id="confirm" onclick=getDeliveryInfo()>Complete Order</div>
-
+<div id="buttons">
+    <input type="button" id="restart" value="Restart order">
+    <script>
+        var cancellation = document.getElementById("restart");
+        cancellation.onclick = function () {
+            location.replace("/pages/shopping.jsp");
+        }
+    </script>
+    <div id="confirm" onclick=getDeliveryInfo()>Complete Order</div>
+</div>
 </div>
 </div>
 

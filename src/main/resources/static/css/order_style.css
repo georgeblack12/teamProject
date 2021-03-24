@@ -49,9 +49,10 @@ h1 {
 	position: relative;
 }
 
-p, #confirm, #checkout {
+p, #confirm, #checkout, #restart {
 	font-family: 'Nunito', sans-serif;
 	font-weight: 400;
+	font-size: 1rem;
 }
 
 #checkout {
@@ -72,12 +73,17 @@ td{
 	border: 1px solid #000000;
 }
 
-#tbody1 td, #confirm {
+#buttons {
+	display: flex;
+	justify-content: center;
+}
+
+#tbody1 td, #confirm, #restart {
 	padding: 0.5rem 1rem 0.5rem 1rem;
 	border: 1px solid #999999;
 }
 
-#confirm{
+#confirm, #restart{
 	width: 10rem;
 	background: #FCE796;
 	cursor: pointer;
