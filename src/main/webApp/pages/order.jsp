@@ -42,18 +42,27 @@
 </head>
 
 <body>
-<img id="logo" src="../images/logo.png">
-<br>
+<header>
+    <img id="logo" src="../images/logo1.png">
+</header>
 
-<h4 id="numMoney">total:£</h4>
+<div id="intro">
+    <h1>Checkout</h1>
+    <p>Complete your order</p>
+</div>
+
+<div id="checkout">
+
+
+<p id="numMoney">Total: £</p>
 
 <table>
     <tbody id="tbody1">
     <tr class="tit">
-        <td>Type</td>
+        <td>Flavour</td>
         <td>Size</td>
-        <td>SizeMoney</td>
-        <td>Number</td>
+        <td>Price</td>
+        <td>Quantity</td>
     </tr>
     </tbody>
 </table>
@@ -61,8 +70,22 @@
 
 <div id="confirm" onclick=getDeliveryInfo()>Complete Order</div>
 
-
 </div>
+</div>
+
+<footer>
+    <div class="contactleft">
+        <p>Avenue Cresent, Seaton Delaval, Northumberland, NE25 0DN </p>
+        <p>Open Monday - Sunday 11:00-18:00 </p>
+    </div>
+
+    <div class="socials">
+        <a href="https://www.instagram.com" target="_blank"><img class="icons" src="../images/instagram.png"></a>
+        <a href="https://www.twitter.com" target="_blank"><img class="icons" src="../images/twitter.png"></a>
+        <a href="https://www.facebook.com" target="_blank"><img class="icons" src="../images/facebook.png"></a>
+    </div>
+</footer>
+
 </body>
 
 <script type="text/javascript">
