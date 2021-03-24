@@ -315,10 +315,10 @@
 
 
     function checkNotStore(address){
+        console.log(address.toUpperCase());
 
-
-        if(address==="Avenue Crescent, Seaton Delaval" || address==="Avenue Crescent Seaton Delaval"
-                || address==="Avenue Cres, Seaton Delaval" || address==="Avenue Cres Seaton Delaval"){
+        if(address.toUpperCase()==="AVENUE CRESCENT, SEATON DELAVAL" || address.toUpperCase()==="AVENUE CRESCENT SEATON DELAVAL"
+                || address.toUpperCase()==="AVENUE CRES, SEATON DELAVAL" || address.toUpperCase()==="AVENUE CRES SEATON DELAVAL"){
             Swal.fire({
                 icon:'error',
                 text:"You have entered the store's address. Please choose carry out if you would like to " +
