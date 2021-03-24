@@ -14,6 +14,7 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
+    <link href="../css/analytics_style.css" type="text/css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
@@ -51,47 +52,58 @@
 
 
 <header>
+    <img id="logo" src="../images/logo1.png">
+    <input type="button" id="logout" value="logout">
+    <script>
+        var cancellation = document.getElementById("logout");
+        cancellation.onclick = function () {
+            location.replace("/");
+            }
+    </script>
+
+</header>
+
+<div id="intro">
     <h1>Analytics</h1>
-
-
+    <p>See analytics here</p>
     <nav>
         <ul>
             <li><a href="#orders">Number of orders</a></li>
             <li><a href="#flavours">Popularity of flavours</a></li>
         </ul>
     </nav>
-</header>
+</div>
 
 <main>
     <section id="orders">
-        <div id="order_overall">
+        <div id="order_stats">
+        <div class="stats" id="order_overall">
             <p>Number of orders overall:</p>
             <p><%=statsInfo.getTotalOrders()%>
             </p>
         </div>
 
-        <div id="order_today">
+        <div class="stats" id="order_today">
             <p>Number of orders today:</p>
             <p><%=statsInfo.getTotalOrdersFromDate(LocalDate.now())%>
             </p>
         </div>
 
-        <div id="order_week">
+        <div class="stats" id="order_week">
             <p>Number of orders in the last 7 days:</p>
             <p><%=statsInfo.getTotalOrdersThisWeek()%>
             </p>
         </div>
 
-        <div id="order_month">
-            <p>Number of orders this month/last 30 days:</p>
+        <div class="stats" id="order_month">
+            <p>Number of orders in the last 30 days:</p>
             <p><%=statsInfo.getTotalOrdersPastThirty()%>
             </p>
         </div>
+        </div>
 
         <div id="order_calendar">
-
-
-
+            <div id="left">
             <p>Select a date to view orders:</p>
             <script>
 
@@ -148,11 +160,9 @@
             <script>
                 document.getElementById("dateChosen").innerHTML=getFormattedDate();
             </script>
-
             </p>
-        </div>
 
-        <div id="order_chosen_day">
+        <div class="stats" id="order_chosen_day">
             <p>Total number of orders this day:</p>
             <div id="soldFromDate"></div>
 
@@ -160,12 +170,12 @@
                 document.getElementById("soldFromDate").innerHTML=<%=statsInfo.getTotalOrdersFromDate(LocalDate.now())%>
             </script>
         </div>
+            </div>
 
 
 
         <div id="order_graph">
-            <p>Graph</p>
-            <canvas id="myChart2" width="300" height="300"></canvas>
+            <canvas id="myChart2"></canvas>
             <script>
 
                     var ctx = document.getElementById('myChart2');
@@ -199,17 +209,17 @@
 
             </script>
         </div>
+        </div>
     </section>
 
     <section id="flavours">
-        <div id="popular">
+        <div class="stats" id="popular">
             <p>Our most popular flavour is:</p>
             <p><%=statsInfo.getMostPopularFlavor()%></p>
         </div>
 
         <div id="flavour_graph">
-            <p>Graph</p>
-            <canvas id="myChart" width="400" height="400"></canvas>
+            <canvas id="myChart"></canvas>
             <script>
                 var ctxOther = document.getElementById('myChart');
                 var myChart = new Chart(ctxOther, {
