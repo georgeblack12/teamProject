@@ -1,3 +1,6 @@
+<%--Original Author: Madeleine Towes (20/03/21)--%>
+<%--Modifying Authors: Madeleine Towes, Aggrey Nhiwatiwa (23/03/21)--%>
+
 <%@ page import="com.project.cavallo.dao.StatisticsRepository" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
@@ -52,7 +55,7 @@
 
 
 <header>
-    <img id="logo" src="../images/logo1.png">
+    <img id="logo" src="../images/logo1.png" alt="Yellow circle with red text reading Cavallo, black text of traditional Italian ice cream and a picture of an ice cream.">
     <input type="button" id="logout" value="logout">
     <script>
         var cancellation = document.getElementById("logout");

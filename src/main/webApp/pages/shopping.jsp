@@ -1,3 +1,6 @@
+<%--Original Author: Shiyao Ding--%>
+<%--Modifying Authors: Madeleine Towes, Aggrey Nhiwatiwa (23/03/21)--%>
+
 <%@ page import="jdk.swing.interop.SwingInterOpUtils" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -25,7 +28,7 @@
 %>
 
 <header>
-    <img id="logo" src="../images/logo1.png">
+    <img id="logo" src="../images/logo1.png" alt="Yellow circle with red text reading Cavallo, black text of traditional Italian ice cream and a picture of an ice cream.">
     <input type="button" id="logout" value="logout">
     <script>
         var cancellation = document.getElementById("logout");
@@ -63,7 +66,7 @@
     <div id="menu">
         <!--   one-->
         <div class="menu_information">
-            <img src="../images/vanilla.jpg">
+            <img src="../images/vanilla.jpg" alt="Image of vanilla ice cream in a white bowl.">
             <h3 class="type">Vanilla</h3>
             <p>Rich and creamy vanilla. Made fresh everyday using our secret family recipe!</p>
             <div class="select_box">
@@ -89,7 +92,7 @@
         </div>
 
         <div class="menu_information">
-            <img src="../images/dairy free final.jpg">
+            <img src="../images/dairy free final.jpg" alt="Image of vanilla ice cream in a grey bowl with text on a green circle in the corner reading dairy free.">
             <h3 class="type">Dairy Free Vanilla</h3>
             <p>Rich and dairy free vanilla. Made fresh everyday using our super duper secret family recipe!</p>
             <div class="select_box">
@@ -117,7 +120,7 @@
 
         <!--   two-->
         <div class="menu_information">
-            <img src="../images/honeycomb.jpg">
+            <img src="../images/honeycomb.jpg" alt="Image of ice cream with honeycomb pieces on top in a glass bowl.">
             <h3 class="type">Honeycomb</h3>
             <p>Sweet caramel flavour ice cream with delicious and crunchy honeycomb pieces</p>
             <div class="select_box">
@@ -143,7 +146,7 @@
         </div>
         <!--   three-->
         <div class="menu_information">
-            <img src="../images/rum raisin.jpg">
+            <img src="../images/rum raisin.jpg" alt="Image of ice cream with raisins in in a white bowl with two spoons.">
             <h3 class="type">Rum and Raisin</h3>
             <p>Creamy and rich rum ice cream with punchy rum soaked raisins</p>
             <div class="select_box">
@@ -169,7 +172,7 @@
         </div>
         <!--   four-->
         <div class="menu_information">
-            <img src="../images/mint.jpg">
+            <img src="../images/mint.jpg" alt="Image of green ice cream with a leaf on top in a pink bowl.">
             <h3 class="type">Mint</h3>
 
             <p>Delightfully fresh and smooth mint ice cream!</p>
@@ -196,7 +199,7 @@
         </div>
         <!--   five-->
         <div class="menu_information">
-            <img src="../images/cherry.jpg">
+            <img src="../images/cherry.jpg" alt="Image of pink ice cream in a white bowl.">
             <h3 class="type">Cherry</h3>
             <p>Tangy cherry ice cream perfect for fruit lovers</p>
             <div class="select_box">
@@ -222,7 +225,7 @@
         </div>
         <!--   six-->
         <div class="menu_information">
-            <img src="../images/chocolate.jpg">
+            <img src="../images/chocolate.jpg" alt="Image of chocolate ice cream with chocolate sauce on top in a white bowl.">
             <h3 class="type">Chocolate</h3>
             <p>This classic flavour is a combination of rich chocolate ice cream and tasty chocolate
                 pieces</p>
@@ -248,7 +251,7 @@
         </div>
         <!--   seven-->
         <div class="menu_information">
-            <img src="../images/salted caramel.jpg">
+            <img src="../images/salted caramel.jpg" alt="Image of toffee coloured ice cream in an orange bowl.">
             <h3 class="type">Salted Caramel</h3>
             <p>Smooth salted caramel ice cream with moreish caramel sauce and pieces</p>
             <div class="select_box">
@@ -273,7 +276,7 @@
         </div>
         <!--   eight-->
         <div class="menu_information">
-            <img src="../images/strawberry.jpg">
+            <img src="../images/strawberry.jpg" alt="Image of pink ice cream and a strawberry in a white bowl.">
             <h3 class="type">Strawberry</h3>
             <p>Delicious and creamy flavour made with fresh, juicy strawberries</p>
             <div class="select_box">

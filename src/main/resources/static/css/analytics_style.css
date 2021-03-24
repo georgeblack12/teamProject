@@ -1,17 +1,19 @@
+/* --------- Authors: Madeleine Towes, Aggrey Nhiwatiwa --------- */
+
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;900&display=swap');
 
 header {
-    background-color: #FCE796;
     padding: 0;
     margin: 0;
+    background-color: #FCE796;
 }
 
 #intro {
-    background: url("../images/intro_header.jpg") no-repeat;
     padding: 0;
     margin: 0;
-    text-align: center;
     height: 10rem;
+    background: url("../images/intro_header.jpg") no-repeat;
+    text-align: center;
 }
 
 body{
@@ -19,15 +21,15 @@ body{
 }
 
 h1, h2 {
-    margin:0;
+    margin: 0;
     font-family: 'Nunito', sans-serif;
     font-weight: 900;
 }
 
 h1 {
+    margin-left: 7rem;
     font-size: 3rem;
     text-align: center;
-    margin-left: 7rem;
 }
 
 h3 {

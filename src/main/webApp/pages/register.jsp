@@ -1,3 +1,6 @@
+<%--Original Author: Shiyao Ding--%>
+<%--Modifying Authors: Madeleine Towes, Aggrey Nhiwatiwa (23/03/21)--%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +21,7 @@
 <body>
 
 <header>
-	<img id="logo" src="../images/logo1.png">
+	<img id="logo" src="../images/logo1.png" alt="Yellow circle with red text reading Cavallo, black text of traditional Italian ice cream and a picture of an ice cream.">
 </header>
 
 <div id="intro">

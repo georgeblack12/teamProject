@@ -1,3 +1,6 @@
+<%--Original Author: Shiyao Ding--%>
+<%--Modifying Authors: Madeleine Towes, Aggrey Nhiwatiwa (23/03/21)--%>
+
 <%@ page import="com.project.cavallo.domain.Customer" %>
 <%@ page import="com.project.cavallo.domain.IceCream" %>
 <%@ page import="java.util.ArrayList" %>
@@ -43,7 +46,7 @@
 
 <body>
 <header>
-    <img id="logo" src="../images/logo1.png">
+    <img id="logo" src="../images/logo1.png" alt="Yellow circle with red text reading Cavallo, black text of traditional Italian ice cream and a picture of an ice cream.">
 </header>
 
 <div id="intro">
@@ -169,7 +172,7 @@
     </p>
     <p>
         <input type="radio" name="deliveryType" onclick="showAddressQuestion(false)" value="carryOut"
-        >Carry out</input>
+        >Collection</input>
     </p>
 
 </div>
@@ -180,7 +183,7 @@
 
     <input type="text" name="city" id="deliveryCity" placeholder="Enter Delivery City Here">
 
-    <input type="text" name="zipCode" id="deliveryZip" placeholder="Enter Delivery Zip Code Here">
+    <input type="text" name="zipCode" id="deliveryZip" placeholder="Enter Delivery Post Code Here">
 
 </div>
 `
