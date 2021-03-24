@@ -26,7 +26,8 @@ h1, h2 {
 
 h1 {
     font-size: 3rem;
-    position: relative;
+    text-align: center;
+    margin-left: 7rem;
 }
 
 h3 {
@@ -106,10 +107,12 @@ nav a:hover {
 #order_calendar {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 #order_chosen_day {
     width: auto;
+    padding-bottom:1rem;
 }
 
 #left{
@@ -158,3 +161,108 @@ nav a:hover {
     height: 60em;
     vertical-align: center;
 }
+
+#socials{
+    display: flex;
+    justify-content: center;
+}
+
+img.icons{
+    display: inline-flex;
+    height: 3rem;
+    width: 3rem;
+}
+/********************************MEDIA QUERIES*********************************/
+
+@media (max-width: 1121px) {
+    #myChart2 {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+}
+
+@media (max-width: 850px) {
+    #popular, #flavour_graph {
+        width: 95%;
+    }
+}
+@media (max-width: 700px){
+
+    #intro p {
+        padding-left: 5rem;
+        padding-right: 5rem;
+        font-size: 1.1rem;
+    }
+
+    img.icons{
+        display: inline-flex;
+        height: 2rem;
+        width: 2rem;
+    }
+
+    #order_stats {
+        flex-wrap: wrap;
+    }
+
+    #order_graph {
+        width: 95%;
+    }
+
+}
+
+
+    @media (max-width: 600px) {
+
+        img.icons {
+            height: 1.5rem;
+            width: 1.5rem;
+        }
+
+        footer p {
+            font-size: 0.75rem;
+        }
+
+        #socials {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li, nav a{
+            /* nav renders vertically */
+            display: block;
+        }
+
+        #intro {
+            height: auto;
+        }
+    }
+
+
+
+
+    @media (max-width: 505px) {
+
+        img.icons {
+            height: 1.2rem;
+            width: 1.2rem;
+            margin: 0;
+            padding-right: 0;
+        }
+
+        #intro p {
+            font-size: 1rem;
+        }
+
+    }
+
+
+    @media (max-width: 400px) {
+
+        img.icons {
+            height: 1.2rem;
+            width: 1.2rem;
+            margin: 0;
+            padding-right: 0;
+        }
+
+    }

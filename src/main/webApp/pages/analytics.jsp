@@ -65,7 +65,7 @@
 
 <div id="intro">
     <h1>Analytics</h1>
-    <p>See analytics here</p>
+    <p>See store statistics here!</p>
     <nav>
         <ul>
             <li><a href="#orders">Number of orders</a></li>
