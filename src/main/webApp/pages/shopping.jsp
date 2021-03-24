@@ -254,11 +254,11 @@
             <div class="select_box">
                 <span>Size:</span>
                 <select class="select">
-                    <option value="Small">Small - £1.75</option>
-                    <option value="Medium">Medium - £2.25 </option>
-                    <option value="Large">Large- £2.75 </option>
-                    <option value="Extra Large">Extra Large- £3.50</option>
-                    <option value="Extra Extra Large">Extra Extra Large - £5.75</option>
+                    <option value="Small">Small - £2.50</option>
+                    <option value="Medium">Medium - £3.00 </option>
+                    <option value="Large">Large- £3.50 </option>
+                    <option value="Extra Large">Extra Large- £4.25</option>
+                    <option value="Extra Extra Large">Extra Extra Large - £6.50</option>
                 </select>
             </div>
             <div class="jiaOrJian">

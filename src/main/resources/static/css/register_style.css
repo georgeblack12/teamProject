@@ -72,6 +72,10 @@ main {
 	float: center;
 }
 
+td.tit, td {
+	margin-left: 15rem;
+}
+
 input{
 	height: 2rem;
 	width: 38em;
@@ -93,7 +97,10 @@ input{
 	height: 2rem;
 	background: #FCE796;
 	cursor: pointer;
-	margin-left: 17rem;
+	margin-left: 16rem;
+	border: 0;
+	border-radius: 0.5rem;
+	font-weight: 600;
 }
 
 footer{
@@ -103,7 +110,7 @@ footer{
 	height: 5rem;
 	margin: 0;
 	padding: 0;
-	position: fixed;
+	/*position: fixed;*/
 	left: 0;
 	bottom: 0;
 	width: 100%;
@@ -126,6 +133,113 @@ footer p{
 	height: 2.5rem;
 }
 
+#socials{
+	display: flex;
+	justify-content: center;
+}
+
+img.icons{
+	display: inline-flex;
+	height: 3rem;
+	width: 3rem;
+}
+
+/********************************MEDIA QUERIES*********************************/
+@media (max-width: 700px){
+
+	img.icons{
+		display: inline-flex;
+		height: 2rem;
+		width: 2rem;
+	}
+
+}
+
+@media (max-width: 900px) {
+	main {
+		margin-left: 6rem;
+	}
+
+	input {
+		height: 2rem;
+		width: 28rem;
+		border-radius: 0.2rem;
+		margin: 0.7rem 0.7rem;
+	}
+
+	#submit_form {
+		margin-left: 9rem;
+		border: 0;
+		border-radius: 0.5rem;
+		font-weight: 600;
+	}
+
+	h2 {
+		position: relative;
+		left: 3.5rem;
+	}
+}
+
+@media (max-width: 650px) {
+	main {
+		margin-left: 1rem;
+	}
+
+	input {
+		width: 22rem;
+		font-size: 0.8rem;
+	}
+
+	#submit_form {
+		margin-left: 5rem;
+	}
+
+	h2 {
+		left: 5rem;
+	}
+}
+
+
+	@media (max-width: 600px) {
+
+		img.icons {
+			height: 1.5rem;
+			width: 1.5rem;
+		}
+
+		footer p {
+			font-size: 0.75rem;
+		}
+
+		#socials {
+			margin: 0;
+			padding: 0;
+		}
+	}
+
+
+	@media (max-width: 505px) {
+
+		img.icons {
+			height: 1.2rem;
+			width: 1.2rem;
+			margin: 0;
+			padding-right: 0;
+		}
+
+	}
+
+
+	@media (max-width: 400px) {
+
+		img.icons {
+			height: 1.2rem;
+			width: 1.2rem;
+			margin: 0;
+			padding-right: 0;
+		}
+
+	}
 /*#user_reg{*/
 /*	font-family: 微软雅黑;*/
 /*	text-align: center;*/

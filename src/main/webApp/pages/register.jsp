@@ -28,7 +28,7 @@
 
 <main>
 
-<h2>Create a new user</h2>
+<h2>Create new account</h2>
 <form id="registerForm" onsubmit="return false;">
 	<table>
 		<tr>
@@ -55,14 +55,14 @@
 
 		<tr>
 			<td class="tit">Password:</td>
-			<td><input type="password" id="password" name="password" placeholder="Must contain 8-16 characters including numbers and upper and lower case letters"
+			<td><input type="password" id="password" name="password" placeholder="8-16 characters inc. numbers and upper & lower case letters"
 					   oninput="validatePassword()"/></td>
 			<td id="test_pw"></td>
 		</tr>
 
 		<tr>
 			<td class="tit">Confirm password:</td>
-			<td><input type="password" id="password2" name="password2" placeholder="Enter your password again" oninput="validatePasswordCheck()" /></td>
+			<td><input type="password" id="password2" name="password2" placeholder="Re-enter your password" oninput="validatePasswordCheck()" /></td>
 			<td id="is_test_pw"></td>
 		</tr>
 
@@ -84,7 +84,7 @@
 	<div class="socials">
 		<a href="https://www.instagram.com" target="_blank"><img class="icons" src="../images/instagram.png"></a>
 		<a href="https://www.twitter.com" target="_blank"><img class="icons" src="../images/twitter.png"></a>
-		<a href="https://www.facebook.com" target="_blank"><img class="icons" src="../images/facebook.png"></a>
+		<a href="https://www.facebook.com" target="_blank"><img class="icons" src="../images/facebook.jpg"></a>
 	</div>
 </footer>
 
