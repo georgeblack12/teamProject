@@ -58,18 +58,24 @@
                 </tr>
                 <tr>
                     <td><input type="text" id="email" name="email" placeholder="
-Please enter your email" onblur="validate_username(this.value)"/></td>
+Please enter your email" onchange="validate_username(this.value)"/></td>
+                </tr>
+                <tr>
+                <td id="test_user"></td>
                 </tr>
                 <tr>
                     <td class="tit">Password:</td>
                 </tr>
-                <tr>
                     <td>
                         <input type="password" id="password" name="password"
                                placeholder="Please enter your password"
-                               onblur="validate_password(this.value)"/>
+                               onchange="validate_password(this.value)"/>
                     </td>
                 </tr>
+                <tr>
+                    <td id="test_pw"></td>
+                </tr>
+                <tr>
                 <tr>
                     <td>
                         <input type="submit" id="submit_form" value="Login"/>
@@ -113,7 +119,9 @@ Please enter your email" onblur="validate_username(this.value)"/></td>
         var emailReg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
         //console.log(username);
         if (username != "" && username.search(emailReg) != -1) {
-            document.getElementById("test_user").innerHTML = "<font color='green' size='3px'>√ email format is correct</font>";
+            console.log("in validate");
+            console.log(document.getElementById("email").value);
+            document.getElementById("test_user").innerHTML = "<font color='green' size='3px'>email format is correct</font>";
         } else {
             document.getElementById("test_user").innerHTML = "<font color='red' size='3px'> email format error</font>";
         }
@@ -125,10 +133,9 @@ Please enter your email" onblur="validate_username(this.value)"/></td>
         //测试密码：12345y
         var passwordReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
         if (password != "" && password.search(passwordReg) != -1) {
-            document.getElementById("test_pw").innerHTML = "<font color='green' size='3px'>√ the password format is correct</font>";
+            document.getElementById("test_pw").innerHTML = "<font color='green' size='3px'>the password format is correct</font>";
         } else {
             document.getElementById("test_pw").innerHTML = "<font color='red' size='3px'>password format error</font>";
-            alert("The password consists of 8-16 digits. The password consists of numbers and upper and lower case letters");
         }
     }
 
