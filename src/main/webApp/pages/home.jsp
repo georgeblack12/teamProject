@@ -6,13 +6,12 @@
 <!DOCTYPE html>
 
 
-<!doctype html>
+<%--<!doctype html>--%>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>login</title>
+    <title>Welcome to Cavallo</title>
     <link href="../css/login_style.css" type="text/css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -31,15 +30,18 @@
         session.removeAttribute("statsRepo");
     }
 %>
+<header>
+    <img id="logo" src="../images/logo1.png">
+</header>
 
-
-            <img id="logo" src="../images/logo.png">
-
-<br>
+<div id="intro">
+    <h1>About Us</h1>
+    <p>kfhhcimrklmjknjkbhc;hr;hewmt;CBBKJCFBkjbkjBJKBKCBWEIB JBKIUWECKO</p>
+</div>
 
 <div id="nav">
     <div class="left">
-        <h2>login</h2>
+        <h2>Login</h2>
 
         <%--        If the user tries to login and and they enter incorrect credentials an error message is displayed.
                     This will need to be styled. Thanks, George Black. --%>
@@ -56,43 +58,49 @@
                 </tr>
                 <tr>
                     <td><input type="text" id="email" name="email" placeholder="
-Please log in by email" onblur="validate_username(this.value)"/></td>
-                </tr>
-                <tr>
-                    <td id="test_user"></td>
+Please enter your email" onblur="validate_username(this.value)"/></td>
                 </tr>
                 <tr>
                     <td class="tit">Password:</td>
                 </tr>
                 <tr>
-                    <td><input type="password" id="password" name="password"
-                               placeholder="The 8-16 bit password consists of numbers and uppercase and lowercase letters！"
-                               onblur="validate_password(this.value)"/></td>
-                </tr>
-                <tr>
-                    <td id="test_pw"></td>
+                    <td>
+                        <input type="password" id="password" name="password"
+                               placeholder="Please enter your password"
+                               onblur="validate_password(this.value)"/>
+                    </td>
                 </tr>
                 <tr>
                     <td>
-
                         <input type="submit" id="submit_form" value="Login"/>
                     </td>
                 </tr>
             </table>
         </form>
     </div>
+
     <div class="right">
-        <h2>register</h2>
-        <p class="tips">Notice for registration:</p>
-        <br>
-        <br>
-        <p>Please register by email</p>
-        <p>The password has 6 digits, composed of numbers and letters!</p>
+        <h2>Register</h2>
+        <p>To view the Cavallo site, you must have an account.</p>
+        <p>If you do not have an account, please press the register button below to create one.</p>
         <div id="goto_register"><a href="/pages/register.jsp">Register</a>
         </div>
     </div>
 
 </div>
+
+<footer>
+    <div class="contactleft">
+        <p>Avenue Cresent, Seaton Delaval, Northumberland, NE25 0DN </p>
+        <p>Open Monday - Sunday 11:00-18:00 </p>
+    </div>
+
+    <div class="socials">
+        <a href="https://www.instagram.com" target="_blank"><img class="icons" src="../images/instagram.png"></a>
+        <a href="https://www.twitter.com" target="_blank"><img class="icons" src="../images/twitter.png"></a>
+        <a href="https://www.facebook.com" target="_blank"><img class="icons" src="../images/facebook.png"></a>
+    </div>
+</footer>
 
 
 </body>
