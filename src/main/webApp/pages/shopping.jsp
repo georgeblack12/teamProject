@@ -1,9 +1,9 @@
 <%--Original Author: Shiyao Ding--%>
-<%--Modifying Authors: Madeleine Towes, Aggrey Nhiwatiwa (23/03/21)--%>
+<%--Modifying Authors: Madeleine Towes, Aggrey Nhiwatiwa, George Black (23/03/21)--%>
 
-<%@ page import="jdk.swing.interop.SwingInterOpUtils" %>
+
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 
 <!doctype html>

@@ -1,14 +1,14 @@
 package com.project.cavallo;
 
-import com.project.cavallo.dao.StatisticsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * This is how we are able to run spring boot properly! Thanks, George Black
+ */
 @SpringBootApplication
 public class CavalloApplication {
-
-
 
 	public static void main(String[] args) {
 

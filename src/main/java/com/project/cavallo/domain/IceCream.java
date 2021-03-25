@@ -3,6 +3,11 @@ package com.project.cavallo.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * Entity for an IceCream in the database. This is used in the OrderContains Controller. The setters and getters
+ * are for the use of JSON objects.
+ * @author George Black
+ */
 @Entity
 public class IceCream{
 
@@ -26,19 +31,9 @@ public class IceCream{
         return price;
     }
 
+    //needed for getting JSON
     public String getIceCreamID() {
         return iceCreamID;
     }
 
-
-
-    @Override
-    public String toString() {
-        return "IceCream{" +
-                "iceCreamID='" + iceCreamID + '\'' +
-                ", flavour='" + flavour + '\'' +
-                ", size='" + size + '\'' +
-                ", price=" + price +
-                '}';
-    }
 }

@@ -1,10 +1,5 @@
-<%--Original Author: Shiyao Ding--%>
-<%--Modifying Authors: Madeleine Towes, Aggrey Nhiwatiwa (23/03/21)--%>
-
-<%@ page import="com.project.cavallo.dao.StatisticsRepository" %>
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%--Original Author: Shiyao Ding, Haolei Ning--%>
+<%--Modifying Authors: Madeleine Towes, Aggrey Nhiwatiwa, George Black (23/03/21)--%>
 
 <!DOCTYPE html>
 
@@ -19,8 +14,8 @@
 
 <body>
 
-<%--If the user already has the custId in the session remove it. This is to be used if the user decides to go back into--%>
-<%--the login page after making/trying to make  an order. Thanks, George Black--%>
+<%--If the user already has the cust, orderID, and/or statsRep in the session removethem . This is to be used if the user decides to go back into--%>
+<%--the login page after making/trying to make  an order or viewing the admin page. Thanks, George Black--%>
 <%if (session.getAttribute("cust") != null) {%>
 <%session.removeAttribute("cust");%>
 <%
@@ -122,7 +117,6 @@ Please enter your email" onchange="validate_username(this.value)"/></td>
         var emailReg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
         //console.log(username);
         if (username != "" && username.search(emailReg) != -1) {
-            console.log("in validate");
             console.log(document.getElementById("email").value);
             document.getElementById("test_user").innerHTML = "<font color='green' size='3px'>email format is correct</font>";
         } else {

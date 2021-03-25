@@ -1,5 +1,7 @@
-<%--Original Author: Shiyao Ding--%>
-<%--Modifying Authors: Madeleine Towes, Aggrey Nhiwatiwa (23/03/21)--%>
+<%--Original Author: Shiyao Ding, Haolei Ning--%>
+<%--Modifying Authors: Madeleine Towes, Aggrey Nhiwatiwa, George Black (23/03/21)--%>
+
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
 <!DOCTYPE html>
 <html>

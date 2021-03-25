@@ -1,21 +1,17 @@
 package com.project.cavallo.domain;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.stereotype.Service;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Random;
+
 
 
 /**
- * Entity for a Customer in the database. I removed the orderId, because the way our system is set up a customer Should
- * not have an order. original code is commented out below.
+ * Entity for a Customer in the database. Note: Getters and Setters used for the use of JSON objects.
  * Original author: Hanxiong Wang
- * Modifying author: George Black. Note: I just removed the orderId.
- * Modifying author: Madeleine Towes (generating customer ID)
+ * Modifying author: George Black.
  */
 @Entity
 public class Customer {
@@ -28,7 +24,7 @@ public class Customer {
 
     private String name;
     private String phoneNo;
-    private String password;
+    private String password; //password not in the database but added here to make registration of a customer very easy.
 
     public String getEmail() {
         return email;
@@ -42,6 +38,7 @@ public class Customer {
         return customerID;
     }
 
+    //needed for recieving JSON
     public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
@@ -58,6 +55,7 @@ public class Customer {
         return phoneNo;
     }
 
+    //needed for receiving JSON
     public void setPhoneNo(String phone) {
         this.phoneNo = phone;
     }
@@ -70,15 +68,7 @@ public class Customer {
         this.password = passWord;
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "email='" + email + '\'' +
-                ", customerID='" + customerID + '\'' +
-                ", name='" + name + '\'' +
-                ", phone=" + phoneNo +
-                '}';
-    }
+
 }
 
 

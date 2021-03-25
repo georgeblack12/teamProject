@@ -2,8 +2,10 @@ package com.project.cavallo.domain.HorsePayClass;
 
 
 /**
- * The JSON that is to be sent back with the payment results. This class is a subclass of horsePay because it has
- * all the attributes of horsePay. This makes it really easy to create and send back to the client.
+ * The JSON that is to be sent back to the client. This is made up of the JSON that was received by the server and the
+ * payment results. This class is a subclass of horsePay because it has all the attributes of horsePay.
+ * This makes it really easy to create and send back to the client.
+ *
  * @author George Black.
  */
 public class HorsePayResponse extends HorsePay {
@@ -25,12 +27,7 @@ public class HorsePayResponse extends HorsePay {
         return paymentResult;
     }
 
-    @Override
-    public String toString() {
-        return "HorsePayResponse{" +
-                "paymentResult=" + paymentResult +
-                '}';
-    }
+
 }
 
 

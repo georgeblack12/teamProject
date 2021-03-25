@@ -1,22 +1,22 @@
-<%--Original Author: Shiyao Ding--%>
-<%--Modifying Authors: Madeleine Towes, Aggrey Nhiwatiwa (23/03/21)--%>
+<%--Original Author: Shiyao Ding, Haolei Ning--%>
+<%--Modifying Authors: Madeleine Towes, Aggrey Nhiwatiwa, George Black (23/03/21)--%>
+
+
+<%--NOTE: In my opinion keeping the javascript and html of the JSP together was the best approach to keep things as
+clean as possible. Even though there is a lot of javascript here, I found keeping it together was the cleanest and best
+overall option. Thanks, George Black.--%>
 
 <%@ page import="com.project.cavallo.domain.Customer" %>
-<%@ page import="com.project.cavallo.domain.IceCream" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.project.cavallo.dao.IceCreamRepository" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!--Note: I moved this html to pages in order to have the website workingc ontinuously. For example, if the user-->
-<!--wishes to make another order after they place order. Thanks,George Black-->
+
 <!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>order</title>
 
-    <!--	Had to change links for css and images to be in the right spot for our project. Thanks, George Black-->
+
     <link href="../css/order_style.css" type="text/css" rel="stylesheet">
 
     <!--    Files needed to be added in order to get Sweet alert 2. These are used in the pop ups when the person wishes
@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="../css/sweetalert2.css">
 
 
+    <%--    All the following scripts are needed in order to properly use the maps geoCode api. Thanks, George Black--%>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 
@@ -46,7 +47,8 @@
 
 <body>
 <header>
-    <img id="logo" src="../images/logo1.png" alt="Yellow circle with red text reading Cavallo, black text of traditional Italian ice cream and a picture of an ice cream.">
+    <img id="logo" src="../images/logo1.png"
+         alt="Yellow circle with red text reading Cavallo, black text of traditional Italian ice cream and a picture of an ice cream.">
 </header>
 
 <div id="intro">
@@ -57,29 +59,32 @@
 <div id="checkout">
 
 
-<p id="numMoney">Total: £</p>
+    <p id="numMoney">Total: £</p>
 
-<table>
-    <tbody id="tbody1">
-    <tr class="tit">
-        <td>Flavour</td>
-        <td>Size</td>
-        <td>Price</td>
-        <td>Quantity</td>
-    </tr>
-    </tbody>
-</table>
+    <table>
+        <tbody id="tbody1">
+        <tr class="tit">
+            <td>Flavour</td>
+            <td>Size</td>
+            <td>Price</td>
+            <td>Quantity</td>
+        </tr>
+        </tbody>
+    </table>
 
-<div id="buttons">
-    <input type="button" id="restart" value="Restart order">
-    <script>
-        var cancellation = document.getElementById("restart");
-        cancellation.onclick = function () {
-            location.replace("/pages/shopping.jsp");
-        }
-    </script>
-    <div id="confirm" onclick=getDeliveryInfo()>Complete Order</div>
-</div>
+    <div id="buttons">
+        <input type="button" id="restart" value="Restart order">
+        <script>
+            //If the user clicks restart they order is restarted and taken back to the shopping page and the order
+            //is restarted.
+            var cancellation = document.getElementById("restart");
+            cancellation.onclick = function () {
+                location.replace("/pages/shopping.jsp");
+            }
+        </script>
+        <%--    If the user clicks complete order it asks if the order is for Delivery or carry out--%>
+        <div id="confirm" onclick=getDeliveryInfo()>Complete Order</div>
+    </div>
 </div>
 </div>
 
@@ -111,23 +116,29 @@
     infor[2] = getSpaces(infor[2]);
 
 
-    var sumMoney = infor[0];	//总额
-    var type_arr = infor[1].split(",");	//冰激凌类型数组
-    var size_arr = infor[2].split(",");	//尺寸数组
-    var sizeMoney_arr = infor[3].split(",");	//尺寸价格数组
-    var number_arr = infor[4].split(",");	//数量数组
-    var iceCreamOrderList = [];
+    var sumMoney = infor[0];	//The total cost of the iceCream
+    var type_arr = infor[1].split(",");	//the types of iceCream potentially being purchasedr
+
+    var size_arr = infor[2].split(",");	//the size of each iceCream value in the potential order.
+    var sizeMoney_arr = infor[3].split(",");	//The cost for each iceCream value that was added to the cart
+    var number_arr = infor[4].split(",");	// the amount of the iceCream value the Customer will potentially purchase.
+    var iceCreamOrderList = []; //The orderList to potentially be sent to the server when the Customer completes an
+                                //order
 
 
+    //area the ice cream values that are potentially going to be purchases are displayed
     var tbody = document.getElementById("tbody1");
     var tableData = "";
 
 
+    //Takes each iceCream value in the potential order
     for (var i = 0; i < type_arr.length; i++) {
 
+        //displays each ice cream value that is potentially going to be purchased.
         tableData += "<tr><td>" + type_arr[i] + "</td>" + "<td>" + size_arr[i] + "</td>" + "<td>" + sizeMoney_arr[i] + "</td>" + "<td>" + number_arr[i] + "</td></tr>";
 
-
+        //takes each ice cream value that is potentially going to be purchased and converts it to JSON and then
+        //adds it to the iceCreamOrder array.
         for (j = 0; j < number_arr[i]; j++) {
             var iceCreamOrder = {
                 "flavour": String(type_arr[i]),
@@ -139,15 +150,20 @@
 
     }
 
-    console.log(iceCreamOrderList);
-    tbody.innerHTML += tableData;
+    tbody.innerHTML += tableData; //to display the ice Cream values that are potentially going to be purchased.
 
 
-    //设置总额
+    //to get the overall total Cost.
     var numMoney = document.getElementById("numMoney");
     numMoney.innerHTML += sumMoney;
 
 
+    /**
+     * A method that displays the form delivery or not based on if showQuestion is true or false.
+     * If showQuestion is true, a form is displayed to get the delivery address. Otherwise, no form is shown.
+     * @param showQuestion A boolean that states if the form should be visible or not.
+     * @author George Black
+     */
     function showAddressQuestion(showQuestion) {
         if (showQuestion) {
             document.getElementById("getAddress").style.visibility = "visible";
@@ -156,9 +172,14 @@
         }
     }
 
+    /**
+     * A method that displays the form delivery or not based on if the Customer has the Delivery type set to carry out
+     * or Delivery. If the Delivery type is "delivery," a form is displayed to get the delivery address. Otherwise,
+     * the order is for carry out, then no form is shown. Once the person has chosen to complete the order after deciding
+     * the delivery type. They are then to be taken to an area where they are to confirm/check their order.
+     * @author George Black
+     */
     function getDeliveryInfo() {
-
-
         swal.fire({
             title: 'Get Order Information',
             allowOutsideClick: false,
@@ -189,20 +210,23 @@
 `
         }).then((result) => {
             if (result.isConfirmed) {
-
+                //if the order type is confirmed they are taken to an specific area to complete/check their order.
                 goToCarryOrDelivery(getRadioValue("deliveryType"));
-
-
             }
-//else do nothing stay here
+            //else do nothing stay here
         })
     }
 
 
-
-
-
     // https:stackoverflow.com/questions/604167/how-can-we-access-the-value-of-a-radio-button-using-the-dom
+    /**
+     * A method used to take the radioButton entered by the Customer and gets which radio button value they have chosen.
+     * @author Canuckster, Felix Kling
+     * @see https:stackoverflow.com/questions/604167/how-can-we-access-the-value-of-a-radio-button-using-the-dom
+     *
+     * Modifying author: George Black
+     *
+     */
     function getRadioValue(theRadioGroup) {
         var elements = document.getElementsByName(theRadioGroup);
         for (var i = 0, l = elements.length; i < l; i++) {
@@ -212,22 +236,285 @@
         }
     }
 
-
-
-
-    function goToCarryOrDelivery(typeOfOrder){
-        if(typeOfOrder==="carryOut"){
+    /**
+     * A method that takes the type of order in the parameter, and if it is "carryOut" they are sent to a page to
+     * confirm their order. Otherwise, the typeOfOrder will be "delivery" causing a function to be started, which
+     * makes sure the entered address is legit and within a 5 mile radius of the store.
+     * @param typeOfOrder The type of Order the Customer is placing.
+     * @author George Black
+     */
+    function goToCarryOrDelivery(typeOfOrder) {
+        if (typeOfOrder === "carryOut") {
             askToCompleteCarry();
-        }else{
+        } else {
             doGeocode();
         }
     }
 
 
+    /**
+     * Method used in doGeoCode() to make sure the Customer has entered all the required values needed to get the
+     * address. If the value is empty, an error message is displayed, and false is returned. Otherwise, true is returned.
+     * @param value The String we want to see if it has at least one character.
+     * @return {boolean} Returns true if value has at least one character. Otherwise, false is returned
+     * @author George Black
+     */
+    function checkValueLength(value) {
+        if (value.length == 0) {
+            Swal.fire({
+                icon: 'error',
+                text: "You did not enter in all the values needed for a delivery address. Please try again."
+            })
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    //so that we automatically have the stores coordinates as soon as the page is loaded
+    //source: https://www.youtube.com/watch?v=pRiQeo17u6c
+    var storeCoordinates = [];
+    axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+        params: {
+            address: "Avenue Cres, Seaton Delaval, Whitley Bay NE25 0DN, UK",
+            key: 'AIzaSyDwC5IMKz7knixriHKausCU2N7IamWno6s'
+
+        }
+    })
+        .then(function (response) {
+
+            storeCoordinates.push(response.data.results[0].geometry.location.lat);
+            storeCoordinates.push(response.data.results[0].geometry.location.lng);
+            return storeCoordinates;
+
+        })
+
+    /**
+     * Method to make sure the address entered by the Customer is not the stores address. If the address entered
+     * by the customer is the Stores address true is returned and an error message is displayed. Otherwise, false is
+     * returned.
+     * @param address The delivery address of the Customer
+     * @returns {boolean} A boolean that is true if the address is the store's address and is false if the address
+     * is not the stores address.
+     * @author George Black.
+     */
+    function checkNotStore(address) {
+        if (address.toUpperCase() === "AVENUE CRESCENT, SEATON DELAVAL" ||
+            address.toUpperCase() === "AVENUE CRESCENT SEATON DELAVAL"
+            || address.toUpperCase() === "AVENUE CRES, SEATON DELAVAL" ||
+            address.toUpperCase() === "AVENUE CRES SEATON DELAVAL") {
+            Swal.fire({
+                icon: 'error',
+                text: "You have entered the store's address. Please choose carry out if you would like to " +
+                    "pick the ice cream up from the store. Thank you. "
+            })
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
+    /**
+     * Method that takes the Customer's delivery address and makes sure it is an accepted address within
+     * a five-mile radius of the Store. If the address is not accepted, an appropriate error message is displayed.
+     * Otherwise, the Customer is given a popup asking them to confirm the order to the given address.
+     * @author George Black
+     */
+    function doGeocode() {
+        var haveError;
 
-    function checkWithinTime(typeOfOrder,address) {
+        //get the entered in values from the form.
+        var city = document.getElementById("deliveryCity").value;
+        var address = document.getElementById("deliveryAddress").value;
+        var zip = document.getElementById("deliveryZip").value;
+
+        //make sure all the values entered are not empty
+        haveError = checkValueLength(address);
+        if (!haveError) {
+            haveError = checkValueLength(city);
+        }
+        if (!haveError) {
+            haveError = checkValueLength(zip);
+        }
+        if (!haveError) {
+            haveError = checkNotStore(address);
+        }
+        //look up the given address in the Uk.
+        if (!haveError) {
+            axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+                params: {
+                    components: 'country:UK',
+                    city: city,
+                    address: address,
+                    zip: zip,
+                    key: 'AIzaSyDwC5IMKz7knixriHKausCU2N7IamWno6s'
+
+                }
+            }) //if the address is not found dislay an appropriate error message.
+                .then(function (response) {
+                    console.log(response);
+                    if (response.data.status != "OK") {
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'There was an issue finding your address.' +
+                                'Please try again. '
+                        })
+                        //if address is found make sure it is a proper location and not just some large
+                        //like a town or city. This way we know exactly where to send the delivery to.
+                    } else if ((response.data.results[0].types[0] != "premise"
+                        && response.data.results[0].types[0] != "subpremise"
+                        && response.data.results[0].types[0] != "street_address")) {
+
+                        Swal.fire({
+                            icon: 'error',
+                            text: "The address " + response.data.results[0].formatted_address + " is not " +
+                                "specific enough for delivery. Please enter a more specific address."
+                        })
+                        //if the address is legit and precise make sure the address is withing a five mile radius
+                        //of the store.
+                    } else {
+                        //use an array because that is what get distance accepts, makes passing the function
+                        //look a little more clean
+                        var deliveryCoordinates = [];
+                        deliveryCoordinates.push(response.data.results[0].geometry.location.lat);
+                        deliveryCoordinates.push(response.data.results[0].geometry.location.lng);
+
+                        var distance = getDistance(storeCoordinates, deliveryCoordinates);
+
+                        //If the delivery address is not within a five mile radius display an error. Otherwise,
+                        //ask the Customer to confirm the order to the address with askToCompleteDelivery.
+                        if (distance > 5) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: "We are sorry " + address + " is too far away for us to deliver to."
+                            })
+                        } else {
+                            askToCompleteDelivery(address, city, zip);
+                        }
+                    }
+                })
+        }
+    }
+
+
+    /**
+     * Function that converts x to radians. This method is used in getDistance.
+     * @param x a value we want to convert to radians.
+     * @returns x converted to radians.
+     * @author Mike Williams, Mathias Bynens
+     * @see https://stackoverflow.com/questions/1502590/calculate-distance-between-two-points-in-google-maps-v3
+     */
+    var rad = function (x) {
+        return x * Math.PI / 180;
+    };
+
+
+    /**
+     * Method used to calculate the straight line distance (in miles) between two addresses/places with their given
+     * coordinates. This method is used in doGeoCode()
+     * @param p1 The coordinates for the first place/address
+     * @param p2 The coordinates for second place/address
+     * @returns {float} Returns the straight line distance (in miles) between p1 and p2.
+     * @author Mike Williams, Mathias Bynens
+     * @see https://stackoverflow.com/questions/1502590/calculate-distance-between-two-points-in-google-maps-v3
+     * Modifying Author: George Black
+     */
+    var getDistance = function (p1, p2) {
+        var R = 6378137; // Earth’s mean radius in meter
+        var dLat = rad(p2[0] - p1[0]);
+        var dLong = rad(p2[1] - p1[1]);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(rad(p1[0])) * Math.cos(rad(p2[0])) *
+            Math.sin(dLong / 2) * Math.sin(dLong / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c; //in meters need to change to miles
+        var toReturn = d / 1609.344
+        console.log(d);
+        console.log(toReturn);
+        return toReturn; //convert to miles
+    };
+
+
+    /**
+     * Method to get the current date and turn it into a String with the required format.
+     * @returns {string} A string of the current date with the required format for the project.
+     * @author user113716 on stack overflow.
+     * @see https://stackoverflow.com/questions/3605214/javascript-add-leading-zeroes-to-date
+     * Modifying author: George Black
+     */
+    function getFormattedDate() {
+        var horseDate = new Date()
+
+//Add 0 and then slice to get the last two numbers. If there already two number ex: 12 then it will have
+//012 so 12 will be sent to MM. If the date is a single number  ex:5 then the number is 05 and 05 is
+//returned
+
+//+1 added with montn because month goes 0-11 and we need 1-12
+        var MM = ('0' + String(horseDate.getMonth() + 1)).slice(-2);
+
+        var yyyy = String(horseDate.getFullYear());
+        var DD = ('0' + String(horseDate.getDate())).slice(-2);
+        return DD + "/" + MM + "/" + yyyy;
+    }
+
+
+    /**
+     * Method to get the current time and turn it into a String with the required format.
+     * Note: If the client is doing delivery, we know their time is the same as the store.
+     * If the order is for delivery, the Customer's time does not make too much of
+     * a difference. If there are in another time zone and the iceCreamOrder is accepted, we already have
+     * their money.
+     * @returns {string} A string of the current time with the required format for the project.
+     * @author user113716 on stack overflow.
+     * @see https://stackoverflow.com/questions/3605214/javascript-add-leading-zeroes-to-date
+     * Modifying author: George Black
+     */
+    function getFormattedTime() {
+        var horseTimeDate = new Date();
+        var hh = ('0' + String(horseTimeDate.getHours())).slice(-2);
+        var mm = ('0' + String(horseTimeDate.getMinutes())).slice(-2);
+        return hh + ":" + mm;
+    }
+
+
+    /**
+     * Method to create the HorsePay JSON to be sent to the server.
+     * @return The horsePay JSON to be sent to the server with the required formatt/values.
+     * @author George Black
+     */
+    function createHorsePay() {
+//the current date and time with proper format to be sent with the original horsePay JSON. Thanks, George Black
+        var dateToSend = getFormattedDate();
+        var timeToSend = getFormattedTime();
+
+
+//The original horsePay JSON to be sent to server to get proper JSON back with the paymentResult.
+        var originalHorseObject = {
+            "storeID": "Team08",
+            "customerID": "<%=((Customer) session.getAttribute("cust")).getCustomerID()%>", //the customersID in the website
+            "date": dateToSend,
+            "time": timeToSend,
+            "timeZone": "GMT",
+            "transactionAmount": String(sumMoney), //the totalCost of the order
+            "currencyCode": "GBP",
+        }
+
+        return JSON.stringify(originalHorseObject);
+    }
+
+
+    /**
+     * A method that ensures the order entered by the Customer is an order that can be placed during the given time.
+     * If the order can be placed. Then the HorsePay JSON is sent. Otherwise, an error message is displayed saying
+     * the typeOfOrder can not be placed during this time.
+     * @param typeOfOrder The type of order the Customer wishes to complete.
+     * @param address The address for the delivery of the iceCreamOrder. Note: if the order is for carryOut, the address
+     * will be set to "NA."
+     * @author George Black
+     */
+    function checkWithinTime(typeOfOrder, address) {
 
         var time = getUKTime();
         var hours = possibleRemoveZeros(time.substring(0, 2));
@@ -255,13 +542,16 @@
             } else {
                 sendHorsePayJson(address);
             }
-
         }
-
     }
 
-
-
+    /**
+     * Method that gets the current Time in London England. This is used in the checkWithinTime method.
+     * @return {date} Returns the current time in London England.
+     * @author Shiva
+     * @see https://stackoverflow.com/questions/53862778/how-to-get-the-current-london-time-and-date-using-javascript/53862828
+     * Modifying Author: George Black
+     */
     function getUKTime() {
         let options = {
                 timeZone: 'Europe/London',
@@ -270,14 +560,18 @@
                 minute: 'numeric',
             },
             formatter = new Intl.DateTimeFormat([], options);
-
-
         return formatter.format(new Date());
     }
 
 
+    /**
+     * Method that removes any 0s in the string parameter. This method is used to get the minutes and hours in the
+     * checkWithinTime function, so that we can easily see if the current time is an acceptable time to make an order.
+     * @param  string The String we want to remove its zeros (if it has any).
+     * @return {String} returns the original String entered in the parameter, but without any 0s
+     * @author George Black
+     */
     function possibleRemoveZeros(string) {
-        console.log(string);
         if (string.charAt(0) == 0) {
             string = string.substring(1);
         }
@@ -285,224 +579,13 @@
         return string
     }
 
-
-    function checkValueLength(value) {
-        if (value.length == 0) {
-            Swal.fire({
-                icon: 'error',
-                text: "You did not enter in all the values needed for a delivery address. Please try again."
-            })
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    var storeCoordinates = [];
-    axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-        params: {
-            address: "Avenue Cres, Seaton Delaval, Whitley Bay NE25 0DN, UK",
-            key: 'AIzaSyDwC5IMKz7knixriHKausCU2N7IamWno6s'
-
-        }
-    })
-        .then(function (response) {
-
-
-            storeCoordinates.push(response.data.results[0].geometry.location.lat);
-            storeCoordinates.push(response.data.results[0].geometry.location.lng);
-            return storeCoordinates;
-
-        })
-
-
-    function checkNotStore(address){
-        console.log(address.toUpperCase());
-
-        if(address.toUpperCase()==="AVENUE CRESCENT, SEATON DELAVAL" || address.toUpperCase()==="AVENUE CRESCENT SEATON DELAVAL"
-                || address.toUpperCase()==="AVENUE CRES, SEATON DELAVAL" || address.toUpperCase()==="AVENUE CRES SEATON DELAVAL"){
-            Swal.fire({
-                icon:'error',
-                text:"You have entered the store's address. Please choose carry out if you would like to " +
-                    "pick the ice cream up from the store. Thank you. "
-            })
-            return true;
-        }else {
-            return false;
-        }
-    }
-
-
-    https://www.youtube.com/watch?v=pRiQeo17u6c&t=731s
-        function doGeocode() {
-        console.log("geocode called");
-            var haveError;
-            var city = document.getElementById("deliveryCity").value;
-            var address = document.getElementById("deliveryAddress").value;
-            var zip = document.getElementById("deliveryZip").value;
-
-            haveError = checkValueLength(address);
-            if (!haveError) {
-                haveError = checkValueLength(city);
-            }
-            if (!haveError) {
-                haveError = checkValueLength(zip);
-            }
-            if(!haveError){
-                haveError=checkNotStore(address);
-            }
-            if (!haveError) {
-                axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-                    params: {
-                        components: 'country:UK',
-                        city: city,
-                        address: address,
-                        zip: zip,
-                        key: 'AIzaSyDwC5IMKz7knixriHKausCU2N7IamWno6s'
-
-                    }
-                })
-                    .then(function (response) {
-                        console.log(response);
-                        if (response.data.status != "OK") {
-                            Swal.fire({
-                                icon: 'error',
-                                text: 'There was an issue finding your address.' +
-                                    'Please try again. '
-                            })
-
-                        } else if ((response.data.results[0].types[0] != "premise"
-                            && response.data.results[0].types[0] != "subpremise"
-                            && response.data.results[0].types[0] != "street_address")) {
-
-                            Swal.fire({
-                                icon: 'error',
-                                text: "The address " + response.data.results[0].formatted_address + " is not " +
-                                    "specific enough for delivery. Please enter a more specific address."
-                            })
-
-                        } else {
-
-//explain why you used an array.
-                            var deliveryCoordinates = [];
-                            deliveryCoordinates.push(response.data.results[0].geometry.location.lat);
-                            deliveryCoordinates.push(response.data.results[0].geometry.location.lng);
-
-                            var distance = getDistance(storeCoordinates, deliveryCoordinates);
-
-
-                            if (distance > 5) {
-                                Swal.fire({
-                                    icon: 'error',
-                                    text: "We are sorry " + address + " is too far away for us to deliver to."
-                                })
-                            } else {
-                                askToCompleteDelivery(address, city, zip);
-                            }
-                        }
-                    })
-            }
-        }
-
-
-    var rad = function (x) {
-        return x * Math.PI / 180;
-    };
-
-
-
-
-    var getDistance = function (p1, p2) {
-        var R = 6378137; // Earth’s mean radius in meter
-        var dLat = rad(p2[0] - p1[0]);
-        var dLong = rad(p2[1] - p1[1]);
-        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(rad(p1[0])) * Math.cos(rad(p2[0])) *
-            Math.sin(dLong / 2) * Math.sin(dLong / 2);
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        var d = R * c; //in meters need to change to miles
-        var toReturn = d / 1609.344
-        console.log(d);
-        console.log(toReturn);
-        return toReturn; //convert to miles
-    };
-
-
+    //NOTE: Seperating askToCompleteCarry and askToCompleteDelivery made the code much smoother and easier to read in
+    //my opinion. Thanks, George Black.
     /**
-     * Method to get the current date and turn it into a String with the required format
-     * @returns {string} A string of the current date with the required format for the project.
-     *
-     * @author user113716 on stack overflow.
-     * @see https://stackoverflow.com/questions/3605214/javascript-add-leading-zeroes-to-date
-     * Modifying author: George Black
-     */
-    function getFormattedDate() {
-        var horseDate = new Date()
-
-//Add 0 and then slice to get the last two numbers. If there already two number ex: 12 then it will have
-//012 so 12 will be sent to MM. If the date is a single number  ex:5 then the number is 05 and 05 is
-//returned
-
-//+1 added with montn because month goes 0-11 and we need 1-12
-        var MM = ('0' + String(horseDate.getMonth() + 1)).slice(-2);
-
-        var yyyy = String(horseDate.getFullYear());
-        var DD = ('0' + String(horseDate.getDate())).slice(-2);
-        return DD + "/" + MM + "/" + yyyy;
-    }
-
-
-    /**
-     * Method to get the current time and turn it into a String with the required format
-     * @returns {string} A string of the current time with the required format for the project.
-     *
-     * @author user113716 on stack overflow.
-     * @see https://stackoverflow.com/questions/3605214/javascript-add-leading-zeroes-to-date
-     * Modifying author: George Black
-     */
-    function getFormattedTime() {
-        var horseTimeDate = new Date();
-        var hh = ('0' + String(horseTimeDate.getHours())).slice(-2);
-        var mm = ('0' + String(horseTimeDate.getMinutes())).slice(-2);
-        return hh + ":" + mm;
-    }
-
-
-    function createHorsePay() {
-
-//the current date and time with proper format to be sent with the original horsePay JSON. Thanks, George Black
-        var dateToSend = getFormattedDate();
-        var timeToSend = getFormattedTime();
-
-
-//The original horsePay JSON to be sent to server to get proper JSON back with the paymentResult.
-        var originalHorseObject = {
-            "storeID": "Team08",
-            "customerID": "<%=((Customer) session.getAttribute("cust")).getCustomerID()%>", //the customersID in the website
-            "date": dateToSend,
-            "time": timeToSend,
-            "timeZone": "GMT",
-            "transactionAmount": String(sumMoney), //the totalCost of the order
-            "currencyCode": "GBP",
-        }
-
-        return JSON.stringify(originalHorseObject);
-    }
-
-
-
-
-
-
-
-
-
-    /**
-     * Method that is run after the user hits Pay now £(their total cost). It does a pop up asking if they are sure
-     * they want to make this purchase. If confirm order is clicked, then the horsePay JSON is sent to server to see if
-     * horsePayment can process the Users order. If cancel is clicked, then the user stays on the page
-     *
+     * Method that is run after the user hits ok after deciding the order is for carry out.
+     * It does a pop-up asking if they are sure they want to make this purchase. If "confirm order" is clicked,
+     * then it makes sure the order is within the accepted time. If "cancel" is clicked, then the user stays on the
+     * page.
      * @author George Black
      */
     function askToCompleteCarry() {
@@ -510,7 +593,7 @@
             title: "Confirm Order",
 
 //displays the companies logo
-            imageUrl: "../images/logo.png",
+            imageUrl: "../images/logo1.png",
             text: "Confirm carry out order for  £" + sumMoney + " ? After placing the order" +
                 " it will be ready for collection in 10 minutes time.",
             showCancelButton: true,
@@ -522,21 +605,25 @@
 //if Confirm Order is clicked then send HorsePayJSON
         }).then((result) => {
                 if (result.isConfirmed) {
-                    checkWithinTime("carryOut","Na");
+                    checkWithinTime("carryOut", "Na");
                 }
             }
         )
     }
 
-
+    /**
+     * Method that is run after the user hits ok after deciding the order is for delivery and the address is accepted.
+     * It does a pop-up asking if they are sure they want to make this purchase. If "confirm order" is clicked,
+     * then it makes sure the order is within the accepted time. If "cancel" is clicked, then the user stays on the
+     * page.
+     * @author George Black
+     */
     function askToCompleteDelivery(address, city, zip) {
-
-
         Swal.fire({
             title: "Confirm Order",
 
 //displays the companies logo
-            imageUrl: "../images/logo.png",
+            imageUrl: "../images/logo1.png",
             text: "Confirm delivery order to " + address + ", " + city + ", " + zip + " for £" + sumMoney + "?",
             showCancelButton: true,
             confirmButtonText: 'Confirm order',
@@ -547,7 +634,7 @@
 //if Confirm Order is clicked then send HorsePayJSON
         }).then((result) => {
                 if (result.isConfirmed) {
-                    checkWithinTime("delivery",address);
+                    checkWithinTime("delivery", address);
                 }
             }
         )
@@ -558,7 +645,6 @@
      * Method to send the horsePayJSON over post to the server and then get the JSON back with the paymentResults.
      * Then with the paymentResults, a proper sweet alert 2 alert is displayed telling the user if the horsePayment is
      * successful.
-     *
      * @author sheikh005 on Geek for Geeks
      * @see https://www.geeksforgeeks.org/how-to-send-a-json-object-to-a-server-using-javascript/
      * Modifying author: George Black
@@ -576,10 +662,8 @@
         xhr.send(createHorsePay());
 
 
-//if the sending back and forth is successful  then the horsePay with the PaymentResult added is
-//sent to see if the transaction was complete or not and then display the proper alert.
-//If the sending back and forth is not successful, add the PaymentResult Status to false and reason
-//to be internal error with horsePay server.
+        //if the sending back and forth is successful  then the horsePay with the PaymentResult added is
+        //sent to getlAlert message to see if the transaction was complete or not in order to display the proper alert.
         xhr.onreadystatechange = function () {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 getAlertMessage(JSON.parse(xhr.response));
@@ -587,10 +671,15 @@
         }
     }
 
-
+    //take the array that contains all the JSONs of the iceCream values and Stringifies it so the values can be sent to
+    // the server to have them added to the orderContains table in the databse.
     iceCreamOrderStringify = JSON.stringify(iceCreamOrderList);
 
-
+    /**
+     * Method that sends the stringified JSON containing all the iceCream values to the server so the ice Cream values
+     * can properly be added to the order contains method. This method is used in getAlertMessage.
+     * @author George Black
+     */
     function sendIceCreamJson() {
         let xhr = new XMLHttpRequest();
         let url = '/getIceCreams';
@@ -602,16 +691,14 @@
     }
 
     /**
-     * Method that displays if the horsePayment was successful or not. A proper message is displayed based on what the
+     * A method that displays if the horsePayment was successful or not. A proper message is displayed based on what the
      * paymentSuccess result is.
-     * If the payment was successful, the user is given the option to stay on the page (this
-     * is for testing purposes and will be removed), logout, or make another purchase.
-     * the option to logout or make another order.
-     * If the payment was not successful, the user is given the option to stay on the page(this is for testing and will
-     * be changed), try to make the payment again, or logout.
-     * @author George Black
-     *
+     * If the payment was successful, the iceCream values from the order are first added to the database.
+     * Then, the Customer is given the option to logout, or make another purchase. If the payment was not successful, the reason
+     * for the error is displayed, and the Customer is given the option to stay on the page, try to make the payment again,
+     * or logout.
      * @param result The horsePay JSON with the paymentResult
+     * @author George Black
      */
     function getAlertMessage(result) {
         if (result.paymentResult["Status"]) {
@@ -628,11 +715,13 @@
             }).then((result) => {
                 if (result.isConfirmed) {
 
-//remove the customerId from the session
 
                     window.location.replace("/");
 
                 } else {
+                    //Initially needed to make it, so there was not an error in the database. Changed how orderContains
+                    //was added, so this is no longer needed. It was left in because I think it helps the Customer
+                    //understand what is going on, and I like the way it looks. Thanks, George Black.
                     setTimeout(function () {
                         window.location.replace("/pages/shopping.jsp");
                     }, 5000);
@@ -671,7 +760,7 @@
 
 
                 } else {
-                    window.location.replace("/");
+                    window.location.replace("/");// "/" takes a Customer back to the homepage due to WebStartController.
                 }
 
             })

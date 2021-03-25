@@ -25,10 +25,9 @@ public class PaymentResult {
 
 
     /**
-     *
      * Constructor that randomly generates a number between 1 and 100. If randomInt is less than 30, then Status is set
      * to false and the reason why it was declined. Otherwise, the Status is set to true and the
-     * reason is set to "Payment Successful". If the payment is declined the reason is then set.
+     * reason is set to "Payment Successful".
      * @author George Black
      */
     PaymentResult() {
@@ -51,7 +50,7 @@ public class PaymentResult {
 
     /**
      * Takes two numbers if the errorCaused number is less than numberReturned, then true and "Payment Successful is
-     * added otherwise false and "Need to find Reason is added. This function will be used in the classes constructor.
+     * added otherwise false and "Need to find Reason is added. This function will be used in the class's constructor.
      * This is to be used in the constructor.
      *
      * @author George Black
@@ -111,7 +110,6 @@ public class PaymentResult {
 
 
     //setters and getters required for JSON. Thanks, George Black
-
     @JsonGetter("Status")
     public boolean isStatus() {
         return Status;

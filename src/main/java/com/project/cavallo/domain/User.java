@@ -3,6 +3,11 @@ package com.project.cavallo.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+
+/**
+ * Entity for a User in the database. This will be used with the servlets.
+ * @author George Black
+ */
 @Entity
 public class User{
 
@@ -26,11 +31,5 @@ public class User{
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
+
 }

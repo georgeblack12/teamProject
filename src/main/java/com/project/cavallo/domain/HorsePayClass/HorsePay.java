@@ -3,7 +3,8 @@ package com.project.cavallo.domain.HorsePayClass;
 
 /**
  * A class for the JSON that is to be sent from the client to the server when they click to make payment. Only has
- * constructor, getters, and setters.
+ * constructor, getters, and setters. NOTE: The setters and getters are needed to retrieve and send the JSON.
+ *
  * @author George Black.
  */
 public class HorsePay {
@@ -17,8 +18,17 @@ public class HorsePay {
     private String currencyCode;
 
 
-
-
+    /**
+     * Constructor to create a HorsePay object
+     *
+     * @param storeID           The Stores Id.
+     * @param customerID        The CustomerID of the Customer making a purchase.
+     * @param date              The date the iceCreamOrder was made.
+     * @param time              The time the iceCreamOrder was made.
+     * @param timeZone          The time zone the order was placed in. This will always be GMT.
+     * @param transactionAmount The total cost of the icCreamOrder.
+     * @param currencyCode      The currency code of the order. This will always be GBP.
+     */
     public HorsePay(String storeID, String customerID, String date, String time, String timeZone, float transactionAmount, String currencyCode) {
         this.storeID = storeID;
         this.customerID = customerID;
@@ -47,7 +57,6 @@ public class HorsePay {
     public void setTransactionAmount(float transactionAmount) {
         this.transactionAmount = transactionAmount;
     }
-
 
 
     public String getStoreID() {
@@ -79,18 +88,6 @@ public class HorsePay {
     }
 
 
-    @Override
-    public String toString() {
-        return "HorsePay{" +
-                "storeID='" + storeID + '\'' +
-                ", customerID='" + customerID + '\'' +
-                ", date='" + date + '\'' +
-                ", time='" + time + '\'' +
-                ", timeZone='" + timeZone + '\'' +
-                ", transactionAmount=" + transactionAmount +
-                ", currencyCode='" + currencyCode + '\'' +
-                '}';
-    }
 }
 
 
