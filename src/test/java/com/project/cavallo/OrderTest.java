@@ -27,12 +27,8 @@ public class OrderTest {
 	@Test
 	public void getOrderID() {
 		HorsePayResponse horsePayResponse = new HorsePayResponse(new HorsePay("1","1","15/03/2021","15:00:00","Asia/Shanghai",20,"1"));
-		try {
-			int orderID = orderRepository.getOrderID(horsePayResponse);
-			System.out.println("orderID:"+orderID);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		int orderID = orderRepository.getOrderID(horsePayResponse);
+		System.out.println("orderID:"+orderID);
 	}
 	
 }

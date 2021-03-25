@@ -104,6 +104,33 @@ overall option. Thanks, George Black.--%>
 </body>
 
 <script type="text/javascript">
+
+    /**
+     * Method intended to take a cost and adds any O's needed to make sure the price displayed contains two decimals
+     * places.
+     * @param cost The cost of a value in the order that may need 0s added to it so that it contains two decimal places.
+     * places.
+     * @returns The cost from the parameter containing two decimal places.
+     * @author George Black
+     */
+    function getDecimals(cost){
+        if(!cost.includes(".")){
+            cost=cost.concat(".00");
+        }else{
+            cost=cost.concat("00");
+            cost=cost.slice(0,4);
+        }
+        return cost;
+    }
+
+
+    /**
+     * Method to replace each "%20" in a String with a space. This method is used to get the names and sized of each
+     * iceCream in the Customer's cart.
+     * @param The String to have .
+     * @return {String} the String entered in the parameter but without "%20 (if it contained it before(.
+     * @author George Black
+     */
     function getSpaces(typeOfIceCream) {
         while (typeOfIceCream.includes("%20")) {
             typeOfIceCream = typeOfIceCream.replace("%20", " ");
@@ -117,7 +144,7 @@ overall option. Thanks, George Black.--%>
 
 
     var sumMoney = infor[0];	//The total cost of the iceCream
-    var type_arr = infor[1].split(",");	//the types of iceCream potentially being purchasedr
+    var type_arr = infor[1].split(",");	//the types of iceCream potentially being purchased
 
     var size_arr = infor[2].split(",");	//the size of each iceCream value in the potential order.
     var sizeMoney_arr = infor[3].split(",");	//The cost for each iceCream value that was added to the cart
@@ -133,9 +160,11 @@ overall option. Thanks, George Black.--%>
 
     //Takes each iceCream value in the potential order
     for (var i = 0; i < type_arr.length; i++) {
+        var costToDisplay=getDecimals(sizeMoney_arr[i]);
+
 
         //displays each ice cream value that is potentially going to be purchased.
-        tableData += "<tr><td>" + type_arr[i] + "</td>" + "<td>" + size_arr[i] + "</td>" + "<td>" + sizeMoney_arr[i] + "</td>" + "<td>" + number_arr[i] + "</td></tr>";
+        tableData += "<tr><td>" + type_arr[i] + "</td>" + "<td>" + size_arr[i] + "</td>" + "<td>" + costToDisplay + "</td>" + "<td>" + number_arr[i] + "</td></tr>";
 
         //takes each ice cream value that is potentially going to be purchased and converts it to JSON and then
         //adds it to the iceCreamOrder array.
@@ -155,7 +184,10 @@ overall option. Thanks, George Black.--%>
 
     //to get the overall total Cost.
     var numMoney = document.getElementById("numMoney");
-    numMoney.innerHTML += sumMoney;
+    numMoney.innerHTML += getDecimals(sumMoney);
+
+
+
 
 
     /**
@@ -522,7 +554,7 @@ overall option. Thanks, George Black.--%>
         var minutes = possibleRemoveZeros(time.substring(3));
 
         if (typeOfOrder == "carryOut") {
-            if ((hours < 11) || (hours >= 18) || (hours == 17 && minutes >= 45)) {
+            if ((hours < 11) || (hours >= 24) || (hours == 17 && minutes >= 45)) {
                 Swal.fire({
                     icon: 'error',
                     text: 'We are sorry. We are unable to collect orders for carry out during ' +
@@ -595,7 +627,8 @@ overall option. Thanks, George Black.--%>
 //displays the companies logo
             imageUrl: "../images/logo1.png",
             text: "Confirm carry out order for  £" + sumMoney + " ? After placing the order" +
-                " it will be ready for collection in 10 minutes time.",
+                " it will be ready for collection in 10 minutes time. The store is located at " +
+                "Avenue Crescent, Seaton Delaval, Whitley Bay NE25 0DN",
             showCancelButton: true,
             confirmButtonText: 'Confirm order',
 
