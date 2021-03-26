@@ -1,6 +1,6 @@
-#Overview of Structure of Program
+# Overview of Structure of Program
 
-- All java code can be found in /src/main/java
+- All Java code can be found in /src/main/java
 
 - CSS and images can be found in /src/main/resources/static/css and /images respectively
 
@@ -12,7 +12,7 @@
 
 - JUnit testing can be found in /junit and /src/test
 
-##Package structure
+## Package structure
 
 Within /src/main/java/com/project/cavallo we have the following packages:
 
