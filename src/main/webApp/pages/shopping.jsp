@@ -45,20 +45,7 @@
     <p>(75p surcharge for Salted Caramel) </p>
 </div>
 
-<%--<div id="all">--%>
-<%--    <div id="top">--%>
-<%--        <li class="menu">--%>
-<%--            &lt;%&ndash;        <a href="register.jsp">register</a> does not make sense to register since they are alread logged in, thanks--%>
-<%--            george black &ndash;%&gt;--%>
-<%--            &lt;%&ndash;        <a href="/pages/admin.html">admin</a>&ndash;%&gt;--%>
-<%--            <input type="button" id="logout" value="logout">--%>
-<%--        </li>--%>
-<%--    </div>--%>
 
-
-<%--    <div id="head">--%>
-<%--        <img src="../images/head.png">--%>
-<%--    </div>--%>
 
     <div id="tit"><h2>Menu</h2></div>
 
