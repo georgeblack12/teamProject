@@ -17,7 +17,7 @@
 Within /src/main/java/com/project/cavallo we have the following packages:
 
 - controller: Package used to get JSONs sent from the client and either store them in the database or 
-send a JSON back to the client
+send a JSON back to the client.
 
 - dao: Package used to make the queries and insert values into the connected database. 
 
