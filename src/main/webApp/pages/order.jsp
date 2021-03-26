@@ -118,7 +118,7 @@ overall option. Thanks, George Black.--%>
             cost=cost.concat(".00");
         }else{
             cost=cost.concat("00");
-            cost=cost.slice(0,4);
+            cost=cost.slice(0,cost.lastIndexOf(".")+3);
         }
         return cost;
     }
