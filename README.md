@@ -13,3 +13,13 @@
 - JUnit testing can be found in /junit and /src/test
 
 ##Package structure
+
+Within /src/main/java/com/project/cavallo we have the following packages:
+
+- controller:
+
+- dao: 
+
+- domain: 
+
+- service: 
