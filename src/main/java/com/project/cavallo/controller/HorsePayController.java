@@ -25,8 +25,6 @@ public class HorsePayController {
     //order repository needed to run function with database
     @Autowired
     private OrderRepository orderRepository;
-
-
     /**
      * Method that takes the JSON needed for horsePay from the client and then sends back the JSON with the paymentSucess
      * added to it.
@@ -51,8 +49,6 @@ public class HorsePayController {
             session.setAttribute("orderID", orderRepository.getOrderID(hSend));
         }
         //else do not add an orderID;
-
-
         //return the JSON with paymentSuccess added
         return hSend;
     }

@@ -166,8 +166,6 @@ public class StatisticsRepository {
      * @author George Black
      */
     private <K> Map<K, Integer> getMapFromList(List<Map<String, Object>> list) {
-
-
         HashMap<K, Integer> mapToReturn = new HashMap<>();
 
         for (int i = 0; i < list.size(); i++) {

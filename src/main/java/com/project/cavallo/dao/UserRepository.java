@@ -43,15 +43,12 @@ public class UserRepository {
 
             //get the customer with the specified username(email) and password.
             user = jdbcTemplate.queryForObject(sql, rowMapper, username, password);
-
-
             //If Customer is not in the database display the user does not exist in the database
         } catch (DataAccessException ex) {
             //do nothing User with null values will be returned
         }
         return Optional.ofNullable(user);
     }
-
 
     /**
      * Method That returns the String of the email entered if the String entered is an email in the User table.

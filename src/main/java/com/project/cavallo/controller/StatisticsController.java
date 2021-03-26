@@ -42,7 +42,7 @@ public class StatisticsController {
     }
 
     /**
-     * Method that returns a list where each value is the number of iceCreamOrders that occurred during a related
+     * Method that returns a list where each value is a number of iceCreamOrders that occurred during a related
      * time on the date entered by the admin. For example, the first number in the list is the number of iceCreamOrders
      * that occurred between 11-12 on the entered date, the second number in the list is the number of iceCreamOrders
      * that occurred between 12-1 on the entered date,..., the last number in the list is the number of iceCreamOrders

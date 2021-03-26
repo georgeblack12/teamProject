@@ -16,10 +16,12 @@
 
 Within /src/main/java/com/project/cavallo we have the following packages:
 
-- controller:
+- controller: Package used to get JSONs sent from the client and either store them in the database or 
+send a JSON back to the client
 
-- dao: 
+- dao: Package used to make the queries and insert values into the connected database. 
 
-- domain: 
+- domain: Package containing classes where each class is used to make objects of the JSONs sent between the frontend 
+and backend. These classes are to be used in the controller package.
 
-- service: 
+- service: Package used to help with the Logging in of a User to the website. 
