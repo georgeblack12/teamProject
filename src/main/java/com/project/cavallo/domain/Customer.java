@@ -38,7 +38,7 @@ public class Customer {
         return customerID;
     }
 
-    //needed for recieving JSON
+    //needed for receiving JSON
     public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }

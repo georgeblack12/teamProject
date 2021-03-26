@@ -164,7 +164,8 @@ overall option. Thanks, George Black.--%>
 
 
         //displays each ice cream value that is potentially going to be purchased.
-        tableData += "<tr><td>" + type_arr[i] + "</td>" + "<td>" + size_arr[i] + "</td>" + "<td>" + costToDisplay + "</td>" + "<td>" + number_arr[i] + "</td></tr>";
+        tableData += "<tr><td>" + type_arr[i] + "</td>" + "<td>" + size_arr[i] + "</td>" + "<td>" + costToDisplay +
+            "</td>" + "<td>" + number_arr[i] + "</td></tr>";
 
         //takes each ice cream value that is potentially going to be purchased and converts it to JSON and then
         //adds it to the iceCreamOrder array.
@@ -315,7 +316,6 @@ overall option. Thanks, George Black.--%>
         }
     })
         .then(function (response) {
-
             storeCoordinates.push(response.data.results[0].geometry.location.lat);
             storeCoordinates.push(response.data.results[0].geometry.location.lng);
             return storeCoordinates;

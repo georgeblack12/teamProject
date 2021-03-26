@@ -194,7 +194,6 @@ function validateForm() {
 
     if (accepted) {
         accepted = validateEmail();
-
     }
     if (accepted) {
         accepted = validatePhoneNumber();
@@ -202,11 +201,9 @@ function validateForm() {
     }
     if (accepted) {
         accepted = validatePassword();
-
     }
     if (accepted) {
         accepted = validatePasswordCheck();
-
     }
 
     if (accepted) {
@@ -216,7 +213,7 @@ function validateForm() {
             imageWidth: "300px",
             imageHeight: "300px",
             title: "You're In!",
-            text: "You have been added to our system! Login to the website to make your first " +
+            text: "You have been added to our system! Log in to the website to make your first " +
                 "ice cream purchase",
             confirmButtonText: "Back to login page",
             allowOutsideClick: false

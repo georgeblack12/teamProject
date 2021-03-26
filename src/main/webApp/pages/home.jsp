@@ -14,8 +14,9 @@
 
 <body>
 
-<%--If the user already has the cust, orderID, and/or statsRep in the session removethem . This is to be used if the user decides to go back into--%>
-<%--the login page after making/trying to make  an order or viewing the admin page. Thanks, George Black--%>
+<%--If the user already has the cust, orderID, and/or statsRep in the session removethem . This is to be used if the
+user decides to go back into the login page after making/trying to make  an order or viewing the admin page.
+Thanks, George Black--%>
 <%if (session.getAttribute("cust") != null) {%>
 <%session.removeAttribute("cust");%>
 <%
@@ -41,7 +42,7 @@
     <div class="left">
         <h2>Login</h2>
 
-        <%--        If the user tries to login and and they enter incorrect credentials an error message is displayed.
+        <%--        If the user tries to log in and and they enter incorrect credentials an error message is displayed.
                     This will need to be styled. Thanks, George Black. --%>
         <% if (request.getAttribute("ERROR") != null) { %>
         <%=request.getAttribute("ERROR")%>

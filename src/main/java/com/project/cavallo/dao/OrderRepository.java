@@ -37,7 +37,6 @@ public class OrderRepository {
 
         //formatters used to enter in the date/time values in the database properly.
         SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("HH:mm");
-
         SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd/MM/yyyy");
 
         //if the (with paymentSuccess) that is to be sent has Status=true, store the order in the
@@ -46,7 +45,6 @@ public class OrderRepository {
         if (hResponse.getPaymentResult().isStatus()) {
             String sql = "INSERT INTO iceCreamOrder(customerID,`date`,`time`,`type`,address,cost)" +
                     " values(?,?,?,?,?,?)";
-
             //NA Is the set value for the address if the order is for carry out.
             if (address.equals("NA")) {
                 System.out.println(hResponse.getCustomerID());
@@ -54,13 +52,11 @@ public class OrderRepository {
                         dateFormat.parse(hResponse.getDate()), timeFormat.parse(hResponse.getTime()), "Pick up", "NA",
                         hResponse.getTransactionAmount());
             } else {
-
                 //If the address is not NA, then we know it was for Delivery.
                 insert = jdbcTemplate.update(sql, hResponse.getCustomerID(),
                         dateFormat.parse(hResponse.getDate()), timeFormat.parse(hResponse.getTime()), "Delivery",
                         address, hResponse.getTransactionAmount());
             }
-
             //display the order was successful in console
             if (insert == 1) {
                 System.out.println("order added into order table");
